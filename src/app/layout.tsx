@@ -31,8 +31,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${manrope.variable} h-full`}>
-      <body className="min-h-full flex flex-col antialiased">
+    <html lang="en" className={`${inter.variable} ${manrope.variable} h-full overflow-x-hidden`}>
+      <body className="min-h-full flex flex-col antialiased overflow-x-hidden">
         <Header />
         <MainShell>{children}</MainShell>
         <Footer />

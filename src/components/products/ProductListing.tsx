@@ -40,6 +40,21 @@ export default function ProductListing({
     };
   }, [sidebarOpen]);
 
+  const defaultCategory = initialCategory || "";
+
+  const hasActiveFilters =
+    selectedCategory !== defaultCategory ||
+    selectedBrand !== "" ||
+    search.trim() !== "" ||
+    sort !== "default";
+
+  const clearFilters = () => {
+    setSelectedCategory(defaultCategory);
+    setSelectedBrand("");
+    setSearch("");
+    setSort("default");
+  };
+
   const filtered = useMemo(() => {
     let result: Product[] = [...products];
     if (selectedCategory) result = result.filter((p) => p.category === selectedCategory);
@@ -173,9 +188,10 @@ export default function ProductListing({
               <p className="text-sm text-muted">
                 <span className="font-semibold text-foreground">{filtered.length}</span> products
               </p>
-              {(selectedCategory || selectedBrand) && (
+              {hasActiveFilters && (
                 <button
-                  onClick={() => { setSelectedCategory(initialCategory || ""); setSelectedBrand(""); }}
+                  type="button"
+                  onClick={clearFilters}
                   className="text-xs font-semibold text-primary hover:text-primary-dark"
                 >
                   Clear filters
@@ -187,8 +203,9 @@ export default function ProductListing({
               <div className="surface-card py-16 text-center">
                 <p className="text-muted mb-4">No products match your filters.</p>
                 <button
-                  onClick={() => { setSelectedCategory(""); setSelectedBrand(""); setSearch(""); }}
-                  className="text-sm font-semibold text-primary"
+                  type="button"
+                  onClick={() => { clearFilters(); setSidebarOpen(false); }}
+                  className="text-sm font-semibold text-primary mb-3"
                 >
                   Reset all filters
                 </button>
@@ -221,8 +238,18 @@ export default function ProductListing({
               </button>
             </div>
             <div className="flex-1 overflow-y-auto p-5">{filterPanel}</div>
-            <div className="p-4 border-t border-border bg-background pb-[calc(1rem+env(safe-area-inset-bottom))]">
+            <div className="p-4 border-t border-border bg-background pb-[calc(1rem+env(safe-area-inset-bottom))] space-y-2">
+              {hasActiveFilters && (
+                <button
+                  type="button"
+                  onClick={clearFilters}
+                  className="w-full min-h-11 border border-border text-foreground font-semibold rounded-lg hover:border-primary hover:text-primary transition-colors"
+                >
+                  Clear filters
+                </button>
+              )}
               <button
+                type="button"
                 onClick={() => setSidebarOpen(false)}
                 className="w-full min-h-12 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors"
               >

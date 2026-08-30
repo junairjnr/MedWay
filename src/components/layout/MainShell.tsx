@@ -9,7 +9,7 @@ export default function MainShell({ children }: { children: ReactNode }) {
   const hideMobileBar = pathname === "/contact" || isProductDetail;
 
   return (
-    <main className={`flex-1 ${hideMobileBar ? "" : "pb-mobile-bar lg:pb-0"}`}>
+    <main className={`flex-1 overflow-x-hidden ${hideMobileBar ? "" : "pb-mobile-bar lg:pb-0"}`}>
       {children}
     </main>
   );
