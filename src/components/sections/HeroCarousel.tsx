@@ -27,27 +27,25 @@ function useIsMobile() {
 
 export default function HeroCarousel() {
   const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState(1);
   const touchStartX = useRef(0);
   const slides = siteContent.heroSlides;
   const reduced = usePrefersReducedMotion();
   const isMobile = useIsMobile();
 
   const goTo = useCallback(
-    (index: number, dir: number) => {
+    (index: number) => {
       if (index === current) return;
-      setDirection(dir);
       setCurrent(index);
     },
     [current]
   );
 
   const next = useCallback(() => {
-    goTo((current + 1) % slides.length, 1);
+    goTo((current + 1) % slides.length);
   }, [current, goTo, slides.length]);
 
   const prev = useCallback(() => {
-    goTo((current - 1 + slides.length) % slides.length, -1);
+    goTo((current - 1 + slides.length) % slides.length);
   }, [current, goTo, slides.length]);
 
   useEffect(() => {
@@ -84,7 +82,7 @@ export default function HeroCarousel() {
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
-      <div className="relative min-h-[460px] sm:min-h-[500px] lg:min-h-[600px] pb-24 sm:pb-28 lg:pb-12">
+      <div className="relative min-h-[min(72vh,540px)] sm:min-h-[500px] lg:min-h-[600px] pb-6 sm:pb-8 lg:pb-12">
         {/* Image stack — crossfade, no unmount (smooth on mobile) */}
         <div className="absolute inset-0">
           {slides.map((s, i) => (
@@ -99,56 +97,58 @@ export default function HeroCarousel() {
                   src={s.image}
                   alt={s.title}
                   fill
-                  className="object-cover object-center"
+                  className="object-cover object-[center_28%] sm:object-center"
                   priority={i === 0}
                   sizes="100vw"
                   quality={isMobile ? 75 : 85}
                 />
-                <div className="absolute inset-0 bg-navy/20" aria-hidden />
+                <div className="absolute inset-0 bg-navy/10 lg:bg-navy/20" aria-hidden />
               </div>
             </div>
           ))}
-          {/* Global overlays — light scrim for readable text */}
-          <div className="pointer-events-none absolute inset-0 z-[5] bg-[radial-gradient(ellipse_at_24%_42%,rgba(26,35,50,0.55),transparent_65%)]" />
-          <div className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-r from-navy/70 via-navy/45 to-navy/25 sm:via-navy/35 sm:to-navy/15 lg:via-navy/30 lg:to-transparent" />
-          <div className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-t from-navy/75 via-navy/30 to-transparent" />
-          <div className="pointer-events-none absolute inset-0 z-[5] bg-[radial-gradient(ellipse_at_20%_50%,rgba(15,118,110,0.12),transparent_55%)]" />
+          {/* Mobile — keep top of photo visible, darken only behind text */}
+          <div className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-t from-navy/90 via-navy/45 to-transparent to-[45%] lg:hidden" />
+          {/* Desktop overlays */}
+          <div className="pointer-events-none absolute inset-0 z-[5] hidden bg-[radial-gradient(ellipse_at_24%_42%,rgba(26,35,50,0.55),transparent_65%)] lg:block" />
+          <div className="pointer-events-none absolute inset-0 z-[5] hidden bg-gradient-to-r from-navy/70 via-navy/45 to-navy/25 lg:block lg:via-navy/30 lg:to-transparent" />
+          <div className="pointer-events-none absolute inset-0 z-[5] hidden bg-gradient-to-t from-navy/75 via-navy/30 to-transparent lg:block" />
+          <div className="pointer-events-none absolute inset-0 z-[5] hidden bg-[radial-gradient(ellipse_at_20%_50%,rgba(15,118,110,0.12),transparent_55%)] lg:block" />
         </div>
 
         {!isMobile && (
           <div className="hero-glow pointer-events-none absolute -right-32 top-1/4 hidden h-96 w-96 rounded-full bg-primary/20 blur-[100px] lg:block" aria-hidden />
         )}
 
-        <Container className="relative z-10 flex min-h-[400px] sm:min-h-[440px] lg:min-h-[560px] items-center pt-6 pb-4 sm:pt-10 sm:pb-6 lg:py-16">
-          <div className="grid w-full grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_auto] lg:gap-12">
-            <div className="hero-copy-panel max-w-2xl">
-              <div className="mb-3 flex flex-wrap items-center gap-2 sm:mb-4">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-primary-light/30 bg-primary/25 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-light sm:text-xs">
-                  <Sparkles className="h-3 w-3 shrink-0" />
+        <Container className="relative z-10 flex min-h-[min(72vh,540px)] sm:min-h-[500px] lg:min-h-[560px] items-end justify-start pb-2 pt-28 sm:items-end sm:pb-3 sm:pt-32 lg:items-center lg:py-16 lg:pt-16">
+          <div className="grid w-full grid-cols-1 items-end gap-8 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-12">
+            <div className="hero-copy-panel w-full max-w-md sm:max-w-lg lg:max-w-2xl">
+              <div className="mb-2 flex flex-wrap items-center gap-1.5 sm:mb-4 sm:gap-2">
+                <span className="inline-flex items-center gap-1 rounded-full border border-primary-light/30 bg-primary/25 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.1em] text-primary-light sm:gap-1.5 sm:px-3 sm:py-1.5 sm:text-xs">
+                  <Sparkles className="h-2.5 w-2.5 shrink-0 sm:h-3 sm:w-3" />
                   {slide.badge}
                 </span>
-                {slide.price && <span className="sale-tag">{slide.price}</span>}
+                {slide.price && <span className="sale-tag sale-tag-compact">{slide.price}</span>}
               </div>
 
-              <h1 className="font-display text-[1.75rem] font-extrabold leading-[1.1] tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)] sm:text-4xl lg:text-[3.5rem]">
+              <h1 className="font-display text-xl font-extrabold leading-[1.12] tracking-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] sm:text-3xl lg:text-[3.5rem] lg:leading-[1.1]">
                 {slide.title}
               </h1>
 
               {slide.note && (
-                <p className="mt-2.5 max-w-lg text-sm leading-relaxed text-white/90 drop-shadow-[0_1px_8px_rgba(0,0,0,0.4)] sm:mt-3 sm:text-base">{slide.note}</p>
+                <p className="mt-1.5 hidden max-w-lg text-sm leading-relaxed text-white/90 drop-shadow-[0_1px_8px_rgba(0,0,0,0.4)] sm:mt-3 sm:block sm:text-base">{slide.note}</p>
               )}
 
-              <div className="mt-6 flex flex-col gap-2.5 sm:mt-8 sm:flex-row sm:gap-3">
-                <Button href={slide.href} variant="white" size="lg" showArrow={false} fullWidth className="sm:w-auto rounded-full px-7">
+              <div className="mt-3 flex flex-col gap-2 sm:mt-6 sm:flex-row sm:gap-3 lg:mt-8">
+                <Button href={slide.href} variant="white" size="sm" showArrow={false} fullWidth className="rounded-full px-5 sm:min-h-11 sm:w-auto sm:px-6 sm:py-2.5 sm:text-sm">
                   {slide.cta}
                 </Button>
                 <Button
                   href="/products"
                   variant="outline"
-                  size="lg"
+                  size="sm"
                   showArrow={false}
                   fullWidth
-                  className="sm:w-auto rounded-full border-white/30 text-white hover:border-primary-light hover:bg-white/10"
+                  className="hidden sm:inline-flex sm:min-h-11 sm:w-auto sm:px-6 sm:py-2.5 sm:text-sm rounded-full border-white/30 text-white hover:border-primary-light hover:bg-white/10"
                 >
                   Browse Catalogue
                 </Button>
@@ -160,7 +160,7 @@ export default function HeroCarousel() {
                 <button
                   key={i}
                   type="button"
-                  onClick={() => goTo(i, i > current ? 1 : -1)}
+                  onClick={() => goTo(i)}
                   className={`group flex items-center gap-3 rounded-2xl border p-2 text-left transition-all duration-300 ${
                     i === current
                       ? "border-primary-light/50 bg-white/10 shadow-lg backdrop-blur-md"
@@ -197,41 +197,6 @@ export default function HeroCarousel() {
           <ChevronRight className="h-5 w-5" />
         </button>
 
-        <div className="absolute bottom-5 left-0 right-0 z-20 sm:bottom-6 lg:hidden">
-          <Container className="flex items-center gap-3 px-4 sm:px-6">
-            <div className="flex flex-1 gap-1.5">
-              {slides.map((_, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => goTo(i, i > current ? 1 : -1)}
-                  className="flex h-9 flex-1 items-center justify-center py-2"
-                  aria-label={`Slide ${i + 1}`}
-                  aria-current={i === current ? "true" : undefined}
-                >
-                  <span className="relative h-1 w-full overflow-hidden rounded-full bg-white/25">
-                    {i === current && !reduced ? (
-                      <span
-                        key={`progress-${current}-${direction}`}
-                        className="hero-progress-bar absolute inset-y-0 left-0 block rounded-full bg-primary-light"
-                        style={{ animationDuration: `${AUTOPLAY_MS}ms` }}
-                      />
-                    ) : (
-                      <span
-                        className={`block h-full rounded-full transition-colors duration-300 ${
-                          i === current ? "w-full bg-primary-light" : "w-0 bg-primary-light/0"
-                        }`}
-                      />
-                    )}
-                  </span>
-                </button>
-              ))}
-            </div>
-            <span className="shrink-0 text-xs font-medium tabular-nums text-white/70">
-              {current + 1}/{slides.length}
-            </span>
-          </Container>
-        </div>
       </div>
 
       <TrustStatsBar />
