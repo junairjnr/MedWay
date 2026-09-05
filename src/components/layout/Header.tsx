@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,12 +9,13 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import { ProductsMegaMenuDesktop, ProductsMegaMenuMobile } from "@/components/layout/ProductsMegaMenu";
+import { siteLogo, siteLogoWidth, siteLogoHeight } from "@/data/images";
 
 const navLinks = [
   { href: "/products", label: "Products" },
   { href: "/solutions", label: "Solutions" },
   { href: "/about", label: "About" },
-  { href: "/resources", label: "Resources" },
+  // { href: "/resources", label: "Resources" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -47,7 +49,6 @@ export default function Header() {
   }, [mobileOpen]);
 
   const navText = solidNav ? "text-foreground hover:text-primary" : "text-white/90 hover:text-white";
-  const logoText = solidNav ? "text-foreground" : "text-white";
   const menuIcon = solidNav ? "text-foreground" : "text-white";
 
   const closeMenus = () => {
@@ -58,19 +59,23 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <motion.div
-        animate={{ height: solidNav ? 64 : 72 }}
+        animate={{ height: solidNav ? 96 : 104 }}
         className={`transition-all duration-300 ${
           solidNav ? "glass-nav shadow-sm border-b border-border/60" : "bg-navy/40 backdrop-blur-md"
         }`}
       >
         <Container className="h-full flex items-center justify-between gap-4">
-          <Link href="/" className="flex items-center gap-2.5 shrink-0 min-h-11 group">
-            <div className="w-9 h-9 bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center rounded-lg shadow-sm group-hover:shadow-md transition-shadow">
-              <span className="text-white font-display font-extrabold text-sm">M</span>
-            </div>
-            <span className={`font-display font-extrabold text-lg tracking-tight transition-colors ${logoText}`}>
-              Med Way
-            </span>
+          <Link href="/" className="inline-flex shrink-0 items-center min-h-11 group">
+            <Image
+              src={siteLogo}
+              alt="Med Way"
+              width={siteLogoWidth}
+              height={siteLogoHeight}
+              quality={100}
+              sizes="(max-width: 640px) 260px, (max-width: 1024px) 360px, 480px"
+              className="h-14 w-auto transition-opacity group-hover:opacity-90 sm:h-16 md:h-20 lg:h-24"
+              priority
+            />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-0.5">
@@ -150,7 +155,7 @@ export default function Header() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 top-16 bg-navy/40 backdrop-blur-sm lg:hidden z-40"
+              className="fixed inset-0 top-24 bg-navy/40 backdrop-blur-sm lg:hidden z-40"
               onClick={() => setMobileOpen(false)}
               aria-label="Close menu overlay"
             />

@@ -1,9 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail, MapPin } from "lucide-react";
 import Container from "@/components/ui/Container";
 import NewsletterForm from "@/components/forms/NewsletterForm";
 import Button from "@/components/ui/Button";
 import { categories } from "@/data/categories";
+import { siteLogo, siteLogoWidth, siteLogoHeight } from "@/data/images";
 
 export default function Footer() {
   return (
@@ -29,11 +31,16 @@ export default function Footer() {
       <Container className="py-12 sm:py-16 lg:py-20">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4">
-            <div className="flex items-center gap-2.5 mb-5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-dark shadow-md">
-                <span className="font-display text-sm font-extrabold text-white">M</span>
-              </div>
-              <span className="font-display text-xl font-extrabold text-white">Med Way</span>
+            <div className="mb-5">
+              <Image
+                src={siteLogo}
+                alt="Med Way"
+                width={siteLogoWidth}
+                height={siteLogoHeight}
+                quality={100}
+                sizes="360px"
+                className="h-14 w-auto sm:h-16 md:h-20"
+              />
             </div>
             <p className="mb-6 max-w-sm text-sm leading-relaxed">
               Canada&apos;s leading medical equipment supplier. Helping people move with comfort, confidence and independence.
@@ -69,7 +76,7 @@ export default function Footer() {
             <ul className="space-y-2.5 text-sm">
               <li><Link href="/about" className="hover:text-primary-light transition-colors">About Us</Link></li>
               <li><Link href="/solutions" className="hover:text-primary-light transition-colors">Solutions</Link></li>
-              <li><Link href="/resources" className="hover:text-primary-light transition-colors">Resources</Link></li>
+              {/* <li><Link href="/resources" className="hover:text-primary-light transition-colors">Resources</Link></li> */}
               <li><Link href="/contact" className="hover:text-primary-light transition-colors">Contact</Link></li>
             </ul>
           </div>

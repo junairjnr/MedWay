@@ -10,15 +10,15 @@ import FeaturedProducts from "@/components/sections/FeaturedProducts";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import TrustSection from "@/components/sections/TrustSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import BrandsSection from "@/components/sections/BrandsSection";
-import ResourcesSection from "@/components/sections/ResourcesSection";
+// import BrandsSection from "@/components/sections/BrandsSection";
+// import ResourcesSection from "@/components/sections/ResourcesSection";
 import BottomCTA from "@/components/sections/BottomCTA";
 import ContactCTA from "@/components/sections/ContactCTA";
 
 export default function HomePage() {
   return (
     <>
-      <div className="pt-16 sm:pt-[4.5rem]">
+      <div className="pt-24 sm:pt-[6.5rem]">
         <PromoTicker />
         <HeroCarousel />
       </div>
@@ -32,8 +32,8 @@ export default function HomePage() {
       <WhyChooseUs />
       <TrustSection />
       <TestimonialsSection />
-      <BrandsSection />
-      <ResourcesSection />
+      {/* <BrandsSection /> */}
+      {/* <ResourcesSection /> */}
       <BottomCTA />
       <ContactCTA />
     </>

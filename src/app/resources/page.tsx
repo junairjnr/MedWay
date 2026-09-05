@@ -13,7 +13,7 @@ export const metadata = {
 
 export default function ResourcesPage() {
   return (
-    <div className="pt-16 sm:pt-[4.5rem] bg-background bg-pattern">
+    <div className="pt-24 sm:pt-[6.5rem] bg-background bg-pattern">
       <PageHero
         title="Knowledge That Moves You Forward"
         description="Expert guides to help you choose the right mobility equipment with confidence."

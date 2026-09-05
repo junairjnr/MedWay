@@ -31,7 +31,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
   const imageScale = useTransform(scrollYProgress, [0, 0.3], [0.95, 1]);
 
   return (
-    <div className="pt-16 sm:pt-[4.5rem] pb-[calc(4.5rem+env(safe-area-inset-bottom))] lg:pb-12">
+    <div className="pt-24 sm:pt-[6.5rem] pb-[calc(4.5rem+env(safe-area-inset-bottom))] lg:pb-12">
       <Container className="py-4 sm:py-6">
         <Link href="/products" className="inline-flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors min-h-11">
           <ArrowLeft className="w-4 h-4" /> Back to Products
