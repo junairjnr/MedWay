@@ -11,7 +11,7 @@ export const metadata = {
 
 export default function SolutionsPage() {
   return (
-    <div className="pt-24 sm:pt-[6.5rem] bg-background">
+    <div className="pt-14 lg:pt-[5.5rem] bg-background">
       <PageHero
         title="Complete Mobility Solutions"
         description="More than products — end-to-end support for personal mobility, home care, and professional environments."

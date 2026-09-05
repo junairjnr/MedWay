@@ -109,7 +109,7 @@ export default function ProductListing({
   );
 
   return (
-    <div className="pt-24 sm:pt-[6.5rem] bg-background bg-pattern">
+    <div className="pt-14 lg:pt-[5.5rem] bg-background bg-pattern">
       <div className="relative h-44 sm:h-52 md:h-60 lg:h-72 overflow-hidden">
         <Image src={bannerImage} alt={title} fill className="object-cover scale-105" sizes="100vw" priority />
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/70 to-navy/40" />

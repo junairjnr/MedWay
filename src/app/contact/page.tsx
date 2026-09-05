@@ -18,7 +18,7 @@ const contactItems = [
 
 export default function ContactPage() {
   return (
-    <div className="pt-24 sm:pt-[6.5rem] bg-background bg-pattern">
+    <div className="pt-14 lg:pt-[5.5rem] bg-background bg-pattern">
       <PageHero
         title="Get In Touch"
         description="Our mobility specialists are ready to help you find the right equipment."

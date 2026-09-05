@@ -13,7 +13,7 @@ export default function AboutPage() {
   const { intro, cta, trust } = siteContent;
 
   return (
-    <div className="pt-24 sm:pt-[6.5rem] bg-background">
+    <div className="pt-14 lg:pt-[5.5rem] bg-background">
       <PageHero
         title="About Med Way"
         description="Canada's leading medical equipment supplier — helping people move with comfort, confidence and independence."

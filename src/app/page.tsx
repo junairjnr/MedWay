@@ -18,7 +18,7 @@ import ContactCTA from "@/components/sections/ContactCTA";
 export default function HomePage() {
   return (
     <>
-      <div className="pt-24 sm:pt-[6.5rem]">
+      <div className="pt-14 lg:pt-[5.5rem]">
         <PromoTicker />
         <HeroCarousel />
       </div>

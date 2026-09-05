@@ -48,8 +48,10 @@ export default function Header() {
     };
   }, [mobileOpen]);
 
-  const navText = solidNav ? "text-foreground hover:text-primary" : "text-white/90 hover:text-white";
-  const menuIcon = solidNav ? "text-foreground" : "text-white";
+  const navText = solidNav
+    ? "text-foreground hover:text-primary"
+    : "text-foreground/90 hover:text-primary";
+  const menuIcon = solidNav ? "text-foreground" : "text-white max-lg:text-foreground";
 
   const closeMenus = () => {
     setCategoriesOpen(false);
@@ -59,26 +61,25 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <motion.div
-        animate={{ height: solidNav ? 96 : 104 }}
-        className={`transition-all duration-300 ${
-          solidNav ? "glass-nav shadow-sm border-b border-border/60" : "bg-navy/40 backdrop-blur-md"
+        className={`h-14 overflow-visible transition-all duration-300 ${
+          solidNav ? "glass-nav lg:h-20" : "bg-white/90 backdrop-blur-sm lg:bg-navy/15 lg:backdrop-blur-sm lg:h-[5.5rem]"
         }`}
       >
-        <Container className="h-full flex items-center justify-between gap-4">
-          <Link href="/" className="inline-flex shrink-0 items-center min-h-11 group">
+        <Container className="flex h-full items-center justify-between gap-3 lg:gap-6">
+          <Link href="/" className="relative z-10 flex shrink-0 items-center self-center group">
             <Image
               src={siteLogo}
               alt="Med Way"
               width={siteLogoWidth}
               height={siteLogoHeight}
               quality={100}
-              sizes="(max-width: 640px) 260px, (max-width: 1024px) 360px, 480px"
-              className="h-14 w-auto transition-opacity group-hover:opacity-90 sm:h-16 md:h-20 lg:h-24"
+              sizes="(max-width: 1024px) 480px, 560px"
+              className="h-[5.5rem] w-auto max-w-[min(68vw,16rem)] object-contain object-[left_center] transition-opacity group-hover:opacity-90 lg:h-28 lg:max-w-[18rem]"
               priority
             />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-0.5">
+          <nav className="relative z-20 hidden lg:flex flex-1 items-center justify-center gap-0.5 self-center min-w-0">
             {/* Products mega menu */}
             <div
               className="relative"
@@ -89,11 +90,9 @@ export default function Header() {
                 type="button"
                 aria-expanded={categoriesOpen}
                 aria-haspopup="true"
-                className={`flex items-center gap-1.5 px-4 py-2.5 min-h-11 text-sm font-medium transition-all rounded-lg ${
+                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-all rounded-lg ${
                   categoriesOpen || isProductsActive
-                    ? solidNav
-                      ? "text-primary bg-primary/10"
-                      : "text-white bg-white/10"
+                    ? "text-primary bg-primary/10"
                     : navText
                 }`}
               >
@@ -103,7 +102,6 @@ export default function Header() {
                 />
               </button>
 
-              {/* Hover bridge — prevents menu closing when moving cursor down */}
               <div className="absolute left-0 right-0 top-full h-3" aria-hidden />
 
               <AnimatePresence>
@@ -117,7 +115,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-4 py-2.5 min-h-11 inline-flex items-center text-sm font-medium transition-colors rounded-lg ${navText} ${
+                className={`px-4 py-2 inline-flex items-center text-sm font-medium transition-colors rounded-lg ${navText} ${
                   pathname === link.href ? "text-primary bg-primary/10" : ""
                 }`}
               >
@@ -126,25 +124,22 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="hidden lg:block">
-            <Button
-              href="/contact"
-              variant={solidNav ? "primary" : "white"}
-              size="sm"
-              showArrow={false}
-            >
-              Enquire
-            </Button>
-          </div>
+          <div className="relative z-20 flex shrink-0 items-center self-center">
+            <div className="hidden lg:block">
+              <Button href="/contact" variant="primary" size="sm" showArrow={false}>
+                Enquire
+              </Button>
+            </div>
 
-          <button
-            className="lg:hidden touch-target inline-flex items-center justify-center rounded-md -mr-2"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-          >
-            {mobileOpen ? <X className={`w-6 h-6 ${menuIcon}`} /> : <Menu className={`w-6 h-6 ${menuIcon}`} />}
-          </button>
+            <button
+              className="lg:hidden touch-target inline-flex items-center justify-center rounded-md -mr-2"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
+            >
+              {mobileOpen ? <X className={`w-6 h-6 ${menuIcon}`} /> : <Menu className={`w-6 h-6 ${menuIcon}`} />}
+            </button>
+          </div>
         </Container>
       </motion.div>
 
@@ -155,7 +150,7 @@ export default function Header() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 top-24 bg-navy/40 backdrop-blur-sm lg:hidden z-40"
+              className="fixed inset-0 top-14 bg-navy/40 backdrop-blur-sm lg:hidden z-40"
               onClick={() => setMobileOpen(false)}
               aria-label="Close menu overlay"
             />
@@ -163,7 +158,7 @@ export default function Header() {
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
-              className="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-border shadow-xl z-50 max-h-[calc(100dvh-4rem)] overflow-y-auto"
+              className="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-border shadow-xl z-50 max-h-[calc(100dvh-3.5rem)] overflow-y-auto"
             >
               <div className="px-4 sm:px-6 py-5 space-y-5">
                 <ProductsMegaMenuMobile onNavigate={closeMenus} />
