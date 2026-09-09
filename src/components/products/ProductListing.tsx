@@ -148,7 +148,7 @@ export default function ProductListing({
         </div>
 
         {/* Mobile category pills */}
-        <div className="lg:hidden mb-5 -mx-1">
+        <div className="lg:hidden mb-5">
           <div className="filter-scroll flex gap-2 overflow-x-auto px-1 pb-1">
             <button
               onClick={() => setSelectedCategory("")}

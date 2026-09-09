@@ -6,11 +6,12 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { vitalImages } from "@/data/images";
 import { solutions } from "@/data/solutions";
+import Container from "@/components/ui/Container";
 
 export default function SolutionsPreview() {
   return (
     <section className="py-24 bg-navy text-white">
-      <div className="max-w-7xl mx-auto px-5 lg:px-8">
+      <Container>
         <p className="text-xs font-semibold uppercase tracking-widest text-primary-light mb-4">Solutions</p>
         <h2 className="font-display font-extrabold text-4xl md:text-5xl tracking-tight mb-4">More Than Products.</h2>
         <p className="text-2xl font-display font-bold text-white/80 mb-16">Complete Mobility Solutions.</p>
@@ -37,7 +38,7 @@ export default function SolutionsPreview() {
             </motion.div>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

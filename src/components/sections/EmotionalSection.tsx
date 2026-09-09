@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
+import Container from "@/components/ui/Container";
 
 export default function EmotionalSection() {
   const ref = useRef<HTMLElement>(null);
@@ -26,18 +27,20 @@ export default function EmotionalSection() {
         <div className="absolute inset-0 bg-navy/75" />
       </motion.div>
 
-      <motion.div
-        style={reduced ? {} : { opacity: textOpacity, y: textY }}
-        className="relative z-10 max-w-4xl mx-auto px-5 lg:px-8 py-24 text-center"
+      <Container
+        as="div"
+        className="relative z-10 max-w-4xl py-24 text-center"
       >
-        <h2 className="font-display font-extrabold text-white text-4xl md:text-6xl lg:text-7xl tracking-tight leading-[1.05] mb-8">
+        <motion.div style={reduced ? {} : { opacity: textOpacity, y: textY }}>
+        <h2 className="font-display font-extrabold text-white text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-8">
           BETTER MOBILITY.<br />BETTER EVERYDAY LIFE.
         </h2>
-        <p className="text-white/70 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+        <p className="text-white/70 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
           Because the right equipment isn&apos;t simply about getting from one place to another.
           It&apos;s about being able to do more. Go further. Stay independent. And live confidently.
         </p>
-      </motion.div>
+        </motion.div>
+      </Container>
     </section>
   );
 }

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Phone } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { whatsAppHref } from "@/data/site-contact";
 
 export default function MobileEnquireBar() {
   const pathname = usePathname();
@@ -12,11 +13,13 @@ export default function MobileEnquireBar() {
     <div className="fixed bottom-0 inset-x-0 z-40 lg:hidden pb-[env(safe-area-inset-bottom)]">
       <div className="flex border-t border-border bg-white/95 backdrop-blur-md shadow-[0_-4px_24px_rgba(0,0,0,0.08)]">
         <a
-          href="tel:1800633929"
+          href={whatsAppHref()}
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex flex-1 items-center justify-center gap-2 min-h-[3.25rem] text-sm font-semibold text-foreground border-r border-border active:bg-background"
         >
           <Phone className="w-4 h-4 text-primary" />
-          Call
+          WhatsApp
         </a>
         <Link
           href="/contact"

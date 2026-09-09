@@ -85,4 +85,23 @@ export const siteContent = {
       "Let us be your trusted medical equipment supplier in Canada or your rental company for the Greater Toronto Area. We aren't just an e-commerce site, we live in the Toronto community, operate 2 Toronto based stores and have a dedicated team of expert employees to take your Canada wide support calls and ship all our products across Canada. See why everyone who buys or rents for us, loves us. It's because for us, it's all about family!",
     ],
   },
+  about: {
+    title: "About Medway",
+    description:
+      "Trusted mobility and home medical equipment solutions dedicated to comfort, safety, mobility, and independence at home.",
+    lead:
+      "Our goal is simple: to make quality mobility and home medical equipment accessible, convenient, and dependable for every customer we serve.",
+    paragraphs: [
+      "Medway is a trusted mobility and home medical equipment company dedicated to helping individuals maintain comfort, safety, mobility, and independence at home.",
+      "We specialize in medical equipment rentals, medical bed rentals and sales, mobility scooter sales, bathroom safety equipment, and a wide range of home healthcare solutions. Whether you need equipment for short-term recovery, long-term care, or everyday mobility, our team is here to provide practical solutions tailored to your needs.",
+      "Our services include medical bed rentals and sales, mobility scooters, wheelchairs, walkers, bathroom safety products, patient care equipment, and other essential home medical equipment. We also provide delivery, setup, installation, and ongoing support to make the process as simple and convenient as possible.",
+    ],
+    mission: {
+      headline: "Reliable Products, Professional Service, and Customer Care",
+      image: vitalImages.sections.trust,
+      paragraphs: [
+        "At Medway, we understand that medical equipment is often needed during important and sometimes difficult times. That's why we focus on reliable products, timely delivery, professional service, and customer care.",
+      ],
+    },
+  },
 };

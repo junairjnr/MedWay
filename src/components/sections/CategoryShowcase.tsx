@@ -7,11 +7,12 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { categories } from "@/data/categories";
 import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
+import Container from "@/components/ui/Container";
 
 export default function CategoryShowcase() {
   return (
     <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-5 lg:px-8 mb-20">
+      <Container className="mb-20">
         <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">Explore</p>
         <h2 className="font-display font-extrabold text-4xl md:text-5xl tracking-tight max-w-2xl">
           Explore Our Mobility Solutions
@@ -19,7 +20,7 @@ export default function CategoryShowcase() {
         <p className="text-muted text-lg mt-4 max-w-xl leading-relaxed">
           Thoughtfully selected mobility and healthcare equipment designed around comfort, safety and independence.
         </p>
-      </div>
+      </Container>
       <div>
         {categories.map((cat, i) => (
           <CategoryRow key={cat.slug} category={cat} reversed={i % 2 === 1} index={i} />

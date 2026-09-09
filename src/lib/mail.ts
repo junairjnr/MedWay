@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { siteContact } from "@/data/site-contact";
 
 export interface MailOptions {
   to: string;
@@ -13,7 +14,7 @@ export async function sendMail(options: MailOptions): Promise<boolean> {
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
   const from = process.env.SMTP_FROM || user;
-  const adminEmail = process.env.ADMIN_EMAIL || user;
+  const adminEmail = process.env.ADMIN_EMAIL || siteContact.email;
 
   if (!host || !user || !pass) {
     console.log("[Med Way Mail - Demo Mode]");

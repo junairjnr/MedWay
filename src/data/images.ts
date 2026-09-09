@@ -2,8 +2,8 @@
 const VM = "https://www.vitalmobility.ca/wp-content/uploads";
 
 export const siteLogo = "/assets/logo.png";
-export const siteLogoWidth = 2752;
-export const siteLogoHeight = 1536;
+export const siteLogoWidth = 1979;
+export const siteLogoHeight = 570;
 
 /** Verified Unsplash photo IDs (HTTP 200 tested) */
 const STOCK = {

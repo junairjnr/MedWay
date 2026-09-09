@@ -39,11 +39,11 @@ export default function PageHero({
               {eyebrow}
             </p>
           )}
-          <h1 className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] text-white tracking-tight leading-[1.1] max-w-3xl">
+          <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-tight max-w-3xl">
             {title}
           </h1>
           {description && (
-            <p className="text-white/75 mt-3 sm:mt-4 text-sm sm:text-base md:text-lg max-w-2xl leading-relaxed">
+            <p className="text-white/75 mt-3 sm:mt-4 text-base sm:text-lg max-w-2xl leading-relaxed">
               {description}
             </p>
           )}

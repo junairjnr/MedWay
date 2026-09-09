@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import Button from "@/components/ui/Button";
+import Container from "@/components/ui/Container";
 import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
 
 const words = ["MOVE", "WITH", "CONFIDENCE."];
@@ -38,8 +39,8 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/50 to-navy/80" />
       </motion.div>
 
-      <motion.div style={{ y: reduced ? 0 : textY, opacity: reduced ? 1 : opacity }} className="relative z-10 h-full flex flex-col justify-center max-w-7xl mx-auto px-5 lg:px-8 pt-20">
-        <div className="max-w-3xl">
+      <Container as="div" className="relative z-10 flex h-full flex-col justify-center pt-20">
+        <motion.div style={{ y: reduced ? 0 : textY, opacity: reduced ? 1 : opacity }} className="max-w-3xl">
           <h1 className="font-display font-extrabold text-white leading-[0.95] tracking-tight">
             {words.map((word, i) => (
               <motion.span
@@ -57,7 +58,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2, duration: 0.8 }}
-            className="text-white/70 text-lg md:text-xl mt-8 max-w-md leading-relaxed"
+            className="text-white/70 text-base sm:text-lg mt-8 max-w-md leading-relaxed"
           >
             Designed for comfort.<br />Built for independence.
           </motion.p>
@@ -71,8 +72,8 @@ export default function HeroSection() {
               Explore Products
             </Button>
           </motion.div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </Container>
 
       <motion.div
         style={{ opacity: reduced ? 1 : opacity }}

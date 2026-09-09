@@ -3,6 +3,7 @@ import NewsletterForm from "@/components/forms/NewsletterForm";
 import { vitalImages } from "@/data/images";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
+import { siteContact, mailtoHref } from "@/data/site-contact";
 
 const collage = [
   vitalImages.hero.store,
@@ -31,9 +32,9 @@ export default function ContactCTA() {
             {/* Content */}
             <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10 xl:p-12">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-light mb-3">Questions?</p>
-              <h2 className="font-display text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
-                hello@medway.ca
-              </h2>
+              <a href={mailtoHref()} className={`font-medium text-white hover:text-primary-light transition-colors ${siteContact.emailClass}`}>
+                {siteContact.email}
+              </a>
               <p className="mt-3 text-sm leading-relaxed text-white/70 sm:text-base">
                 Receive helpful mobility advice, product updates and news from our team.
               </p>

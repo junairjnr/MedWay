@@ -10,9 +10,11 @@ import Button from "@/components/ui/Button";
 
 interface ProductsMegaMenuProps {
   onNavigate?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
-export function ProductsMegaMenuDesktop({ onNavigate }: ProductsMegaMenuProps) {
+export function ProductsMegaMenuDesktop({ onNavigate, onMouseEnter, onMouseLeave }: ProductsMegaMenuProps) {
   const featuredImage = getCategoryImage("mobility-scooters");
 
   return (
@@ -21,6 +23,8 @@ export function ProductsMegaMenuDesktop({ onNavigate }: ProductsMegaMenuProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 8 }}
       transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       className="absolute left-1/2 top-full z-50 w-[min(calc(100vw-2rem),56rem)] -translate-x-1/2 pt-3"
     >
       <div className="overflow-hidden rounded-2xl border border-border/80 bg-white shadow-[0_24px_64px_rgba(26,35,50,0.14)]">

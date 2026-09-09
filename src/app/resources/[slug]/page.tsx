@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { resources, getResourceBySlug } from "@/data/resources";
 import { notFound } from "next/navigation";
+import Container from "@/components/ui/Container";
 
 export function generateStaticParams() {
   return resources.map((r) => ({ slug: r.slug }));
@@ -21,7 +22,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
 
   return (
     <article className="pt-24 pb-16">
-      <div className="max-w-3xl mx-auto px-5 lg:px-8">
+      <Container className="max-w-3xl">
         <Link href="/resources" className="text-sm text-muted hover:text-primary mb-8 inline-block">← Back to Resources</Link>
         <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">{r.category}</p>
         <h1 className="font-display font-extrabold text-3xl md:text-5xl tracking-tight mb-8">{r.title}</h1>
@@ -30,10 +31,10 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
         </div>
         <div className="space-y-6">
           {r.content.map((p, i) => (
-            <p key={i} className="text-muted leading-relaxed text-lg">{p}</p>
+            <p key={i} className="text-muted text-body leading-relaxed">{p}</p>
           ))}
         </div>
-      </div>
+      </Container>
     </article>
   );
 }
