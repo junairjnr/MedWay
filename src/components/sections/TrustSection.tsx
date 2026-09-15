@@ -9,7 +9,7 @@ import Container from "@/components/ui/Container";
 const pillars = [
   { icon: Building2, title: "Hospitals & Clinics", desc: "Trusted by healthcare professionals" },
   { icon: Heart, title: "Home Care Patients", desc: "Comfort for families across Canada" },
-  { icon: Shield, title: "Quality Guaranteed", desc: "Top brands, integrity pricing" },
+  { icon: Shield, title: "Quality Guaranteed", desc: "Trusted products, integrity pricing" },
 ];
 
 export default function TrustSection() {

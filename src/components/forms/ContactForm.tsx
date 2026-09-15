@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { getEmailJsErrorMessage, isEmailJsConfigured, sendEmailJs } from "@/lib/emailjs";
 
 interface ContactFormProps {
   productName?: string;
@@ -29,30 +30,55 @@ export default function ContactForm({ productName, showUpdates = false }: Contac
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("loading");
-    const name = `${form.firstName} ${form.lastName}`.trim();
-    try {
-      const endpoint = productName ? "/api/inquiry" : "/api/contact";
-      const body = productName
-        ? { name, email: form.email, phone: form.phone, productName, message: form.message }
-        : { name, email: form.email, phone: form.phone, subject: form.subject || form.category, message: form.message };
 
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setStatus("success");
-        setMessage("Thank you. We've received your enquiry. Our team will get back to you shortly.");
-        setForm({ firstName: "", lastName: "", email: "", phone: "", subject: "", category: "", message: "", updates: false });
-      } else {
-        setStatus("error");
-        setMessage(data.error || "Something went wrong.");
-      }
-    } catch {
+    const name = `${form.firstName} ${form.lastName}`.trim();
+    const resolvedProductName =
+      productName?.trim() ||
+      form.category.trim() ||
+      form.subject.trim() ||
+      "Not provided";
+    const subject =
+      form.subject ||
+      form.category ||
+      (productName ? `Enquiry: ${productName}` : "General Enquiry");
+    const template = productName ? "inquiry" : "contact";
+
+    if (!isEmailJsConfigured(template)) {
       setStatus("error");
-      setMessage("Failed to send. Please try again.");
+      setMessage("Email service is not configured yet. Please call or WhatsApp us directly.");
+      return;
+    }
+
+    try {
+      await sendEmailJs(template, {
+        from_name: name,
+        from_email: form.email,
+        reply_to: form.email,
+        phone: form.phone || "Not provided",
+        subject,
+        category: form.category || "Not provided",
+        product_name: resolvedProductName,
+        message: form.message,
+        updates: form.updates ? "Yes" : "No",
+      });
+
+      setStatus("success");
+      setMessage("Thank you. We've received your enquiry. Our team will get back to you shortly.");
+      setForm({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        subject: productName ? `Enquiry: ${productName}` : "",
+        category: productName || "",
+        message: "",
+        updates: false,
+      });
+    } catch (error) {
+      setStatus("error");
+      setMessage(
+        `${getEmailJsErrorMessage(error)} Please try again or contact us by phone or WhatsApp.`
+      );
     }
   }
 

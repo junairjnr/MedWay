@@ -4,14 +4,54 @@ import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import ProductCard from "@/components/products/ProductCard";
-import { products, Product } from "@/data/products";
+import { products, Product, getProductDisplayName } from "@/data/products";
 import { categories, getCategoryBySlug } from "@/data/categories";
-import { brands } from "@/data/brands";
 import { getCategoryImage } from "@/data/images";
 import Container from "@/components/ui/Container";
 import { MotionStagger, MotionStaggerItem } from "@/components/animations/MotionInView";
 
 type SortOption = "default" | "name-az" | "name-za";
+
+interface CategoryFilterProps {
+  selectedCategory: string;
+  onCategoryChange: (slug: string) => void;
+  groupName: string;
+}
+
+function CategoryFilter({ selectedCategory, onCategoryChange, groupName }: CategoryFilterProps) {
+  return (
+    <div>
+      <h3 className="text-xs font-semibold uppercase tracking-widest mb-3 text-foreground">Category</h3>
+      <div className="space-y-1 max-h-52 overflow-y-auto text-sm">
+        <label className="flex items-center gap-3 cursor-pointer min-h-10 px-2 rounded-lg hover:bg-background">
+          <input
+            type="radio"
+            name={groupName}
+            checked={selectedCategory === ""}
+            onChange={() => onCategoryChange("")}
+            className="accent-primary w-4 h-4"
+          />
+          All Categories
+        </label>
+        {categories.map((cat) => (
+          <label
+            key={cat.slug}
+            className="flex items-center gap-3 cursor-pointer min-h-10 px-2 rounded-lg hover:bg-background"
+          >
+            <input
+              type="radio"
+              name={groupName}
+              checked={selectedCategory === cat.slug}
+              onChange={() => onCategoryChange(cat.slug)}
+              className="accent-primary w-4 h-4"
+            />
+            {cat.name}
+          </label>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 interface ProductListingProps {
   initialCategory?: string;
@@ -25,7 +65,6 @@ export default function ProductListing({
   description = "Find the right mobility solution for your everyday journey.",
 }: ProductListingProps) {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory || "");
-  const [selectedBrand, setSelectedBrand] = useState("");
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<SortOption>("default");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -44,69 +83,42 @@ export default function ProductListing({
 
   const hasActiveFilters =
     selectedCategory !== defaultCategory ||
-    selectedBrand !== "" ||
     search.trim() !== "" ||
     sort !== "default";
 
   const clearFilters = () => {
     setSelectedCategory(defaultCategory);
-    setSelectedBrand("");
     setSearch("");
     setSort("default");
   };
 
   const filtered = useMemo(() => {
     let result: Product[] = [...products];
-    if (selectedCategory) result = result.filter((p) => p.category === selectedCategory);
-    if (selectedBrand) result = result.filter((p) => p.brand === selectedBrand);
-    if (search.trim()) {
-      const q = search.toLowerCase();
-      result = result.filter(
-        (p) =>
-          p.name.toLowerCase().includes(q) ||
-          p.brand.toLowerCase().includes(q) ||
-          p.shortDescription.toLowerCase().includes(q)
-      );
-    }
-    if (sort === "name-az") result.sort((a, b) => a.name.localeCompare(b.name));
-    if (sort === "name-za") result.sort((a, b) => b.name.localeCompare(a.name));
-    return result;
-  }, [selectedCategory, selectedBrand, search, sort]);
+    const query = search.trim().toLowerCase();
 
-  const filterPanel = (
-    <div className="space-y-6">
-      <div>
-        <h3 className="text-xs font-semibold uppercase tracking-widest mb-3 text-foreground">Category</h3>
-        <div className="space-y-1 max-h-52 overflow-y-auto text-sm">
-          <label className="flex items-center gap-3 cursor-pointer min-h-10 px-2 rounded-lg hover:bg-background">
-            <input type="radio" name="cat" checked={!selectedCategory} onChange={() => setSelectedCategory("")} className="accent-primary w-4 h-4" />
-            All Categories
-          </label>
-          {categories.map((cat) => (
-            <label key={cat.slug} className="flex items-center gap-3 cursor-pointer min-h-10 px-2 rounded-lg hover:bg-background">
-              <input type="radio" name="cat" checked={selectedCategory === cat.slug} onChange={() => setSelectedCategory(cat.slug)} className="accent-primary w-4 h-4" />
-              {cat.name}
-            </label>
-          ))}
-        </div>
-      </div>
-      <div>
-        <h3 className="text-xs font-semibold uppercase tracking-widest mb-3 text-foreground">Brand</h3>
-        <div className="space-y-1 max-h-52 overflow-y-auto text-sm">
-          <label className="flex items-center gap-3 cursor-pointer min-h-10 px-2 rounded-lg hover:bg-background">
-            <input type="radio" name="brand" checked={!selectedBrand} onChange={() => setSelectedBrand("")} className="accent-primary w-4 h-4" />
-            All Brands
-          </label>
-          {brands.filter((b) => b !== "Med Way").map((b) => (
-            <label key={b} className="flex items-center gap-3 cursor-pointer min-h-10 px-2 rounded-lg hover:bg-background">
-              <input type="radio" name="brand" checked={selectedBrand === b} onChange={() => setSelectedBrand(b)} className="accent-primary w-4 h-4" />
-              {b}
-            </label>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+    if (query) {
+      result = result.filter((p) => {
+        const categoryName = getCategoryBySlug(p.category)?.name.toLowerCase() || "";
+        const displayName = getProductDisplayName(p).toLowerCase();
+        return (
+          displayName.includes(query) ||
+          p.shortDescription.toLowerCase().includes(query) ||
+          categoryName.includes(query) ||
+          p.sku.toLowerCase().includes(query)
+        );
+      });
+    } else if (selectedCategory) {
+      result = result.filter((p) => p.category === selectedCategory);
+    }
+
+    if (sort === "name-az") {
+      result.sort((a, b) => getProductDisplayName(a).localeCompare(getProductDisplayName(b)));
+    }
+    if (sort === "name-za") {
+      result.sort((a, b) => getProductDisplayName(b).localeCompare(getProductDisplayName(a)));
+    }
+    return result;
+  }, [selectedCategory, search, sort]);
 
   return (
     <div className="pt-14 lg:pt-[5.5rem] bg-background bg-pattern">
@@ -129,12 +141,25 @@ export default function ProductListing({
           <div className="relative flex-1">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted pointer-events-none" />
             <input
-              type="search"
+              type="text"
+              role="searchbox"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search products, brands..."
-              className="w-full pl-11 pr-4 py-3 min-h-11 border border-border bg-background text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30"
+              onInput={(e) => setSearch(e.currentTarget.value)}
+              placeholder="Search products..."
+              autoComplete="off"
+              className="w-full pl-11 pr-10 py-3 min-h-11 border border-border bg-background text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30"
             />
+            {search && (
+              <button
+                type="button"
+                onClick={() => setSearch("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 touch-target inline-flex items-center justify-center rounded-md text-muted hover:text-foreground"
+                aria-label="Clear search"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
           </div>
           <select
             value={sort}
@@ -179,7 +204,11 @@ export default function ProductListing({
           <aside className="hidden lg:block w-60 xl:w-64 shrink-0">
             <div className="surface-card p-5 sticky top-24">
               <h2 className="font-display font-bold text-base mb-5 pb-3 border-b border-border">Refine Results</h2>
-              {filterPanel}
+              <CategoryFilter
+                selectedCategory={selectedCategory}
+                onCategoryChange={setSelectedCategory}
+                groupName="product-category-desktop"
+              />
             </div>
           </aside>
 
@@ -211,7 +240,10 @@ export default function ProductListing({
                 </button>
               </div>
             ) : (
-              <MotionStagger className="product-grid">
+              <MotionStagger
+                key={`${selectedCategory}-${search.trim()}-${sort}`}
+                className="product-grid"
+              >
                 {filtered.map((p) => (
                   <MotionStaggerItem key={p.slug}>
                     <ProductCard product={p} compact />
@@ -237,7 +269,13 @@ export default function ProductListing({
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <div className="flex-1 overflow-y-auto p-5">{filterPanel}</div>
+            <div className="flex-1 overflow-y-auto p-5">
+              <CategoryFilter
+                selectedCategory={selectedCategory}
+                onCategoryChange={setSelectedCategory}
+                groupName="product-category-mobile"
+              />
+            </div>
             <div className="p-4 border-t border-border bg-background pb-[calc(1rem+env(safe-area-inset-bottom))] space-y-2">
               {hasActiveFilters && (
                 <button

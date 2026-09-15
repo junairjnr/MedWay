@@ -10,7 +10,7 @@ import Container from "@/components/ui/Container";
 
 const highlights = [
   "Canada-wide sales & GTA rentals",
-  "Top brands: Drive, Pride, Invacare & more",
+  "Wide range of mobility & home care solutions",
   "Expert staff & integrity pricing",
 ];
 

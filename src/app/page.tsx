@@ -5,7 +5,7 @@ import IntroSection from "@/components/sections/IntroSection";
 import ShowroomGallery from "@/components/sections/ShowroomGallery";
 import CategoryGrid from "@/components/sections/CategoryGrid";
 import HowItWorks from "@/components/sections/HowItWorks";
-import PromoBanners from "@/components/sections/PromoBanners";
+// import PromoBanners from "@/components/sections/PromoBanners";
 import FeaturedProducts from "@/components/sections/FeaturedProducts";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import TrustSection from "@/components/sections/TrustSection";
@@ -27,7 +27,7 @@ export default function HomePage() {
       <ShowroomGallery />
       <CategoryGrid />
       <HowItWorks />
-      <PromoBanners />
+      {/* <PromoBanners /> */}
       <FeaturedProducts />
       <WhyChooseUs />
       <TrustSection />

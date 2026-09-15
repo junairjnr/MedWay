@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { getEmailJsErrorMessage, isEmailJsConfigured, sendEmailJs } from "@/lib/emailjs";
 
 interface NewsletterFormProps {
   variant?: "inline" | "footer" | "hero" | "section";
@@ -15,24 +16,31 @@ export default function NewsletterForm({ variant = "inline" }: NewsletterFormPro
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("loading");
-    try {
-      const res = await fetch("/api/newsletter", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setStatus("success");
-        setMessage(data.message || "Thank you for subscribing!");
-        setEmail("");
-      } else {
-        setStatus("error");
-        setMessage(data.error || "Something went wrong.");
-      }
-    } catch {
+
+    if (!isEmailJsConfigured("newsletter")) {
       setStatus("error");
-      setMessage("Failed to subscribe.");
+      setMessage("Newsletter signup is not configured yet. Please try again later.");
+      return;
+    }
+
+    try {
+      await sendEmailJs("newsletter", {
+        from_name: "Newsletter Subscriber",
+        from_email: email,
+        reply_to: email,
+        subject: "Newsletter Subscription",
+        category: "Newsletter",
+        product_name: "Newsletter",
+        message: `New newsletter subscription request: ${email}`,
+        updates: "Yes",
+      });
+
+      setStatus("success");
+      setMessage("Thank you for subscribing!");
+      setEmail("");
+    } catch (error) {
+      setStatus("error");
+      setMessage(getEmailJsErrorMessage(error));
     }
   }
 

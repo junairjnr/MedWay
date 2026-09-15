@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendMail, buildProductInquiryEmail } from "@/lib/mail";
+import { sendMail, buildProductInquiryEmail, MailConfigurationError, getAdminEmail } from "@/lib/mail";
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,17 +16,24 @@ export async function POST(request: NextRequest) {
     }
 
     await sendMail({
-      to: process.env.ADMIN_EMAIL || "",
-      subject: `[Med Way Inquiry] ${productName}`,
+      to: getAdminEmail(),
+      subject: `[Medway Enquiry] ${productName}`,
       html: buildProductInquiryEmail({ name, email, phone, productName, message }),
       replyTo: email,
     });
 
     return NextResponse.json({
-      message: "Thank you! Your product inquiry has been sent. Our team will contact you shortly.",
+      message: "Thank you! Your product enquiry has been sent. Our team will contact you shortly.",
     });
   } catch (error) {
+    if (error instanceof MailConfigurationError) {
+      console.error("Inquiry mail configuration error:", error.message);
+      return NextResponse.json(
+        { error: "Email service is temporarily unavailable. Please call or WhatsApp us directly." },
+        { status: 503 }
+      );
+    }
     console.error("Product inquiry error:", error);
-    return NextResponse.json({ error: "Failed to send inquiry. Please try again." }, { status: 500 });
+    return NextResponse.json({ error: "Failed to send enquiry. Please try again." }, { status: 500 });
   }
 }

@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendMail, buildNewsletterEmail, buildWelcomeEmail } from "@/lib/mail";
+import {
+  sendMail,
+  buildNewsletterEmail,
+  buildWelcomeEmail,
+  MailConfigurationError,
+  getAdminEmail,
+} from "@/lib/mail";
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,22 +22,33 @@ export async function POST(request: NextRequest) {
     }
 
     await sendMail({
-      to: process.env.ADMIN_EMAIL || "",
-      subject: "[Med Way] New Newsletter Subscription",
+      to: getAdminEmail(),
+      subject: "[Medway] New Newsletter Subscription",
       html: buildNewsletterEmail(email),
       replyTo: email,
     });
 
-    await sendMail({
-      to: email,
-      subject: "Welcome to Med Way Newsletter!",
-      html: buildWelcomeEmail(),
-    });
+    try {
+      await sendMail({
+        to: email,
+        subject: "Welcome to Medway Newsletter!",
+        html: buildWelcomeEmail(),
+      });
+    } catch (welcomeError) {
+      console.warn("Newsletter welcome email failed:", welcomeError);
+    }
 
     return NextResponse.json({
-      message: "Thank you for subscribing! Check your inbox for a welcome email.",
+      message: "Thank you for subscribing!",
     });
   } catch (error) {
+    if (error instanceof MailConfigurationError) {
+      console.error("Newsletter mail configuration error:", error.message);
+      return NextResponse.json(
+        { error: "Email service is temporarily unavailable. Please try again later." },
+        { status: 503 }
+      );
+    }
     console.error("Newsletter error:", error);
     return NextResponse.json({ error: "Failed to subscribe. Please try again." }, { status: 500 });
   }

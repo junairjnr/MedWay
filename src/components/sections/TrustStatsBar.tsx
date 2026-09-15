@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CreditCard, Truck, Headphones, ShieldCheck, MapPin, Award } from "lucide-react";
+import { Truck, Headphones, ShieldCheck, Award, ShoppingBag, Wrench, RefreshCw } from "lucide-react";
 import Container from "@/components/ui/Container";
 import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
 
@@ -53,9 +53,10 @@ export default function TrustStatsBar() {
 
 export function PromoTicker() {
   const items = [
-    { icon: CreditCard, text: "Buy now, pay later — financing available" },
-    { icon: Truck, text: "Canada-wide shipping — free over $100*" },
-    { icon: MapPin, text: "Toronto showrooms + coast-to-coast delivery" },
+    { icon: ShoppingBag, text: "Sales — mobility & home care equipment" },
+    { icon: Wrench, text: "Service — expert setup, repairs & support" },
+    { icon: RefreshCw, text: "Rental — flexible home health care equipment" },
+    { icon: Truck, text: "All-over shipping across Canada" },
   ];
 
   return (

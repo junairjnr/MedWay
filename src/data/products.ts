@@ -38,9 +38,9 @@ export interface Product {
 export const products: Product[] = [
   {
     slug: "vitalflex-elite-hospital-bed",
-    name: "VitalFlex Elite Electric Hospital Bed",
+    name: "Elite Electric Hospital Bed",
     brand: "VitalFlex",
-    sku: "VITAL-ELITE",
+    sku: "MED-BED-001",
     price: 2499,
     originalPrice: 2999,
     category: "hospital-beds",
@@ -50,13 +50,13 @@ export const products: Product[] = [
       "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1200&h=900&fit=crop",
       "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&h=900&fit=crop",
     ],
-    shortDescription: "Premium electric hospital bed with full positioning control. Better than basic Invacare beds with more features at an appropriately priced premium for longterm use.",
-    description: "I ordered the VitalFlex Elite hospital bed online here and it was a smooth experience. The bed has been amazing and there are a lot of features. The bed is better than the basic invacare beds and I would recommend the Vital Mobility beds instead. I had received numerous quotes from medical suppliers for other beds, but they were overpriced with less features. The VitalFlex Elite is appropriately priced for a premium hospital bed for longterm use.",
+    shortDescription: "Premium electric hospital bed with full positioning control and advanced features for long-term home care.",
+    description: "This elite electric hospital bed delivers a smooth ordering experience and outstanding everyday performance. With extensive positioning features and reliable build quality, it is well suited as a premium hospital bed for long-term home care and recovery.",
     whoItsFor: "Designed for patients requiring long-term home care, post-surgical recovery, and those who need Trendelenburg positioning with electric head and foot elevation.",
     benefits: [
       "Electric head and foot elevation with ultra-quiet motor system",
       "Trendelenburg and reverse Trendelenburg positioning",
-      "Better features than basic Invacare beds at Integrity Pricing",
+      "Advanced positioning features for home care comfort",
       "Remote control with backlight display",
       "Integrated side rails with easy-release mechanism",
       "White Glove delivery and setup available in Toronto & GTA",
@@ -86,24 +86,23 @@ export const products: Product[] = [
   },
   {
     slug: "foxtr-auto-fold-scooter",
-    name: "FOXTR Auto-Fold Mobility Scooter",
+    name: "Auto-Fold Mobility Scooter",
     brand: "FOXTR",
-    sku: "VITAL-FOXTR",
+    sku: "MED-SCOOTER-001",
     price: 3499,
     originalPrice: 4999,
     category: "mobility-scooters",
     inStock: true,
     image: "https://images.unsplash.com/photo-1576092768241-dec231879aa3?w=1200&h=900&fit=crop",
     images: ["https://images.unsplash.com/photo-1576092768241-dec231879aa3?w=1200&h=900&fit=crop"],
-    shortDescription: "Summer Scooter Sale — Was $4,999 · Now $3,499. Auto-folding scooter with premium comfort. Sale on while supplies last.",
-    description: "The FOXTR Auto-Fold Mobility Scooter combines cutting-edge portability with premium comfort. One-touch automatic folding makes it perfect for travel, while the airline-approved lithium battery and pneumatic tires ensure a smooth ride wherever you go.",
+    shortDescription: "Auto-folding mobility scooter with premium comfort and one-touch portability.",
+    description: "This auto-fold mobility scooter combines cutting-edge portability with premium comfort. One-touch automatic folding makes it perfect for travel, while the airline-approved lithium battery and pneumatic tires ensure a smooth ride wherever you go.",
     whoItsFor: "Ideal for travelers, urban commuters, and anyone who needs a portable scooter that folds automatically for storage and transport.",
     benefits: [
       "One-touch automatic folding mechanism",
-      "Save $1,500 during Summer Scooter Sale",
       "Airline-approved lithium battery",
       "Pneumatic tires for smooth ride",
-      "Free Canada-Wide Shipping on orders above $100",
+      "Free Canada-wide shipping available",
     ],
     features: ["Auto-fold mechanism", "LED headlight and taillight", "Digital dashboard", "Pneumatic tires", "Airline-approved battery"],
     specs: [
@@ -119,22 +118,22 @@ export const products: Product[] = [
     battery: "Airline-approved lithium",
     warranty: "2 years limited warranty",
     accessories: ["Travel bag", "Weather cover", "Additional battery"],
-    usageInfo: "Shop & Save during our Summer Scooter Sale. Sale on while supplies last.",
+    usageInfo: "Ideal for travel and everyday use. Folds automatically for easy storage and transport.",
     careInfo: "Charge battery after each use. Store in dry location. Annual service recommended.",
-    badges: ["Sale", "In-Stock", "Free Shipping"],
+    badges: ["In-Stock", "Free Shipping"],
   },
   {
     slug: "vitalflex-symphony-bed",
-    name: "VitalFlex Symphony Homecare Bed",
+    name: "Symphony Homecare Bed",
     brand: "VitalFlex",
-    sku: "VITAL-SYMPHONY",
+    sku: "MED-BED-002",
     price: 1899,
     category: "hospital-beds",
     inStock: true,
     image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1200&h=900&fit=crop",
     images: ["https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1200&h=900&fit=crop"],
     shortDescription: "Shop our exclusive Symphony — one of Canada's top selling Homecare Beds for comfort and care at home.",
-    description: "Hospital Beds for Home Care — Shop our exclusive Symphony, VitalFlex and more of Canada's top selling Homecare Beds. Semi-electric head and foot adjustment with tool-free assembly in under 30 minutes.",
+    description: "A top-selling homecare bed designed for comfort and everyday care at home. Semi-electric head and foot adjustment with tool-free assembly in under 30 minutes.",
     whoItsFor: "Home care patients and caregivers seeking a reliable, easy-to-assemble hospital bed for everyday comfort.",
     benefits: ["Tool-free assembly in under 30 minutes", "Semi-electric positioning", "Split pan for easy linen changes", "Low height range for fall prevention", "Best seller in homecare beds"],
     features: ["Semi-electric head/foot", "Tool-free assembly", "Split pan design", "Optional side rails", "Locking casters"],
@@ -154,18 +153,18 @@ export const products: Product[] = [
   },
   {
     slug: "golden-comfort-lift-chair",
-    name: "Golden Comfort Infinite Lift Chair",
+    name: "Comfort Infinite Lift Chair",
     brand: "Golden Technologies",
-    sku: "VITAL-GOLDEN-LC",
+    sku: "MED-LCHAIR-001",
     price: 1899,
     category: "lift-chairs",
     inStock: true,
     image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=900&fit=crop",
     images: ["https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=900&fit=crop"],
-    shortDescription: "Canada's Top Lift Chair Brands — In-Stock & Up To 30% OFF. Infinite position with heat and massage.",
+    shortDescription: "Infinite position lift chair with heat and massage for everyday comfort.",
     description: "Awesome chair with all the bells and whistles. Love the remote and how it is attached to the chair so you never drop it. Very easy to get out. Great spot for a cup and remote or phone.",
     whoItsFor: "Individuals with limited mobility who need assistance standing from a seated position, with optional heat and massage therapy.",
-    benefits: ["Infinite position reclining", "Heat and massage therapy", "Remote attached to chair", "Battery backup during outage", "Up to 30% OFF select models"],
+    benefits: ["Infinite position reclining", "Heat and massage therapy", "Remote attached to chair", "Battery backup during outage"],
     features: ["Dual motor operation", "Heat & massage", "USB charging port", "Battery backup", "Attached remote"],
     specs: [
       { label: "Chair Size", value: "Medium" },
@@ -178,20 +177,20 @@ export const products: Product[] = [
     accessories: ["Lift chair table", "Heat massage upgrade"],
     usageInfo: "Very easy to get out. Remote attached so you never drop it.",
     careInfo: "Vacuum fabric regularly. Avoid direct sunlight on upholstery.",
-    badges: ["Up to 30% OFF", "In-Stock"],
+    badges: ["In-Stock"],
   },
   {
     slug: "solcare-100-mattress",
-    name: "Solcare 100 Premium Therapeutic Medical Mattress",
+    name: "Premium Therapeutic Medical Mattress",
     brand: "Drive DeVilbiss Healthcare",
-    sku: "VITAL-SOL100",
+    sku: "MED-MATTRESS-001",
     price: 399,
     category: "patient-care",
     inStock: true,
     image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&h=900&fit=crop",
     images: ["https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&h=900&fit=crop"],
     shortDescription: "Premium therapeutic foam mattress for patients at low to moderate risk of pressure injuries. Ships out Next Day.",
-    description: "The SolCare 100 Premium Therapeutic Medical Mattress delivers dependable comfort and protection for patients at low to moderate risk of pressure injuries. With a high-resilient foam core and transfer edges, it ensures lasting performance and even wear for superior value and durability.",
+    description: "This premium therapeutic medical mattress delivers dependable comfort and protection for patients at low to moderate risk of pressure injuries. With a high-resilient foam core and transfer edges, it ensures lasting performance and even wear for superior value and durability.",
     whoItsFor: "Home care and long-term care patients at low to moderate risk of pressure injuries.",
     benefits: ["High-resilient foam core", "Transfer edges for safety", "Ships out Next Day", "Free Canada-Wide Shipping", "4 year non-prorated warranty"],
     features: ["Multi-zone pressure redistribution", "Water-resistant cover", "Transfer edges", "Standard bed frame compatible"],
@@ -211,19 +210,19 @@ export const products: Product[] = [
   },
   {
     slug: "serene-elite-mattress",
-    name: "Serene Elite Pressure Redistribution System with Low Air Loss",
+    name: "Elite Pressure Redistribution System with Low Air Loss",
     brand: "VitalFlex",
-    sku: "VITAL-SERENE",
+    sku: "MED-MATTRESS-002",
     price: 3490,
     originalPrice: 4990,
     category: "patient-care",
     inStock: true,
     image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&h=900&fit=crop",
     images: ["https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&h=900&fit=crop"],
-    shortDescription: "Was $4,990 · Now $3,490. Advanced alternating pressure with true low air loss. In-Stock In-Store & Online.",
-    description: "The Serene Elite Pressure Redistribution Mattress System with Low Air Loss provides advanced pressure redistribution for patients at high risk of pressure injuries. Digital pump with multiple modes, CPR quick-release, and seat inflation feature.",
+    shortDescription: "Advanced alternating pressure with true low air loss. In-stock in-store and online.",
+    description: "This elite pressure redistribution mattress system with low air loss provides advanced support for patients at high risk of pressure injuries. Digital pump with multiple modes, CPR quick-release, and seat inflation feature.",
     whoItsFor: "Patients at high risk of pressure ulcers in home or long-term care settings.",
-    benefits: ["True low air loss technology", "Save $1,500", "CPR quick-release", "Seat inflation feature", "FREE Canada-Wide Shipping"],
+    benefits: ["True low air loss technology", "CPR quick-release", "Seat inflation feature", "Free Canada-wide shipping"],
     features: ["Digital multi-mode pump", "Low air loss", "Audible alarms", "CPR release", "Seat inflation"],
     specs: [
       { label: "Mattress Width", value: '35.4"' },
@@ -237,20 +236,20 @@ export const products: Product[] = [
     accessories: ["Replacement pump filter", "Repair kit"],
     usageInfo: "Ships out next day. White Glove Toronto & GTA.",
     careInfo: "Check pump filters monthly. Professional inspection annually.",
-    badges: ["Sale", "In-Stock", "Free Shipping"],
+    badges: ["In-Stock", "Free Shipping"],
   },
   {
     slug: "pride-victory-scooter",
-    name: "Pride Victory 10 Mobility Scooter",
+    name: "Full-Size Mobility Scooter",
     brand: "Pride Mobility",
-    sku: "VITAL-VICTORY10",
+    sku: "MED-SCOOTER-002",
     price: 2799,
     category: "mobility-scooters",
     inStock: true,
     image: "https://images.unsplash.com/photo-1576092768241-dec231879aa3?w=1200&h=900&fit=crop",
     images: ["https://images.unsplash.com/photo-1576092768241-dec231879aa3?w=1200&h=900&fit=crop"],
     shortDescription: "Full-size 4-wheel scooter with premium suspension and 28-mile range. 400 lbs weight capacity.",
-    description: "The Pride Victory 10 delivers a smooth, comfortable ride with industry-leading range and performance. Full suspension, wraparound delta tiller, and feather-touch disassembly.",
+    description: "This full-size mobility scooter delivers a smooth, comfortable ride with industry-leading range and performance. Full suspension, wraparound delta tiller, and feather-touch disassembly.",
     whoItsFor: "Users needing a full-size outdoor scooter with extended range and high weight capacity.",
     benefits: ["28-mile range", "Full suspension", "400 lbs capacity", "USB charger", "Feather-touch disassembly"],
     features: ["Full suspension", "LED lights", "Delta tiller", "USB port", "Disassembly"],
@@ -272,9 +271,9 @@ export const products: Product[] = [
   },
   {
     slug: "pride-transport-chair",
-    name: "Pride Go-Go Transport Wheelchair",
+    name: "Lightweight Transport Wheelchair",
     brand: "Pride Mobility",
-    sku: "VITAL-TRANSPORT",
+    sku: "MED-WCHAIR-001",
     price: 459,
     category: "transport-chairs",
     inStock: true,
@@ -300,9 +299,9 @@ export const products: Product[] = [
   },
   {
     slug: "quantum-pulse-wheelchair",
-    name: "Quantum Pulse Power Wheelchair",
+    name: "Mid-Wheel Drive Power Wheelchair",
     brand: "Quantum Rehab",
-    sku: "VITAL-QUANTUM",
+    sku: "MED-PWC-001",
     price: 4299,
     category: "power-wheelchairs",
     inStock: true,
@@ -331,9 +330,9 @@ export const products: Product[] = [
   },
   {
     slug: "drive-nitro-rollator",
-    name: "Drive Nitro Carbon Fiber Rollator",
+    name: "Carbon Fiber Rollator",
     brand: "Drive DeVilbiss Healthcare",
-    sku: "VITAL-NITRO",
+    sku: "MED-ROLLATOR-001",
     price: 349,
     category: "walkers-rollators",
     inStock: true,
@@ -360,9 +359,9 @@ export const products: Product[] = [
   },
   {
     slug: "healthcraft-grab-bars",
-    name: "Healthcraft Safety Grab Bar Set",
+    name: "Safety Grab Bar Set",
     brand: "Healthcraft",
-    sku: "VITAL-HC-GB",
+    sku: "MED-GRABBAR-001",
     price: 129,
     category: "bathroom-safety",
     inStock: true,
@@ -387,9 +386,9 @@ export const products: Product[] = [
   },
   {
     slug: "invacare-patient-lift",
-    name: "Invacare Reliant 450 Patient Lift",
+    name: "Electric Patient Lift",
     brand: "Invacare",
-    sku: "VITAL-LIFT450",
+    sku: "MED-LIFT-001",
     price: 1599,
     category: "patient-care",
     inStock: false,
@@ -420,6 +419,18 @@ for (const p of products) {
   p.image = p.images[0];
 }
 
+/** Product title for cards, detail pages, and metadata — never shows manufacturer brand. */
+export function getProductDisplayName(product: Pick<Product, "name" | "brand">): string {
+  let name = product.name.trim();
+  const brand = product.brand?.trim();
+  if (!brand) return name;
+
+  const escaped = brand.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  name = name.replace(new RegExp(`^${escaped}\\s+`, "i"), "");
+  name = name.replace(new RegExp(`\\b${escaped}\\b`, "gi"), " ");
+  return name.replace(/\s+/g, " ").trim();
+}
+
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);
 }
@@ -438,7 +449,6 @@ export function searchProducts(query: string): Product[] {
   return products.filter(
     (p) =>
       p.name.toLowerCase().includes(q) ||
-      p.brand.toLowerCase().includes(q) ||
       p.shortDescription.toLowerCase().includes(q) ||
       p.category.toLowerCase().includes(q)
   );

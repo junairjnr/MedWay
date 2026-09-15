@@ -12,14 +12,14 @@ export const solutions = [
     slug: "home-care",
     title: "Home Care",
     description: "Equipment supporting comfort and safety at home.",
-    detail: "Shop our exclusive Symphony, VitalFlex and more of Canada's top selling Homecare Beds. Hospital beds, medical mattresses, lift chairs, and bathroom safety products for complete home care.",
+    detail: "Shop our exclusive homecare beds and more of Canada's top-selling solutions. Hospital beds, medical mattresses, lift chairs, and bathroom safety products for complete home care.",
     image: vitalImages.sections.solutions.homeCare,
   },
   {
     slug: "professional-care",
     title: "Professional Care",
     description: "Solutions for healthcare and care environments.",
-    detail: "Trusted by Hospitals, Clinics and Home Care Patients Alike! We supply quality, branded medical equipment to institutions and professionals across Canada from coast to coast.",
+    detail: "Trusted by hospitals, clinics and home care patients alike! We supply quality medical equipment to institutions and professionals across Canada from coast to coast.",
     image: vitalImages.sections.solutions.professional,
   },
   {
@@ -40,7 +40,7 @@ export const whyChooseUs = [
   {
     num: "02",
     title: "QUALITY EQUIPMENT",
-    description: "Carefully selected products designed around reliability and comfort. Top brands like Drive Medical, VitalFlex, FOXTR Scooters, Pride Mobility, Invacare, Golden Technologies.",
+    description: "Carefully selected products designed around reliability and comfort for everyday mobility and home care needs.",
   },
   {
     num: "03",

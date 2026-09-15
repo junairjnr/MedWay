@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 import { siteContent } from "@/data/site-content";
+import { vitalImages } from "@/data/images";
 import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
@@ -28,7 +29,14 @@ function useIsMobile() {
 export default function HeroCarousel() {
   const [current, setCurrent] = useState(0);
   const touchStartX = useRef(0);
-  const slides = siteContent.heroSlides;
+  const slides = useMemo(
+    () =>
+      siteContent.heroSlides.map((slide) => ({
+        ...slide,
+        image: slide.image || vitalImages.hero.store,
+      })),
+    []
+  );
   const reduced = usePrefersReducedMotion();
   const isMobile = useIsMobile();
 
@@ -87,7 +95,7 @@ export default function HeroCarousel() {
         <div className="absolute inset-0">
           {slides.map((s, i) => (
             <div
-              key={s.image}
+              key={s.href}
               className={`hero-slide-layer absolute inset-0 ${i === current ? "hero-slide-active" : "hero-slide-idle"}`}
               style={{ transitionDuration: `${fadeMs}ms` }}
               aria-hidden={i !== current}
@@ -127,7 +135,7 @@ export default function HeroCarousel() {
                   <Sparkles className="h-2.5 w-2.5 shrink-0 sm:h-3 sm:w-3" />
                   {slide.badge}
                 </span>
-                {slide.price && <span className="sale-tag sale-tag-compact">{slide.price}</span>}
+                {/* {slide.price && <span className="sale-tag sale-tag-compact">{slide.price}</span>} */}
               </div>
 
               <h1 className="font-display text-xl font-extrabold leading-[1.12] tracking-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] sm:text-3xl lg:text-[3.5rem] lg:leading-[1.1]">

@@ -9,6 +9,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import { ProductsMegaMenuDesktop, ProductsMegaMenuMobile } from "@/components/layout/ProductsMegaMenu";
+import { ServicesMegaMenuDesktop, ServicesMegaMenuMobile } from "@/components/layout/ServicesMegaMenu";
 import { siteLogo, siteLogoWidth, siteLogoHeight } from "@/data/images";
 import { layoutGutterClass } from "@/lib/layout";
 
@@ -25,10 +26,12 @@ export default function Header() {
   const isHome = pathname === "/";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const solidNav = !isHome || scrolled;
   const isProductsActive = pathname.startsWith("/products") || pathname.startsWith("/categories");
+  const isServicesActive = pathname === "/rentals" || pathname === "/service";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -40,6 +43,7 @@ export default function Header() {
   useEffect(() => {
     setMobileOpen(false);
     setCategoriesOpen(false);
+    setServicesOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -56,10 +60,12 @@ export default function Header() {
 
   const closeMenus = () => {
     setCategoriesOpen(false);
+    setServicesOpen(false);
     setMobileOpen(false);
   };
 
   const categoriesCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const servicesCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const openCategoriesMenu = useCallback(() => {
     if (categoriesCloseTimer.current) {
@@ -74,9 +80,23 @@ export default function Header() {
     categoriesCloseTimer.current = setTimeout(() => setCategoriesOpen(false), 150);
   }, []);
 
+  const openServicesMenu = useCallback(() => {
+    if (servicesCloseTimer.current) {
+      clearTimeout(servicesCloseTimer.current);
+      servicesCloseTimer.current = null;
+    }
+    setServicesOpen(true);
+  }, []);
+
+  const scheduleCloseServicesMenu = useCallback(() => {
+    if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current);
+    servicesCloseTimer.current = setTimeout(() => setServicesOpen(false), 150);
+  }, []);
+
   useEffect(() => {
     return () => {
       if (categoriesCloseTimer.current) clearTimeout(categoriesCloseTimer.current);
+      if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current);
     };
   }, []);
 
@@ -134,6 +154,38 @@ export default function Header() {
               </AnimatePresence>
             </div>
 
+            {/* Sales, Rentals & Service */}
+            <div className="relative">
+              <button
+                type="button"
+                aria-expanded={servicesOpen}
+                aria-haspopup="true"
+                onMouseEnter={openServicesMenu}
+                onMouseLeave={scheduleCloseServicesMenu}
+                onFocus={openServicesMenu}
+                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-all rounded-lg ${
+                  servicesOpen || isServicesActive
+                    ? "text-primary bg-primary/10"
+                    : navText
+                }`}
+              >
+                Sales & Services
+                <ChevronDown
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              <AnimatePresence>
+                {servicesOpen && (
+                  <ServicesMegaMenuDesktop
+                    onNavigate={() => setServicesOpen(false)}
+                    onMouseEnter={openServicesMenu}
+                    onMouseLeave={scheduleCloseServicesMenu}
+                  />
+                )}
+              </AnimatePresence>
+            </div>
+
             {navLinks.slice(1).map((link) => (
               <Link
                 key={link.href}
@@ -185,6 +237,8 @@ export default function Header() {
             >
               <div className={`${layoutGutterClass} py-5 space-y-5`}>
                 <ProductsMegaMenuMobile onNavigate={closeMenus} />
+
+                <ServicesMegaMenuMobile onNavigate={closeMenus} />
 
                 <hr className="border-border" />
 

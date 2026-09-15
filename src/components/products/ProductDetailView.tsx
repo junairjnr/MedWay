@@ -6,7 +6,7 @@ import Image from "next/image";
 import { ArrowLeft, Check } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef } from "react";
-import { Product, formatPrice, getRelatedProducts } from "@/data/products";
+import { Product, getProductDisplayName, getRelatedProducts } from "@/data/products";
 import ProductCard from "@/components/products/ProductCard";
 import ContactForm from "@/components/forms/ContactForm";
 import Button from "@/components/ui/Button";
@@ -26,6 +26,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
   const reduced = usePrefersReducedMotion();
   const related = getRelatedProducts(product);
   const category = getCategoryBySlug(product.category);
+  const displayName = getProductDisplayName(product);
 
   const { scrollYProgress } = useScroll({ target: contentRef, offset: ["start start", "end end"] });
   const imageScale = useTransform(scrollYProgress, [0, 0.3], [0.95, 1]);
@@ -55,7 +56,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                   transition={{ duration: 0.4 }}
                   className="absolute inset-0"
                 >
-                  <Image src={product.images[activeImage]} alt={product.name} fill className="object-cover" priority sizes="50vw" />
+                  <Image src={product.images[activeImage]} alt={displayName} fill className="object-cover" priority sizes="50vw" />
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -78,14 +79,8 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 
           <div ref={contentRef}>
             <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">{category?.name || product.category}</p>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl tracking-tight mb-4">{product.name}</h1>
-            <p className="text-sm text-muted mb-4">SKU: {product.sku} · {product.brand}</p>
-            {product.price && (
-              <p className="text-2xl font-bold mb-6">
-                {formatPrice(product.price)}
-                {product.originalPrice && <span className="text-muted line-through text-lg ml-3">{formatPrice(product.originalPrice)}</span>}
-              </p>
-            )}
+            <h1 className="font-display font-extrabold text-3xl md:text-4xl tracking-tight mb-4">{displayName}</h1>
+            <p className="text-sm text-muted mb-6">SKU: {product.sku}</p>
 
             <p className="text-lg font-medium mb-4">Designed for freedom. Built for everyday confidence.</p>
             <p className="text-muted leading-relaxed mb-8">{product.description}</p>
@@ -205,8 +200,8 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
               onClick={(e) => e.stopPropagation()}
             >
               <h3 className="font-display font-bold text-2xl mb-2">Request Information</h3>
-              <p className="text-muted text-sm mb-6">{product.name}</p>
-              <ContactForm productName={product.name} />
+              <p className="text-muted text-sm mb-6">{displayName}</p>
+              <ContactForm productName={displayName} />
             </motion.div>
           </motion.div>
         )}

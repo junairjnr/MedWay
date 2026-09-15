@@ -1,4 +1,4 @@
-import { products, getProductBySlug } from "@/data/products";
+import { products, getProductBySlug, getProductDisplayName } from "@/data/products";
 import ProductDetailView from "@/components/products/ProductDetailView";
 import { notFound } from "next/navigation";
 
@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: PageProps<"/products/[slug]">
   const product = getProductBySlug(slug);
   if (!product) return { title: "Product Not Found | Med Way" };
   return {
-    title: `${product.name} | Med Way`,
+    title: `${getProductDisplayName(product)} | Med Way`,
     description: product.shortDescription,
   };
 }

@@ -38,6 +38,8 @@ const U = (photoId: string, w = 1400) =>
 
 export const vitalImages = {
   hero: {
+    mobilityScooter: U(STOCK.scooterHero, 1600),
+    /** @deprecated Use mobilityScooter — kept for cached bundles */
     foxtrSale: U(STOCK.scooterHero, 1600),
     hospitalBeds: U(STOCK.hospitalBed, 1600),
     liftChairs: U(STOCK.liftChair, 1600),
