@@ -20,6 +20,7 @@ export default function ServicePage() {
         eyebrow={hero.eyebrow}
         image={hero.image}
         imageAlt="Medical equipment service and support"
+        size="md"
       />
       <Container className="page-content">
         <p className="max-w-3xl text-muted leading-relaxed text-sm sm:text-base mb-10 sm:mb-12">{intro}</p>

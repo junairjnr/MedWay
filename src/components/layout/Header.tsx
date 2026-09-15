@@ -233,14 +233,16 @@ export default function Header() {
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
-              className="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-border shadow-xl z-50 max-h-[calc(100dvh-3.5rem)] overflow-y-auto"
+              className="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-border shadow-xl z-50 max-h-[calc(100dvh-3.5rem)] overflow-y-auto overscroll-contain"
             >
-              <div className={`${layoutGutterClass} py-5 space-y-5`}>
+              <div className={`${layoutGutterClass} py-4 space-y-4 sm:py-5 sm:space-y-5`}>
                 <ProductsMegaMenuMobile onNavigate={closeMenus} />
+
+                <hr className="border-border" aria-hidden />
 
                 <ServicesMegaMenuMobile onNavigate={closeMenus} />
 
-                <hr className="border-border" />
+                <hr className="border-border" aria-hidden />
 
                 <div className="space-y-1">
                   {navLinks.slice(1).map((link) => (
