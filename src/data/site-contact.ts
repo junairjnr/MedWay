@@ -2,7 +2,7 @@ export const siteContact = {
   phone: "+1 (416) 830-4995",
   phoneTel: "+14168304995",
   phoneWhatsApp: "14168304995",
-  email: "junairjunu869@gmail.com",
+  email: "medwaymobilty@outlook.com",
   emailClass: "text-xs sm:text-sm break-all lowercase",
 } as const;
 
