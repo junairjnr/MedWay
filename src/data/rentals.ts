@@ -49,3 +49,19 @@ export const rentalsPage = {
     },
   ],
 };
+
+export const rentalsPromoSlides = [
+  {
+    title: rentalsPage.hero.title,
+    description:
+      "Flexible home health care and mobility rentals — Toronto, GTA & Canada-wide.",
+    image: rentalsPage.hero.image,
+    tag: "Featured",
+  },
+  ...rentalsPage.sections.map((section) => ({
+    title: section.title,
+    description: section.description,
+    image: section.image,
+    tag: section.highlights[0],
+  })),
+];

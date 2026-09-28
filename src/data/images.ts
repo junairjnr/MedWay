@@ -5,6 +5,10 @@ export const siteLogo = "/assets/logo.png";
 export const siteLogoWidth = 1979;
 export const siteLogoHeight = 570;
 
+/** Client-provided photography — Daily Living / Rehab */
+export const rehabDailyImage = "/assets/rehab-image.jpg";
+export const rehabDailyImageSecond = "/assets/rehab-image-2.webp";
+
 /** Verified Unsplash photo IDs (HTTP 200 tested) */
 const STOCK = {
   scooterHero: "photo-1773239627185-dca814dd0546",
@@ -56,7 +60,7 @@ export const vitalImages = {
     "hospital-beds": U(STOCK.hospitalBed, 800),
     "lift-chairs": U(STOCK.liftChair, 800),
     "bathroom-safety": U(STOCK.bathroomSafety, 800),
-    "daily-living": U(STOCK.wellness, 800),
+    "daily-living": rehabDailyImage,
     "patient-care": U(STOCK.patientCare, 800),
     rentals: U(STOCK.hospitalRoom, 800),
   },
@@ -72,6 +76,7 @@ export const vitalImages = {
     "quantum-pulse-wheelchair": U(STOCK.mobilityDevice, 1200),
     "drive-nitro-rollator": U(STOCK.wheelchairPath, 1200),
     "healthcraft-grab-bars": U(STOCK.bathroomSafety, 1200),
+    "home-rehab-daily-living": rehabDailyImage,
     "invacare-patient-lift": U(STOCK.medicalLab, 1200),
   },
   productGallery: {
@@ -98,6 +103,7 @@ export const vitalImages = {
     "quantum-pulse-wheelchair": [U(STOCK.mobilityDevice, 1200), U(STOCK.wheelchairPark, 1200)],
     "drive-nitro-rollator": [U(STOCK.wheelchairPath, 1200), U(STOCK.wellness, 1200)],
     "healthcraft-grab-bars": [U(STOCK.bathroomSafety, 1200), U(STOCK.medicalOffice, 1200)],
+    "home-rehab-daily-living": [rehabDailyImage, rehabDailyImageSecond],
     "invacare-patient-lift": [U(STOCK.medicalLab, 1200), U(STOCK.medicalTeam, 1200)],
   } as Record<string, string[]>,
   gallery: [

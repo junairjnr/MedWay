@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileEnquireBar from "@/components/layout/MobileEnquireBar";
 import MainShell from "@/components/layout/MainShell";
+import RentalsPromoModal from "@/components/promo/RentalsPromoModal";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <MainShell>{children}</MainShell>
         <Footer />
         <MobileEnquireBar />
+        <RentalsPromoModal />
       </body>
     </html>
   );

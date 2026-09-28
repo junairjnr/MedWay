@@ -27,7 +27,7 @@ export const siteContent = {
     },
     {
       badge: "Home Hospital Beds",
-      title: "Symphony Homecare Beds",
+      title: "Homecare Beds",
       price: "Canada's Top Homecare Beds",
       note: "Electric beds for comfort, care & recovery at home",
       cta: "Shop Hospital Beds",

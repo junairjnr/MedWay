@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, Check } from "lucide-react";
@@ -23,7 +23,32 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
   const [showEnquiry, setShowEnquiry] = useState(false);
   const imageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const [detailsMaxHeight, setDetailsMaxHeight] = useState<number | undefined>(undefined);
   const reduced = usePrefersReducedMotion();
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1024px)");
+    const syncHeight = () => {
+      if (!media.matches) {
+        setDetailsMaxHeight(undefined);
+        return;
+      }
+      const leftHeight = imageRef.current?.offsetHeight;
+      setDetailsMaxHeight(leftHeight && leftHeight > 0 ? leftHeight : undefined);
+    };
+
+    syncHeight();
+    const observer = new ResizeObserver(syncHeight);
+    if (imageRef.current) observer.observe(imageRef.current);
+    window.addEventListener("resize", syncHeight);
+    media.addEventListener("change", syncHeight);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", syncHeight);
+      media.removeEventListener("change", syncHeight);
+    };
+  }, [activeImage, product.images.length]);
   const related = getRelatedProducts(product);
   const category = getCategoryBySlug(product.category);
   const displayName = getProductDisplayName(product);
@@ -40,11 +65,11 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
       </Container>
 
       <Container className="pb-8 sm:pb-12 lg:pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 xl:gap-20">
+        <div className="flex flex-col lg:flex-row lg:items-start gap-8 sm:gap-10 lg:gap-16 xl:gap-20">
           <motion.div
             ref={imageRef}
             style={reduced ? {} : { scale: imageScale }}
-            className="lg:sticky lg:top-24 lg:self-start"
+            className="w-full shrink-0 lg:w-1/2 lg:self-start"
           >
             <div className="relative aspect-square overflow-hidden rounded-xl bg-slate-100 shadow-md ring-1 ring-black/5">
               <AnimatePresence mode="wait">
@@ -61,7 +86,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
               </AnimatePresence>
             </div>
             {product.images.length > 1 && (
-              <div className="flex gap-2 sm:gap-3 mt-3 sm:mt-4 overflow-x-auto pb-1">
+              <div className="mt-3 flex gap-2 overflow-x-auto pb-1 sm:mt-4 sm:gap-3">
                 {product.images.map((img, i) => (
                   <button
                     key={i}
@@ -77,7 +102,11 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
             )}
           </motion.div>
 
-          <div ref={contentRef}>
+          <div
+            ref={contentRef}
+            style={detailsMaxHeight ? { maxHeight: detailsMaxHeight } : undefined}
+            className="product-detail-content-scroll w-full min-w-0 lg:w-1/2 lg:min-h-0 lg:overflow-y-auto lg:overscroll-contain lg:pr-1"
+          >
             <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">{category?.name || product.category}</p>
             <h1 className="font-display font-extrabold text-3xl md:text-4xl tracking-tight mb-4">{displayName}</h1>
             <p className="text-sm text-muted mb-6">SKU: {product.sku}</p>
