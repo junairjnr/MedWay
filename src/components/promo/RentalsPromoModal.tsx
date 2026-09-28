@@ -130,12 +130,7 @@ export default function RentalsPromoModal() {
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-5"
         >
-          <motion.button
-            type="button"
-            aria-label="Close rental offer"
-            className="absolute inset-0 bg-navy/65 backdrop-blur-sm"
-            onClick={dismiss}
-          />
+          <div aria-hidden className="absolute inset-0 bg-navy/65 backdrop-blur-sm" />
 
           <div className="relative z-10 w-full max-w-lg">
             {!reduced && (
@@ -155,6 +150,10 @@ export default function RentalsPromoModal() {
               className="relative flex max-h-[min(90dvh,720px)] w-full flex-col overflow-hidden rounded-2xl border border-primary/15 bg-white shadow-[0_24px_80px_rgba(26,35,50,0.35)]"
               onClick={(e) => e.stopPropagation()}
             >
+              {!reduced && (
+                <div aria-hidden className="rentals-promo-shine absolute inset-0 z-[25] rounded-2xl" />
+              )}
+
             <div
               className="relative h-40 overflow-hidden sm:h-48"
               onTouchStart={handleTouchStart}
@@ -221,7 +220,7 @@ export default function RentalsPromoModal() {
               <button
                 type="button"
                 onClick={dismiss}
-                className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-navy shadow-sm transition-colors hover:bg-white"
+                className="absolute right-3 top-3 z-30 inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-white/90 text-navy shadow-sm transition-colors hover:bg-white"
                 aria-label="Close"
               >
                 <X className="h-4 w-4" />
@@ -234,7 +233,7 @@ export default function RentalsPromoModal() {
                     type="button"
                     onClick={() => goToSlide(i)}
                     aria-label={`Go to slide ${i + 1}`}
-                    className="touch-target flex h-8 w-8 items-center justify-center"
+                    className="touch-target flex h-8 w-8 cursor-pointer items-center justify-center"
                   >
                     <motion.span
                       className="block rounded-full bg-white"
@@ -287,7 +286,7 @@ export default function RentalsPromoModal() {
                   whileTap={reduced ? {} : { scale: 0.98 }}
                   className="relative"
                 >
-                  <Button href="/rentals" size="lg" fullWidth onClick={dismiss}>
+                  <Button href="/rentals" size="lg" fullWidth className="cursor-pointer">
                     Explore Rentals
                   </Button>
                 </motion.div>
@@ -295,7 +294,7 @@ export default function RentalsPromoModal() {
               <button
                 type="button"
                 onClick={dismiss}
-                className="mt-3 w-full text-center text-xs text-muted hover:text-foreground transition-colors"
+                className="mt-3 w-full cursor-pointer text-center text-xs text-muted transition-colors hover:text-foreground"
               >
                 Not now
               </button>
