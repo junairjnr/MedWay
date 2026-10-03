@@ -62,7 +62,7 @@ export const siteContent = {
     subheadline: "Outstanding Customer Service. Integrity Pricing",
     image: vitalImages.hero.store,
     paragraphs: [
-      "Searching for the perfect product to suit your mobility needs? Look no further. Med Way makes that process quick and easy. Our expert staff are constantly scouring the market for the latest products at the lowest prices – and that's why we can stand 100% behind them! Med Way is your one-stop for all your medical equipment needs whether it's our Canada Wide SALES, our Toronto and Greater Toronto Area RENTALS or SERVICE for wheelchairs, hospital beds, lift chairs, mobility scooters, and much more.",
+      "Searching for the perfect product to suit your mobility needs? Look no further. Med Way makes that process quick and easy. Our expert staff are constantly scouring the market for the latest products at the lowest prices – and that's why we can stand 100% behind them! Med Way is your one-stop for all your medical equipment needs whether it's our Toronto and Greater Toronto Area RENTALS, our Canada Wide SALES, or SERVICE for wheelchairs, hospital beds, lift chairs, mobility scooters, and much more.",
       "Visit our showrooms, give us a call or shop online with total confidence — quality mobility and home care equipment is right at your fingertips.",
     ],
   },
@@ -76,13 +76,13 @@ export const siteContent = {
     ],
   },
   cta: {
-    headline: "Looking To Buy Or Rent Medical Equipment and Home Health Care Products?",
+    headline: "Looking To Rent Or Buy Medical Equipment and Home Health Care Products?",
     image: vitalImages.sections.emotional,
     paragraphs: [
       "For the last 16 years, the team at Med Way has taken pride in being Canada's #1 Medical Equipment Supplier and independent source for Home Health Care Products. As well as Toronto's go-to spot for Home Health Care Product Rentals and Mobility Equipment that spans the whole GTA from Burlington, Oakville and Mississauga in the west to Scarborough, Pickering and Oshawa to the east and Richmond Hill, Markham, Vaughan, Aurora and Newmarket to the north. Our dedicated mobility experts are passionate about helping patients, their families and caregivers to find comfort and independence with their medical equipment supplies.",
-      "Our Toronto-based team is the medical equipment supplier of choice for countless individuals, institutions and professionals across Canada. We ship our quality, trusted medical equipment from coast to coast. Likewise, when a medical equipment rental is needed, Med Way can quickly deliver, unbox and set-up home health care product rentals in Toronto and the Greater Toronto Area (GTA). Our expert technicians provide professional and expeditious service whether you choose to buy or rent medical equipment.",
+      "Our Toronto-based team is the medical equipment supplier of choice for countless individuals, institutions and professionals across Canada. When a medical equipment rental is needed, Med Way can quickly deliver, unbox and set-up home health care product rentals in Toronto and the Greater Toronto Area (GTA). We also ship our quality, trusted medical equipment from coast to coast. Our expert technicians provide professional and expeditious service whether you choose to rent or buy medical equipment.",
       "As Canada's independent and trusted industry leader, Med Way is a home health care product supplier offering a wide selection of reliable medical equipment and mobility solutions. Whether you're looking for a medical equipment rental or medical equipment supplies, our company stands out by stocking hospital beds, mobility scooters, lift chairs and more – making them immediately available for shipping or delivery.",
-      "Let us be your trusted medical equipment supplier in Canada or your rental company for the Greater Toronto Area. We aren't just an e-commerce site, we live in the Toronto community, operate 2 Toronto based stores and have a dedicated team of expert employees to take your Canada wide support calls and ship all our products across Canada. See why everyone who buys or rents for us, loves us. It's because for us, it's all about family!",
+      "Let us be your rental company for the Greater Toronto Area or your trusted medical equipment supplier in Canada. We aren't just an e-commerce site, we live in the Toronto community, operate 2 Toronto based stores and have a dedicated team of expert employees to take your Canada wide support calls and ship all our products across Canada. See why everyone who rents or buys from us, loves us. It's because for us, it's all about family!",
     ],
   },
   about: {

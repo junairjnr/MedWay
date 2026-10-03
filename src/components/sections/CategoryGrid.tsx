@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { categories } from "@/data/categories";
+import { getPhotoCoverClassName } from "@/data/images";
 import Section, { SectionHeader } from "@/components/ui/Section";
 
 export default function CategoryGrid() {
@@ -64,7 +65,7 @@ function FeaturedCategoryCard({ category, index }: { category: (typeof categorie
           src={category.image}
           alt={category.name}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className={`${getPhotoCoverClassName(category.image)} transition-transform duration-700 group-hover:scale-105`}
           sizes="(max-width: 640px) 100vw, 50vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/30 to-transparent" />
@@ -101,12 +102,12 @@ function CategoryCard({
         href={`/categories/${category.slug}`}
         className="group flex h-full flex-col overflow-hidden rounded-xl border border-border/80 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-md"
       >
-        <div className={`relative overflow-hidden bg-slate-50 ${compact ? "aspect-square p-2" : "aspect-square p-3"}`}>
+        <div className={`relative overflow-hidden bg-slate-100 ${compact ? "aspect-square" : "aspect-square"}`}>
           <Image
             src={category.image}
             alt={category.name}
             fill
-            className="object-contain p-1.5 transition-transform duration-500 group-hover:scale-110 sm:p-2"
+            className={`${getPhotoCoverClassName(category.image)} transition-transform duration-500 group-hover:scale-105`}
             sizes="(max-width: 640px) 45vw, 15vw"
           />
         </div>

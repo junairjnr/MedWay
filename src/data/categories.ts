@@ -46,7 +46,7 @@ export const categories: Category[] = [
   },
   {
     slug: "hospital-beds",
-    name: "Home Hospital Beds",
+    name: "Hospital Bed",
     headline: "Canada's top selling homecare beds.",
     description: "Shop our exclusive homecare beds for comfort, care and recovery at home.",
     image: getCategoryImage("hospital-beds"),
@@ -54,8 +54,8 @@ export const categories: Category[] = [
   {
     slug: "lift-chairs",
     name: "Medical Lift Chairs",
-    headline: "Supportive seating for easier everyday movement.",
-    description: "Supportive seating designed to make everyday movement easier.",
+    headline: "Power recliners — stand assist from seated.",
+    description: "Lift recliners for comfort and stand assist — not patient transfer hoists.",
     image: getCategoryImage("lift-chairs"),
   },
   {
@@ -76,7 +76,7 @@ export const categories: Category[] = [
     slug: "patient-care",
     name: "Medical Mattresses & Patient Care",
     headline: "Reliable equipment for caregivers and home care.",
-    description: "Medical mattresses, patient lifts and home-care equipment.",
+    description: "Transfer lifts (hoists), medical mattresses, and patient-care equipment.",
     image: getCategoryImage("patient-care"),
   },
 ];

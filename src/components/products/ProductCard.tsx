@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Product, getProductDisplayName } from "@/data/products";
+import { getPhotoCoverClassName } from "@/data/images";
 import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
 
 interface ProductCardProps {
@@ -18,11 +19,13 @@ export default function ProductCard({ product, compact = true, featured = false 
   const isCompact = compact || featured;
   const displayName = getProductDisplayName(product);
 
-  const imageAspect = featured
-    ? "aspect-[4/3] sm:aspect-square"
-    : isCompact
+  const isHospitalBed = product.category === "hospital-beds";
+  const imageAspect =
+    featured || isCompact
       ? "aspect-square"
-      : "aspect-[4/5] sm:aspect-[3/4]";
+      : isHospitalBed
+        ? "aspect-[4/3]"
+        : "aspect-[4/5] sm:aspect-[3/4]";
 
   return (
     <motion.div
@@ -32,15 +35,21 @@ export default function ProductCard({ product, compact = true, featured = false 
     >
       <Link
         href={`/products/${product.slug}`}
-        className="group surface-card flex h-full flex-col overflow-hidden hover:shadow-[0_16px_40px_rgba(15,118,110,0.14)]"
+        className={`group flex h-full flex-col overflow-hidden transition-shadow duration-300 ${
+          featured
+            ? "surface-card ring-1 ring-white/15 hover:shadow-[0_12px_32px_rgba(15,118,110,0.2)]"
+            : "surface-card hover:shadow-[0_16px_40px_rgba(15,118,110,0.14)]"
+        }`}
       >
-        <div className={`relative overflow-hidden bg-slate-100 ${imageAspect}`}>
+        <div className={`relative overflow-hidden bg-slate-50 ${imageAspect}`}>
           <Image
             src={product.image}
             alt={displayName}
             fill
-            className={`object-cover transition-transform duration-700 group-hover:scale-105 ${
-              featured ? "object-center" : "object-center"
+            className={`${getPhotoCoverClassName(product.image, "transition-transform duration-700")} ${
+              isHospitalBed
+                ? "scale-[1.18] sm:scale-[1.22] group-hover:scale-[1.26]"
+                : "group-hover:scale-105"
             }`}
             sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 22vw"
           />
@@ -62,18 +71,18 @@ export default function ProductCard({ product, compact = true, featured = false 
         </div>
 
         <div
-          className={`flex flex-1 flex-col border-t border-border/50 bg-white ${
-            featured ? "p-2 sm:p-2.5" : isCompact ? "p-2.5 sm:p-3" : "p-4 sm:p-5"
+          className={`flex flex-col border-t border-border/50 bg-white ${
+            isCompact ? "p-2.5 sm:p-3" : "flex-1 p-4 sm:p-5"
           }`}
         >
           <h3
             className={`font-display line-clamp-2 font-bold leading-snug text-foreground transition-colors group-hover:text-primary ${
-              featured ? "text-[11px] sm:text-xs" : isCompact ? "mb-1 text-xs sm:text-sm md:text-base" : "mb-2 text-sm sm:text-lg md:text-xl"
+              isCompact ? "mb-1 text-xs sm:text-sm md:text-base" : "mb-2 text-sm sm:text-lg md:text-xl"
             }`}
           >
             {displayName}
           </h3>
-          <div className="mt-auto flex items-end justify-between gap-1.5 pt-0.5 sm:pt-1">
+          <div className={`flex items-end justify-between gap-1.5 pt-0.5 sm:pt-1 ${!isCompact ? "mt-auto" : ""}`}>
             <p className="text-[9px] font-semibold text-primary sm:text-[10px]">Enquire for details</p>
             <span className="shrink-0 text-primary sm:hidden" aria-hidden>
               <ArrowRight className="h-3.5 w-3.5" />

@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 import { siteContent } from "@/data/site-content";
-import { vitalImages } from "@/data/images";
+import { getHeroSlidePhotoClassName, isHospitalBedAsset, vitalImages } from "@/data/images";
 import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
@@ -100,12 +100,16 @@ export default function HeroCarousel() {
               style={{ transitionDuration: `${fadeMs}ms` }}
               aria-hidden={i !== current}
             >
-              <div className="hero-slide-image absolute inset-0">
+              <div
+                className={`hero-slide-image absolute inset-0 ${
+                  isHospitalBedAsset(s.image) ? "hero-slide-image--contain" : ""
+                }`}
+              >
                 <Image
                   src={s.image}
                   alt={s.title}
                   fill
-                  className="object-cover object-[center_28%] sm:object-center"
+                  className={getHeroSlidePhotoClassName(s.image)}
                   priority={i === 0}
                   sizes="100vw"
                   quality={isMobile ? 75 : 85}
@@ -146,9 +150,19 @@ export default function HeroCarousel() {
                 <p className="mt-1.5 hidden max-w-lg text-sm leading-relaxed text-white/90 drop-shadow-[0_1px_8px_rgba(0,0,0,0.4)] sm:mt-3 sm:block sm:text-base">{slide.note}</p>
               )}
 
-              <div className="mt-3 flex flex-col gap-2 sm:mt-6 sm:flex-row sm:gap-3 lg:mt-8">
+              <div className="mt-3 flex flex-col gap-2 sm:mt-6 sm:flex-row sm:flex-wrap sm:gap-3 lg:mt-8">
                 <Button href={slide.href} variant="white" size="sm" showArrow={false} fullWidth className="rounded-full px-5 sm:min-h-11 sm:w-auto sm:px-6 sm:py-2.5 sm:text-sm">
                   {slide.cta}
+                </Button>
+                <Button
+                  href="/rentals"
+                  variant="outline"
+                  size="sm"
+                  showArrow={false}
+                  fullWidth
+                  className="hidden sm:inline-flex sm:min-h-11 sm:w-auto sm:px-6 sm:py-2.5 sm:text-sm rounded-full border-white/30 text-white hover:border-primary-light hover:bg-white/10"
+                >
+                  Explore Rentals
                 </Button>
                 <Button
                   href="/products"
@@ -176,7 +190,17 @@ export default function HeroCarousel() {
                   }`}
                 >
                   <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-xl ring-1 ring-white/10">
-                    <Image src={s.image} alt="" fill className="object-cover" sizes="80px" />
+                    <Image
+                      src={s.image}
+                      alt=""
+                      fill
+                      className={
+                        isHospitalBedAsset(s.image)
+                          ? "object-contain object-center bg-slate-900 p-0.5"
+                          : "object-cover object-center"
+                      }
+                      sizes="80px"
+                    />
                   </div>
                   <div className="min-w-0 pr-2">
                     <p className="text-[10px] font-bold uppercase tracking-wider text-primary-light">{s.badge}</p>

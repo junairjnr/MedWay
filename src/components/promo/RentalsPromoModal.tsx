@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { rentalsPage, rentalsPromoSlides } from "@/data/rentals";
+import { getPromoModalPhotoClassName, isHospitalBedAsset } from "@/data/images";
 import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
 
 /** Wait before first show and before each re-show after close */
@@ -155,7 +156,7 @@ export default function RentalsPromoModal() {
               )}
 
             <div
-              className="relative h-40 overflow-hidden sm:h-48"
+              className="relative h-48 w-full shrink-0 overflow-hidden bg-gradient-to-b from-slate-800 to-slate-900 sm:h-56"
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
@@ -185,14 +186,18 @@ export default function RentalsPromoModal() {
                   <motion.div
                     className="absolute inset-0"
                     initial={false}
-                    animate={reduced ? { scale: 1 } : { scale: [1, 1.08, 1] }}
+                    animate={
+                      reduced || isHospitalBedAsset(activeSlide.image)
+                        ? { scale: 1 }
+                        : { scale: [1, 1.06, 1] }
+                    }
                     transition={{ duration: SLIDE_AUTOPLAY_MS / 1000, ease: "linear" }}
                   >
                     <Image
                       src={activeSlide.image}
                       alt=""
                       fill
-                      className="object-cover"
+                      className={getPromoModalPhotoClassName(activeSlide.image)}
                       sizes="(max-width: 640px) 100vw, 512px"
                       priority
                     />
@@ -200,7 +205,14 @@ export default function RentalsPromoModal() {
                 </motion.div>
               </AnimatePresence>
 
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy via-navy/50 to-navy/15" />
+              <div
+                className="pointer-events-none absolute inset-x-0 bottom-0 z-[8] h-[45%] bg-gradient-to-t from-navy/85 via-navy/25 to-transparent"
+                aria-hidden
+              />
+              <div
+                className="pointer-events-none absolute inset-x-0 top-0 z-[8] h-12 bg-gradient-to-b from-navy/45 to-transparent sm:h-14"
+                aria-hidden
+              />
 
               <motion.span
                 animate={reduced ? {} : { scale: [1, 1.06, 1], boxShadow: ["0 0 0 rgba(255,255,255,0)", "0 0 18px rgba(255,255,255,0.45)", "0 0 0 rgba(255,255,255,0)"] }}

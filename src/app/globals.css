@@ -506,6 +506,11 @@ body {
   backface-visibility: hidden;
 }
 
+.hero-slide-image--contain {
+  transform: none;
+  background-color: #0f172a;
+}
+
 .hero-progress-bar {
   animation: heroProgress linear forwards;
   width: 0;

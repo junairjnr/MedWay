@@ -34,7 +34,10 @@ export default function BottomCTA() {
             <p key={i} className="text-white/70 leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">{p}</p>
           ))}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-8 sm:mt-10">
-            <Button href="/products" variant="white" size="lg" fullWidth className="sm:w-auto">
+            <Button href="/rentals" variant="white" size="lg" fullWidth className="sm:w-auto">
+              Explore Rentals
+            </Button>
+            <Button href="/products" variant="outline" size="lg" fullWidth className="sm:w-auto border-white/30 text-white hover:border-primary-light hover:text-primary-light hover:bg-transparent">
               Browse Products
             </Button>
             <Button href="/contact" variant="outline" size="lg" fullWidth className="sm:w-auto border-white/30 text-white hover:border-primary-light hover:text-primary-light hover:bg-transparent">

@@ -2,6 +2,13 @@ import { vitalImages } from "./images";
 
 export const solutions = [
   {
+    slug: "rentals",
+    title: "Rental / Temporary Needs",
+    description: "Flexible equipment solutions where applicable.",
+    detail: "Med Way is Toronto's go-to spot for Home Health Care Product Rentals and Mobility Equipment spanning the whole GTA. We quickly deliver, unbox and set-up rentals with professional expeditious service.",
+    image: vitalImages.sections.solutions.rentals,
+  },
+  {
     slug: "personal-mobility",
     title: "Personal Mobility",
     description: "Solutions designed around independent movement.",
@@ -21,13 +28,6 @@ export const solutions = [
     description: "Solutions for healthcare and care environments.",
     detail: "Trusted by hospitals, clinics and home care patients alike! We supply quality medical equipment to institutions and professionals across Canada from coast to coast.",
     image: vitalImages.sections.solutions.professional,
-  },
-  {
-    slug: "rentals",
-    title: "Rental / Temporary Needs",
-    description: "Flexible equipment solutions where applicable.",
-    detail: "Med Way is Toronto's go-to spot for Home Health Care Product Rentals and Mobility Equipment spanning the whole GTA. We quickly deliver, unbox and set-up rentals with professional expeditious service.",
-    image: vitalImages.sections.solutions.rentals,
   },
 ];
 

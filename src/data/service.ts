@@ -9,7 +9,7 @@ export const servicePage = {
     image: vitalImages.sections.howItWorks.support,
   },
   intro:
-    "Our service team supports every stage of your equipment journey. Whether you are purchasing, renting, or already using mobility and home care products, we provide dependable help backed by experienced specialists.",
+    "Our service team supports every stage of your equipment journey. Whether you are renting, purchasing, or already using mobility and home care products, we provide dependable help backed by experienced specialists.",
   sections: [
     {
       slug: "delivery-setup",
@@ -34,9 +34,9 @@ export const servicePage = {
       title: "Expert Consultation",
       description: "Guidance to help you choose the right solution.",
       detail:
-        "Not sure what you need? Our mobility specialists listen to your situation and recommend practical equipment options for sales or rental — with clear, honest guidance.",
+        "Not sure what you need? Our mobility specialists listen to your situation and recommend practical equipment options for rental or sales — with clear, honest guidance.",
       image: vitalImages.sections.howItWorks.consult,
-      highlights: ["Personalized recommendations", "Sales & rental guidance", "Friendly expert support"],
+      highlights: ["Personalized recommendations", "Rental & sales guidance", "Friendly expert support"],
     },
     {
       slug: "ongoing-support",

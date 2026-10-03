@@ -1,4 +1,4 @@
-import { vitalImages } from "./images";
+import { hospitalBedImage, patientLiftImage, vitalImages } from "./images";
 
 export const rentalsPage = {
   hero: {
@@ -6,7 +6,7 @@ export const rentalsPage = {
     description:
       "Flexible home health care and mobility equipment rentals for short-term recovery, trial periods, and long-term care across Toronto, the GTA, and Canada.",
     eyebrow: "Rentals",
-    image: vitalImages.sections.solutions.rentals,
+    image: hospitalBedImage,
   },
   intro:
     "Med Way offers reliable medical equipment rentals when you need quality solutions without a long-term purchase. Our team delivers, sets up, and supports your rental so you can focus on comfort and recovery at home.",
@@ -17,7 +17,7 @@ export const rentalsPage = {
       description: "Home hospital beds for recovery, post-surgery care, and long-term support.",
       detail:
         "Rent semi-electric and full-electric hospital beds with professional delivery and setup in Toronto and the Greater Toronto Area. Ideal for patients who need safe positioning, caregiver access, and comfortable home care.",
-      image: vitalImages.categories["hospital-beds"],
+      image: hospitalBedImage,
       highlights: ["Delivery & setup available", "Short-term and long-term options", "Toronto & GTA service"],
     },
     {
@@ -44,24 +44,28 @@ export const rentalsPage = {
       description: "Safe transfer support for caregivers and home care environments.",
       detail:
         "Patient lift rentals help reduce strain during transfers at home. Professional guidance available to ensure safe setup and proper sling compatibility.",
-      image: vitalImages.categories["patient-care"],
+      image: patientLiftImage,
       highlights: ["Caregiver transfer support", "Setup guidance", "Home care focused"],
     },
   ],
 };
 
+const rentalsPromoFeaturedSlide = {
+  title: rentalsPage.hero.title,
+  description: "Flexible home health care and mobility rentals — Toronto, GTA & Canada-wide.",
+  image: rentalsPage.hero.image,
+  tag: "Featured" as const,
+};
+
+/** One slide per image — hero + sections (no duplicate hospital bed featured + section) */
 export const rentalsPromoSlides = [
-  {
-    title: rentalsPage.hero.title,
-    description:
-      "Flexible home health care and mobility rentals — Toronto, GTA & Canada-wide.",
-    image: rentalsPage.hero.image,
-    tag: "Featured",
-  },
-  ...rentalsPage.sections.map((section) => ({
-    title: section.title,
-    description: section.description,
-    image: section.image,
-    tag: section.highlights[0],
-  })),
+  rentalsPromoFeaturedSlide,
+  ...rentalsPage.sections
+    .filter((section) => section.image !== rentalsPage.hero.image)
+    .map((section) => ({
+      title: section.title,
+      description: section.description,
+      image: section.image,
+      tag: section.highlights[0],
+    })),
 ];

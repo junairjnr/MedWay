@@ -10,7 +10,7 @@ export default function FeaturedProducts() {
   const featured = products.filter((p) => p.inStock).slice(0, 6);
 
   return (
-    <section className="relative overflow-hidden bg-navy py-10 sm:py-12 lg:py-14">
+    <section className="relative overflow-hidden bg-navy py-8 sm:py-10 lg:py-11">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_0%_100%,rgba(15,118,110,0.15),transparent_55%)]" aria-hidden />
       <Container className="relative">
         <MotionInView className="mb-5 flex flex-col items-start justify-between gap-3 sm:mb-6 sm:flex-row sm:items-end sm:gap-4">

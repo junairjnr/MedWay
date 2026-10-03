@@ -7,10 +7,10 @@ import { vitalImages } from "@/data/images";
 import Container from "@/components/ui/Container";
 
 const accentImages = [
+  vitalImages.sections.solutions.rentals,
   vitalImages.hero.experts,
   vitalImages.categories["mobility-scooters"],
   vitalImages.hero.store,
-  vitalImages.sections.solutions.rentals,
 ];
 
 export default function WhyChooseUs() {

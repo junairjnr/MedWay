@@ -1,13 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Truck, Headphones, ShieldCheck, Award, ShoppingBag, Wrench, RefreshCw } from "lucide-react";
+import { Truck, Headphones, ShieldCheck, ShoppingBag, Wrench, RefreshCw } from "lucide-react";
 import Container from "@/components/ui/Container";
 import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
 
 const stats = [
-  { icon: Award, value: "16+", label: "Years serving Canada" },
-  { icon: Truck, value: "Free", label: "Shipping over $100*" },
+  // { icon: Award, value: "16+", label: "Years serving Canada" },
+  // { icon: Truck, value: "Free", label: "Shipping over $100*" },
   { icon: ShieldCheck, value: "100%", label: "Integrity pricing" },
   { icon: Headphones, value: "Expert", label: "Mobility specialists" },
 ];
@@ -18,7 +18,11 @@ export default function TrustStatsBar() {
   return (
     <div className="relative z-20 -mt-3 pb-6 sm:-mt-5 sm:pb-8 lg:-mt-8 lg:pb-10">
       <Container>
-        <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4">
+        <div
+          className={`grid grid-cols-2 gap-2 sm:gap-3 ${
+            stats.length >= 4 ? "lg:grid-cols-4" : stats.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-2"
+          }`}
+        >
           {stats.map((stat, i) => {
             const Icon = stat.icon;
             return (
@@ -53,9 +57,9 @@ export default function TrustStatsBar() {
 
 export function PromoTicker() {
   const items = [
+    { icon: RefreshCw, text: "Rental — flexible home health care equipment" },
     { icon: ShoppingBag, text: "Sales — mobility & home care equipment" },
     { icon: Wrench, text: "Service — expert setup, repairs & support" },
-    { icon: RefreshCw, text: "Rental — flexible home health care equipment" },
     { icon: Truck, text: "All-over shipping across Canada" },
   ];
 

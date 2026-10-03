@@ -6,7 +6,7 @@ import { Search, SlidersHorizontal, X } from "lucide-react";
 import ProductCard from "@/components/products/ProductCard";
 import { products, Product, getProductDisplayName } from "@/data/products";
 import { categories, getCategoryBySlug } from "@/data/categories";
-import { getCategoryImage } from "@/data/images";
+import { getCategoryImage, getPhotoCoverClassName } from "@/data/images";
 import Container from "@/components/ui/Container";
 import { MotionStagger, MotionStaggerItem } from "@/components/animations/MotionInView";
 
@@ -123,7 +123,14 @@ export default function ProductListing({
   return (
     <div className="pt-14 lg:pt-[5.5rem] bg-background bg-pattern">
       <div className="relative h-44 sm:h-52 md:h-60 lg:h-72 overflow-hidden">
-        <Image src={bannerImage} alt={title} fill className="object-cover scale-105" sizes="100vw" priority />
+        <Image
+          src={bannerImage}
+          alt={title}
+          fill
+          className={`${getPhotoCoverClassName(bannerImage)} scale-105`}
+          sizes="100vw"
+          priority
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/70 to-navy/40" />
         <Container className="relative z-10 h-full flex items-end">
           <div className="pb-6 sm:pb-8 lg:pb-10 w-full">

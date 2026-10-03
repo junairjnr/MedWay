@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, MapPin } from "lucide-react";
-import { vitalImages } from "@/data/images";
+import { getPhotoCoverClassName, vitalImages } from "@/data/images";
 import Container from "@/components/ui/Container";
 
 /** Bento spans — simplified on mobile to avoid layout breaks */
@@ -54,7 +54,7 @@ export default function ShowroomGallery() {
                 src={item.src}
                 alt={item.alt}
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className={`${getPhotoCoverClassName(item.src)} transition-transform duration-700 group-hover:scale-105`}
                 sizes="(max-width: 768px) 50vw, 25vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/15 to-transparent" />

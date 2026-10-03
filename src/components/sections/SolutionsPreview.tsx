@@ -25,7 +25,7 @@ export default function SolutionsPreview() {
               transition={{ delay: i * 0.1 }}
             >
               <Link href="/solutions" className="group relative block h-64 overflow-hidden">
-                <Image src={s.image} alt={s.title} fill className="object-cover opacity-50 group-hover:scale-105 group-hover:opacity-60 transition-all duration-700" sizes="600px" />
+                <Image src={s.image} alt={s.title} fill className="object-cover object-center opacity-50 group-hover:scale-105 group-hover:opacity-60 transition-all duration-700" sizes="600px" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/60 to-transparent" />
                 <div className="absolute bottom-0 p-6">
                   <h3 className="font-display font-bold text-xl mb-2">{s.title}</h3>

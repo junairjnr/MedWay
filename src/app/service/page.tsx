@@ -52,7 +52,7 @@ export default function ServicePage() {
                   src={section.image}
                   alt={section.title}
                   fill
-                  className="object-cover hover:scale-105 transition-transform duration-700"
+                  className="object-cover object-center hover:scale-105 transition-transform duration-700"
                   sizes="(max-width: 1024px) 100vw, 600px"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/30 to-transparent pointer-events-none" />

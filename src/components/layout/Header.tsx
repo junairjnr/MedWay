@@ -122,6 +122,38 @@ export default function Header() {
           </Link>
 
           <nav className="relative z-20 hidden lg:flex flex-1 items-center justify-center gap-0.5 self-center min-w-0">
+            {/* Rentals, Sales & Service */}
+            <div className="relative">
+              <button
+                type="button"
+                aria-expanded={servicesOpen}
+                aria-haspopup="true"
+                onMouseEnter={openServicesMenu}
+                onMouseLeave={scheduleCloseServicesMenu}
+                onFocus={openServicesMenu}
+                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-all rounded-lg ${
+                  servicesOpen || isServicesActive
+                    ? "text-primary bg-primary/10"
+                    : navText
+                }`}
+              >
+                Rentals, Sales & Service
+                <ChevronDown
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              <AnimatePresence>
+                {servicesOpen && (
+                  <ServicesMegaMenuDesktop
+                    onNavigate={() => setServicesOpen(false)}
+                    onMouseEnter={openServicesMenu}
+                    onMouseLeave={scheduleCloseServicesMenu}
+                  />
+                )}
+              </AnimatePresence>
+            </div>
+
             {/* Products mega menu */}
             <div className="relative">
               <button
@@ -149,38 +181,6 @@ export default function Header() {
                     onNavigate={() => setCategoriesOpen(false)}
                     onMouseEnter={openCategoriesMenu}
                     onMouseLeave={scheduleCloseCategoriesMenu}
-                  />
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* Sales, Rentals & Service */}
-            <div className="relative">
-              <button
-                type="button"
-                aria-expanded={servicesOpen}
-                aria-haspopup="true"
-                onMouseEnter={openServicesMenu}
-                onMouseLeave={scheduleCloseServicesMenu}
-                onFocus={openServicesMenu}
-                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-all rounded-lg ${
-                  servicesOpen || isServicesActive
-                    ? "text-primary bg-primary/10"
-                    : navText
-                }`}
-              >
-                Sales & Services
-                <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`}
-                />
-              </button>
-
-              <AnimatePresence>
-                {servicesOpen && (
-                  <ServicesMegaMenuDesktop
-                    onNavigate={() => setServicesOpen(false)}
-                    onMouseEnter={openServicesMenu}
-                    onMouseLeave={scheduleCloseServicesMenu}
                   />
                 )}
               </AnimatePresence>
@@ -236,11 +236,11 @@ export default function Header() {
               className="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-border shadow-xl z-50 max-h-[calc(100dvh-3.5rem)] overflow-y-auto overscroll-contain"
             >
               <div className={`${layoutGutterClass} py-4 space-y-4 sm:py-5 sm:space-y-5`}>
-                <ProductsMegaMenuMobile onNavigate={closeMenus} />
+                <ServicesMegaMenuMobile onNavigate={closeMenus} />
 
                 <hr className="border-border" aria-hidden />
 
-                <ServicesMegaMenuMobile onNavigate={closeMenus} />
+                <ProductsMegaMenuMobile onNavigate={closeMenus} />
 
                 <hr className="border-border" aria-hidden />
 

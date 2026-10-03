@@ -90,12 +90,12 @@ export function ProductsMegaMenuDesktop({ onNavigate, onMouseEnter, onMouseLeave
                     onClick={onNavigate}
                     className="group flex items-center gap-2.5 rounded-xl p-2 hover:bg-primary/[0.06] transition-colors"
                   >
-                    <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-lg bg-slate-50 border border-border/60 group-hover:border-primary/25 transition-colors">
+                    <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-lg bg-slate-100 border border-border/60 group-hover:border-primary/25 transition-colors">
                       <Image
                         src={cat.image}
                         alt=""
                         fill
-                        className="object-contain p-1.5 group-hover:scale-110 transition-transform duration-300"
+                        className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
                         sizes="44px"
                       />
                     </div>
@@ -157,12 +157,12 @@ export function ProductsMegaMenuMobile({ onNavigate }: ProductsMegaMenuProps) {
             onClick={onNavigate}
             className="group flex flex-col overflow-hidden rounded-xl border border-border bg-white hover:border-primary/30 hover:shadow-sm transition-all"
           >
-            <div className="relative aspect-[4/3] bg-slate-50 p-2">
+            <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
               <Image
                 src={cat.image}
                 alt={cat.name}
                 fill
-                className="object-contain p-1 group-hover:scale-105 transition-transform duration-300"
+                className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
                 sizes="45vw"
               />
             </div>

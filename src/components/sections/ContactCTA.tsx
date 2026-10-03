@@ -6,10 +6,10 @@ import Container from "@/components/ui/Container";
 import { siteContact, mailtoHref } from "@/data/site-contact";
 
 const collage = [
-  vitalImages.hero.store,
-  vitalImages.hero.experts,
-  vitalImages.categories["hospital-beds"],
-  vitalImages.categories["mobility-scooters"],
+  { id: "mobility-scooters", src: vitalImages.categories["mobility-scooters"] },
+  { id: "experts", src: vitalImages.hero.experts },
+  { id: "hospital-beds", src: vitalImages.categories["hospital-beds"] },
+  { id: "lift-chairs", src: vitalImages.categories["lift-chairs"] },
 ];
 
 export default function ContactCTA() {
@@ -20,9 +20,9 @@ export default function ContactCTA() {
           <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* Image collage */}
             <div className="relative grid min-h-[220px] grid-cols-2 grid-rows-2 gap-0.5 p-0.5 sm:min-h-[280px] lg:min-h-[360px]">
-              {collage.map((src, i) => (
-                <div key={src} className={`relative overflow-hidden ${i === 0 ? "row-span-2" : ""}`}>
-                  <Image src={src} alt="" fill className="object-cover" sizes="(max-width: 1024px) 50vw, 400px" />
+              {collage.map((item, i) => (
+                <div key={item.id} className={`relative overflow-hidden ${i === 0 ? "row-span-2" : ""}`}>
+                  <Image src={item.src} alt="" fill className="object-cover object-center" sizes="(max-width: 1024px) 50vw, 400px" />
                   <div className="absolute inset-0 bg-navy/20" />
                 </div>
               ))}

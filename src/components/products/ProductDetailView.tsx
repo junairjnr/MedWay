@@ -13,6 +13,7 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
 import { getCategoryBySlug } from "@/data/categories";
+import { getPhotoCoverClassName } from "@/data/images";
 
 interface ProductDetailViewProps {
   product: Product;
@@ -71,7 +72,11 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
             style={reduced ? {} : { scale: imageScale }}
             className="w-full shrink-0 lg:w-1/2 lg:self-start"
           >
-            <div className="relative aspect-square overflow-hidden rounded-xl bg-slate-100 shadow-md ring-1 ring-black/5">
+            <div
+              className={`relative overflow-hidden rounded-xl bg-slate-100 shadow-md ring-1 ring-black/5 ${
+                product.category === "hospital-beds" ? "aspect-[4/3]" : "aspect-square"
+              }`}
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeImage}
@@ -81,7 +86,14 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                   transition={{ duration: 0.4 }}
                   className="absolute inset-0"
                 >
-                  <Image src={product.images[activeImage]} alt={displayName} fill className="object-cover" priority sizes="50vw" />
+                  <Image
+                    src={product.images[activeImage]}
+                    alt={displayName}
+                    fill
+                    className={getPhotoCoverClassName(product.images[activeImage])}
+                    priority
+                    sizes="50vw"
+                  />
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -95,7 +107,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                       i === activeImage ? "border-primary" : "border-border"
                     }`}
                   >
-                    <Image src={img} alt="" fill className="object-cover" sizes="80px" />
+                    <Image src={img} alt="" fill className={getPhotoCoverClassName(img)} sizes="80px" />
                   </button>
                 ))}
               </div>

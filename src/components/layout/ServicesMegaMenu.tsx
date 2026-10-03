@@ -31,8 +31,8 @@ export function ServicesMegaMenuDesktop({ onNavigate, onMouseEnter, onMouseLeave
           <Image src={featured.image} alt="" fill className="object-cover opacity-55" sizes="384px" />
           <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/75 to-navy/30" />
           <div className="relative z-10 flex h-full flex-col justify-end p-4">
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary-light">Sales & Services</p>
-            <p className="mt-1 font-display text-sm font-bold text-white">Buy, rent, or get expert support</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary-light">Rentals, Sales & Service</p>
+            <p className="mt-1 font-display text-sm font-bold text-white">Rent, buy, or get expert support</p>
           </div>
         </div>
 
@@ -90,16 +90,16 @@ export function ServicesMegaMenuMobile({ onNavigate }: ServicesMegaMenuProps) {
     <div className="space-y-3">
       <div className="relative min-h-[7rem] overflow-hidden rounded-xl bg-navy px-4 py-4">
         <div className="absolute inset-0 opacity-30">
-          <Image src={servicesNavLinks[1].image} alt="" fill className="object-cover" sizes="400px" />
+          <Image src={servicesNavLinks[0].image} alt="" fill className="object-cover" sizes="400px" />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/90 to-navy/70" />
         <div className="relative z-10">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-primary-light">Sales & Services</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-primary-light">Rentals, Sales & Service</p>
           <p className="mt-1 max-w-[16rem] font-display text-sm font-bold leading-snug text-white sm:text-base">
-            Buy, rent, or get expert support
+            Rent, buy, or get expert support
           </p>
-          <Button href="/products" size="sm" variant="white" showArrow={false} className="mt-3" onClick={onNavigate}>
-            View Sales
+          <Button href="/rentals" size="sm" variant="white" showArrow={false} className="mt-3" onClick={onNavigate}>
+            View Rentals
           </Button>
         </div>
       </div>

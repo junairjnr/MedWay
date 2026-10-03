@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Image from "next/image";
 import Container from "./Container";
+import { getPhotoCoverClassName } from "@/data/images";
 
 interface PageHeroProps {
   title: string;
@@ -36,7 +37,14 @@ export default function PageHero({
 
   return (
     <div className={`relative ${heightClass} overflow-hidden`}>
-      <Image src={image} alt={imageAlt || title} fill className="object-cover scale-105" sizes="100vw" priority />
+      <Image
+        src={image}
+        alt={imageAlt || title}
+        fill
+        className={`${getPhotoCoverClassName(image)} scale-105`}
+        sizes="100vw"
+        priority
+      />
       <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/75 to-navy/30" />
       <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-transparent opacity-60" />
       <Container className={`relative z-10 h-full flex ${alignClass}`}>
