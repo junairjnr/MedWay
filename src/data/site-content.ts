@@ -8,6 +8,15 @@ export const siteContent = {
   ],
   heroSlides: [
     {
+      badge: "Rentals",
+      title: "Medical Equipment Rentals",
+      note: "Hospital beds, scooters, wheelchairs & more — Toronto, GTA & Canada-wide",
+      cta: "Explore Rentals",
+      href: "/rentals",
+      image: vitalImages.hero.hospitalBeds,
+      highlight: true,
+    },
+    {
       badge: "Mobility Scooters",
       title: "Auto-Fold Mobility Scooter",
       price: "Was $4,999 · Now $3,499",
@@ -24,15 +33,6 @@ export const siteContent = {
       cta: "Browse Lift Chairs",
       href: "/categories/lift-chairs",
       image: vitalImages.hero.liftChairs,
-    },
-    {
-      badge: "Home Hospital Beds",
-      title: "Homecare Beds",
-      price: "Canada's Top Homecare Beds",
-      note: "Electric beds for comfort, care & recovery at home",
-      cta: "Shop Hospital Beds",
-      href: "/categories/hospital-beds",
-      image: vitalImages.hero.hospitalBeds,
     },
   ],
   promoBanners: [

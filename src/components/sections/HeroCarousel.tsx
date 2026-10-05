@@ -135,7 +135,13 @@ export default function HeroCarousel() {
           <div className="grid w-full grid-cols-1 items-end gap-8 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-12">
             <div className="hero-copy-panel w-full max-w-md sm:max-w-lg lg:max-w-2xl">
               <div className="mb-2 flex flex-wrap items-center gap-1.5 sm:mb-4 sm:gap-2">
-                <span className="inline-flex items-center gap-1 rounded-full border border-primary-light/30 bg-primary/25 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.1em] text-primary-light sm:gap-1.5 sm:px-3 sm:py-1.5 sm:text-xs">
+                <span
+                  className={`inline-flex items-center gap-1 rounded-full border px-2 py-1 text-[9px] font-bold uppercase tracking-[0.1em] text-primary-light sm:gap-1.5 sm:px-3 sm:py-1.5 sm:text-xs ${
+                    slide.highlight
+                      ? "border-primary-light/70 bg-primary/45 shadow-[0_0_22px_rgba(45,212,191,0.4)] ring-2 ring-primary-light/50"
+                      : "border-primary-light/30 bg-primary/25"
+                  }`}
+                >
                   <Sparkles className="h-2.5 w-2.5 shrink-0 sm:h-3 sm:w-3" />
                   {slide.badge}
                 </span>
