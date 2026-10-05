@@ -15,9 +15,13 @@ export const airMattressImage = "/assets/Air%20mattress.jpeg";
 /** Hospital bed product photos (client assets) — one listing, two gallery views */
 export const hospitalBedImage = "/assets/hospital%20bed%201.PNG";
 export const hospitalBedImageSecond = "/assets/hospital%20bed%202.PNG";
+export const liftChairImage = "/assets/lift%20chair.jpeg";
 
-/** Home intro / Our Story section */
-export const introStoryVideo = "/assets/Med-Way_brand_story_video_1080p_20261003230444.mp4";
+/** Hero banner side panel video (client asset) */
+export const heroBannerVideo = "/assets/hero_video.mp4";
+
+/** Home intro / Our Story section video (client asset) */
+export const introStoryVideo = "/assets/our_story.mp4";
 
 /** Verified Unsplash photo IDs (HTTP 200 tested) */
 const STOCK = {
@@ -56,7 +60,7 @@ export const vitalImages = {
     /** @deprecated Use mobilityScooter — kept for cached bundles */
     foxtrSale: U(STOCK.scooterHero, 1600),
     hospitalBeds: hospitalBedImage,
-    liftChairs: U(STOCK.liftChair, 1600),
+    liftChairs: liftChairImage,
     store: U(STOCK.medicalOffice, 1600),
     experts: U(STOCK.wheelchairCare, 1600),
     heroBg: U(STOCK.medicalTeam, 1600),
@@ -68,7 +72,7 @@ export const vitalImages = {
     "power-wheelchairs": U(STOCK.mobilityDevice, 800),
     "transport-chairs": U(STOCK.wheelchairPark, 800),
     "hospital-beds": hospitalBedImage,
-    "lift-chairs": U(STOCK.liftChair, 800),
+    "lift-chairs": liftChairImage,
     "bathroom-safety": U(STOCK.bathroomSafety, 800),
     "daily-living": rehabDailyImage,
     "patient-care": patientLiftImage,
@@ -77,7 +81,7 @@ export const vitalImages = {
   products: {
     "vitalflex-elite-hospital-bed": hospitalBedImage,
     "foxtr-auto-fold-scooter": U(STOCK.scooterHero, 1200),
-    "golden-comfort-lift-chair": U(STOCK.liftChair, 1200),
+    "golden-comfort-lift-chair": liftChairImage,
     "solcare-100-mattress": U(STOCK.patientCare, 1200),
     "serene-elite-mattress": airMattressImage,
     "pride-victory-scooter": U(STOCK.scooterOutdoor1, 1200),
@@ -95,7 +99,7 @@ export const vitalImages = {
       U(STOCK.scooterBuilding, 1200),
       U(STOCK.scooterFamily, 1200),
     ],
-    "golden-comfort-lift-chair": [U(STOCK.liftChair, 1200), U(STOCK.seniorCare, 1200)],
+    "golden-comfort-lift-chair": [liftChairImage],
     "solcare-100-mattress": [U(STOCK.patientCare, 1200), hospitalBedImage],
     "serene-elite-mattress": [airMattressImage],
     "pride-victory-scooter": [U(STOCK.scooterOutdoor1, 1200), U(STOCK.scooterOutdoor2, 1200)],
@@ -111,7 +115,7 @@ export const vitalImages = {
     { src: U(STOCK.wheelchairCare, 1200), alt: "Wheelchair care outdoors", span: "tall" as const },
     { src: U(STOCK.scooterBuilding, 1200), alt: "Electric mobility scooter", span: "normal" as const },
     { src: hospitalBedImage, alt: "Hospital bed", span: "normal" as const },
-    { src: U(STOCK.liftChair, 1200), alt: "Comfort lift recliner", span: "wide" as const },
+    { src: liftChairImage, alt: "Comfort lift recliner", span: "wide" as const },
     { src: U(STOCK.wheelchairPath, 1200), alt: "Rollator walker support", span: "normal" as const },
     { src: U(STOCK.medicalOffice, 1200), alt: "Medical supply showroom", span: "normal" as const },
     { src: U(STOCK.wheelchairPark, 1200), alt: "Wheelchair independence", span: "normal" as const },
