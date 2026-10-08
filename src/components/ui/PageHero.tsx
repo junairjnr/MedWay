@@ -1,7 +1,11 @@
+"use client";
+
 import { ReactNode } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import Container from "./Container";
 import { getPhotoCoverClassName } from "@/data/images";
+import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
 
 interface PageHeroProps {
   title: string;
@@ -24,6 +28,7 @@ export default function PageHero({
   align = "bottom",
   size = "lg",
 }: PageHeroProps) {
+  const reduced = usePrefersReducedMotion();
   const heightClass = size === "lg" ? "h-52 sm:h-64 md:h-72 lg:h-80" : "h-48 sm:h-56 md:h-64";
   const titleClass =
     size === "lg"
@@ -37,18 +42,30 @@ export default function PageHero({
 
   return (
     <div className={`relative ${heightClass} overflow-hidden`}>
-      <Image
-        src={image}
-        alt={imageAlt || title}
-        fill
-        className={`${getPhotoCoverClassName(image)} scale-105`}
-        sizes="100vw"
-        priority
-      />
+      <motion.div
+        className="absolute inset-0"
+        initial={reduced ? false : { scale: 1.08 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <Image
+          src={image}
+          alt={imageAlt || title}
+          fill
+          className={`${getPhotoCoverClassName(image)}`}
+          sizes="100vw"
+          priority
+        />
+      </motion.div>
       <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/75 to-navy/30" />
       <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-transparent opacity-60" />
       <Container className={`relative z-10 h-full flex ${alignClass}`}>
-        <div className={`w-full ${align === "bottom" ? (size === "lg" ? "pb-8 sm:pb-10 lg:pb-12" : "pb-6 sm:pb-8 lg:pb-10") : ""}`}>
+        <motion.div
+          initial={reduced ? false : { opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+          className={`w-full ${align === "bottom" ? (size === "lg" ? "pb-8 sm:pb-10 lg:pb-12" : "pb-6 sm:pb-8 lg:pb-10") : ""}`}
+        >
           {eyebrow && (
             <p className="inline-flex items-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-primary-light mb-2 sm:mb-3">
               <span className="w-6 h-px bg-primary-light" aria-hidden />
@@ -64,7 +81,7 @@ export default function PageHero({
             </p>
           )}
           {children}
-        </div>
+        </motion.div>
       </Container>
     </div>
   );

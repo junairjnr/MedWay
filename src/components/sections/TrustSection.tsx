@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Shield, Heart, Building2 } from "lucide-react";
 import { siteContent } from "@/data/site-content";
+import { getTrustedSectionPhotoClassName } from "@/data/images";
 import Container from "@/components/ui/Container";
 
 const pillars = [
@@ -27,8 +28,14 @@ export default function TrustSection() {
             className="relative order-2 lg:order-1"
           >
             <div className="absolute -inset-2 rounded-3xl bg-gradient-to-br from-primary/15 to-transparent blur-md" aria-hidden />
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-black/5">
-              <Image src={trust.image} alt="Trusted medical equipment supplier" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-slate-50 shadow-2xl ring-1 ring-black/5">
+              <Image
+                src={trust.image}
+                alt="Trusted medical equipment supplier"
+                fill
+                className={getTrustedSectionPhotoClassName()}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
           </motion.div>
 

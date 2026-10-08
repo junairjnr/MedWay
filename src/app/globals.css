@@ -219,6 +219,63 @@ body {
   }
 }
 
+/* Homepage Popular Products — one row, compact cards */
+.product-grid-popular-row {
+  display: flex;
+  gap: 0.625rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding-bottom: 0.125rem;
+}
+
+.product-grid-popular-row::-webkit-scrollbar {
+  display: none;
+}
+
+.product-grid-popular-row > * {
+  flex: 0 0 calc(46% - 0.3125rem);
+  scroll-snap-align: start;
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .product-grid-popular-row {
+    gap: 0.75rem;
+  }
+
+  .product-grid-popular-row > * {
+    flex: 0 0 calc(31% - 0.5rem);
+  }
+}
+
+@media (min-width: 768px) {
+  .product-grid-popular-row > * {
+    flex: 0 0 calc(23% - 0.5625rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-grid-popular-row {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.75rem;
+    overflow-x: visible;
+  }
+
+  .product-grid-popular-row > * {
+    flex: unset;
+  }
+}
+
+@media (min-width: 1280px) {
+  .product-grid-popular-row {
+    gap: 0.875rem;
+  }
+}
+
 /* Horizontal scroll filter pills */
 .filter-scroll {
   -ms-overflow-style: none;
@@ -243,85 +300,175 @@ body {
   border-radius: 9999px;
 }
 
-/* Rentals promo modal — soft seashore wash (foam line + tide glow at bottom edge) */
-.rentals-promo-seashore {
+/* Rentals promo modal — diagonal gray wave highlight (top-left → bottom-right) */
+.rentals-promo-shine {
   pointer-events: none;
   overflow: hidden;
+  container-type: size;
 }
 
-.rentals-promo-seashore::before {
+/* Soft gray wake trailing the main gleam */
+.rentals-promo-shine::before {
   content: "";
   position: absolute;
-  inset: auto 0 0 0;
-  height: 42%;
-  background: linear-gradient(
-    to top,
-    rgba(15, 118, 110, 0.12) 0%,
-    rgba(45, 212, 191, 0.06) 35%,
-    transparent 100%
-  );
-  opacity: 0.85;
-  animation: rentals-promo-seashore-tide 5.5s ease-in-out infinite;
-}
-
-.rentals-promo-seashore::after {
-  content: "";
-  position: absolute;
-  left: -15%;
-  bottom: 18%;
-  width: 130%;
-  height: 6px;
-  border-radius: 9999px;
+  top: 50%;
+  left: 50%;
+  width: calc((100cqw + 100cqh) * 0.72);
+  height: 28px;
+  margin-top: -14px;
+  margin-left: calc((100cqw + 100cqh) * -0.36);
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(45, 212, 191, 0.35) 18%,
-    rgba(224, 242, 254, 0.95) 42%,
-    rgba(255, 255, 255, 0.98) 50%,
-    rgba(204, 251, 241, 0.9) 58%,
-    rgba(45, 212, 191, 0.4) 82%,
+    transparent 28%,
+    rgba(148, 163, 184, 0.08) 40%,
+    rgba(203, 213, 225, 0.22) 48%,
+    rgba(241, 245, 249, 0.28) 50%,
+    rgba(203, 213, 225, 0.2) 52%,
+    rgba(148, 163, 184, 0.08) 60%,
+    transparent 72%,
     transparent 100%
   );
-  box-shadow:
-    0 0 16px rgba(45, 212, 191, 0.35),
-    0 0 32px rgba(240, 253, 250, 0.45),
-    0 -6px 24px rgba(15, 118, 110, 0.08);
-  filter: blur(0.4px);
-  transform: translate3d(-8%, 0, 0);
-  animation: rentals-promo-seashore-wave 6s ease-in-out infinite;
+  filter: blur(10px);
+  transform: rotate(-45deg) translate3d(calc(90cqw + 14%), calc(-90cqh - 14%), 0);
+  transform-origin: center center;
+  opacity: 0;
+  animation: rentals-promo-shine-wake 7s ease-in-out infinite;
   will-change: transform, opacity;
 }
 
-@keyframes rentals-promo-seashore-wave {
-  0%,
-  100% {
-    transform: translate3d(-10%, 0, 0) scaleY(1);
-    opacity: 0.55;
+.rentals-promo-shine::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc((100cqw + 100cqh) * 0.55);
+  height: 4px;
+  margin-top: -2px;
+  margin-left: calc((100cqw + 100cqh) * -0.275);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 30%,
+    rgba(148, 163, 184, 0.45) 42%,
+    rgba(203, 213, 225, 0.88) 47%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(226, 232, 240, 0.92) 53%,
+    rgba(148, 163, 184, 0.42) 58%,
+    transparent 68%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 14px rgba(255, 255, 255, 0.75),
+    0 0 28px rgba(241, 245, 249, 0.65),
+    0 0 42px rgba(203, 213, 225, 0.5);
+  transform: rotate(-45deg) translate3d(calc(90cqw + 12%), calc(-90cqh - 12%), 0);
+  transform-origin: center center;
+  opacity: 0;
+  filter: blur(0.65px);
+  animation: rentals-promo-shine-sweep 7s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes rentals-promo-shine-sweep {
+  0% {
+    transform: rotate(-45deg) translate3d(calc(90cqw + 14%), calc(-90cqh - 14%), 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.88;
   }
   50% {
-    transform: translate3d(10%, 0, 0) scaleY(1.15);
     opacity: 1;
+  }
+  85% {
+    opacity: 0.32;
+  }
+  100% {
+    transform: rotate(-45deg) translate3d(calc(-90cqw - 14%), calc(90cqh + 14%), 0);
+    opacity: 0;
   }
 }
 
-@keyframes rentals-promo-seashore-tide {
-  0%,
-  100% {
+@keyframes rentals-promo-shine-wake {
+  0% {
+    transform: rotate(-45deg) translate3d(calc(90cqw + 14%), calc(-90cqh - 14%), 0);
+    opacity: 0;
+  }
+  18% {
     opacity: 0.65;
   }
   50% {
-    opacity: 0.95;
+    opacity: 0.85;
+  }
+  82% {
+    opacity: 0.25;
+  }
+  100% {
+    transform: rotate(-45deg) translate3d(calc(-90cqw - 14%), calc(90cqh + 14%), 0);
+    opacity: 0;
+  }
+}
+
+@supports not (width: 1cqw) {
+  .rentals-promo-shine::before {
+    width: 140%;
+    height: 28px;
+    margin-top: -14px;
+    margin-left: -70%;
+    transform: rotate(-45deg) translate3d(95%, -95%, 0);
+    animation: rentals-promo-shine-wake-fallback 7s ease-in-out infinite;
+  }
+
+  .rentals-promo-shine::after {
+    width: 120%;
+    height: 4px;
+    margin-top: -2px;
+    margin-left: -60%;
+    transform: rotate(-45deg) translate3d(95%, -95%, 0);
+    animation: rentals-promo-shine-sweep-fallback 7s ease-in-out infinite;
+  }
+
+  @keyframes rentals-promo-shine-sweep-fallback {
+    0% {
+      transform: rotate(-45deg) translate3d(95%, -95%, 0);
+      opacity: 0;
+    }
+    15% {
+      opacity: 0.88;
+    }
+    85% {
+      opacity: 0.32;
+    }
+    100% {
+      transform: rotate(-45deg) translate3d(-95%, 95%, 0);
+      opacity: 0;
+    }
+  }
+
+  @keyframes rentals-promo-shine-wake-fallback {
+    0% {
+      transform: rotate(-45deg) translate3d(95%, -95%, 0);
+      opacity: 0;
+    }
+    18% {
+      opacity: 0.65;
+    }
+    82% {
+      opacity: 0.25;
+    }
+    100% {
+      transform: rotate(-45deg) translate3d(-95%, 95%, 0);
+      opacity: 0;
+    }
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rentals-promo-seashore::before,
-  .rentals-promo-seashore::after {
+  .rentals-promo-shine::before,
+  .rentals-promo-shine::after {
     animation: none;
-  }
-
-  .rentals-promo-seashore::after {
-    opacity: 0.5;
+    opacity: 0;
   }
 }
 

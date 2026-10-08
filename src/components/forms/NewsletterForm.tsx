@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
 import { getEmailJsErrorMessage, isEmailJsConfigured, sendEmailJs } from "@/lib/emailjs";
 
 interface NewsletterFormProps {
@@ -9,6 +10,7 @@ interface NewsletterFormProps {
 }
 
 export default function NewsletterForm({ variant = "inline" }: NewsletterFormProps) {
+  const reduced = usePrefersReducedMotion();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -74,9 +76,20 @@ export default function NewsletterForm({ variant = "inline" }: NewsletterFormPro
           {status === "loading" ? "..." : "Subscribe"}
         </motion.button>
       </form>
-      {message && (
-        <p className={`mt-2 text-sm ${status === "success" ? "text-green-400" : "text-red-400"}`}>{message}</p>
-      )}
+      <AnimatePresence mode="wait" initial={false}>
+        {message ? (
+          <motion.p
+            key={`${status}-${message}`}
+            initial={reduced ? false : { opacity: 0, y: 8, height: 0 }}
+            animate={{ opacity: 1, y: 0, height: "auto" }}
+            exit={reduced ? undefined : { opacity: 0, y: -6, height: 0 }}
+            transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            className={`mt-2 overflow-hidden text-sm ${status === "success" ? "text-green-400" : "text-red-400"}`}
+          >
+            {message}
+          </motion.p>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
 import { CheckCircle2 } from "lucide-react";
 import { siteContent } from "@/data/site-content";
 import { introStoryVideo } from "@/data/images";
@@ -14,6 +15,7 @@ const highlights = [
 ];
 
 export default function IntroSection() {
+  const reduced = usePrefersReducedMotion();
   const { intro } = siteContent;
 
   return (
@@ -101,16 +103,23 @@ export default function IntroSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-navy/50 via-transparent to-transparent" />
             </div> */}
             <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-slate-900 shadow-2xl ring-1 ring-black/5">
-              <video
-                className="absolute inset-0 h-full w-full object-cover object-center"
-                src={introStoryVideo}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                aria-label="Med Way home health care stores Canada"
-              />
+              <AnimatePresence mode="wait">
+                <motion.video
+                  key={introStoryVideo}
+                  className="absolute inset-0 h-full w-full object-contain object-center bg-slate-900"
+                  src={introStoryVideo}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  aria-label="Med Way home health care stores Canada"
+                  initial={reduced ? false : { opacity: 0, scale: 1.02 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={reduced ? undefined : { opacity: 0 }}
+                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                />
+              </AnimatePresence>
               <div
                 className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-navy/35 to-transparent sm:h-[28%]"
                 aria-hidden

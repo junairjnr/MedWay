@@ -1,8 +1,78 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { ReactNode } from "react";
 import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
+
+const easeOut = [0.22, 1, 0.36, 1] as const;
+
+/** Mount/unmount with fade + slide (forms, alerts, toggled panels) */
+export function MotionPresenceFade({
+  show,
+  children,
+  className = "",
+  mode = "wait" as const,
+}: {
+  show: boolean;
+  children: ReactNode;
+  className?: string;
+  mode?: "sync" | "wait" | "popLayout";
+}) {
+  const reduced = usePrefersReducedMotion();
+
+  if (reduced) {
+    return show ? <div className={className}>{children}</div> : null;
+  }
+
+  return (
+    <AnimatePresence mode={mode}>
+      {show ? (
+        <motion.div
+          key="motion-presence-fade"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.35, ease: easeOut }}
+          className={className}
+        >
+          {children}
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
+  );
+}
+
+/** Swap keyed children (filters, tabs, route blocks) */
+export function MotionPresenceSwap({
+  presenceKey,
+  children,
+  className = "",
+}: {
+  presenceKey: string | number;
+  children: ReactNode;
+  className?: string;
+}) {
+  const reduced = usePrefersReducedMotion();
+
+  if (reduced) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.div
+        key={presenceKey}
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -12 }}
+        transition={{ duration: 0.4, ease: easeOut }}
+        className={className}
+      >
+        {children}
+      </motion.div>
+    </AnimatePresence>
+  );
+}
 
 interface MotionInViewProps {
   children: ReactNode;

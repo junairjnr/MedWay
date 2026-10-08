@@ -151,11 +151,11 @@ export default function RentalsPromoModal() {
               animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
               exit={{ opacity: 0, y: 20, scale: 0.97 }}
               transition={{ type: "spring", stiffness: 360, damping: 28 }}
-              className="relative flex max-h-[min(90dvh,720px)] w-full flex-col overflow-hidden rounded-2xl border border-primary/15 bg-white shadow-[0_24px_80px_rgba(26,35,50,0.35)]"
+              className="relative flex max-h-[min(90dvh,720px)] w-full flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_28px_90px_rgba(26,35,50,0.38),0_0_0_1px_rgba(255,255,255,0.6)_inset]"
               onClick={(e) => e.stopPropagation()}
             >
               {!reduced && (
-                <div aria-hidden className="rentals-promo-seashore absolute inset-0 z-[25] rounded-2xl" />
+                <div aria-hidden className="rentals-promo-shine absolute inset-0 z-[25] rounded-2xl" />
               )}
 
             <div
@@ -164,13 +164,13 @@ export default function RentalsPromoModal() {
               onTouchEnd={handleTouchEnd}
             >
               {!reduced && slides.length > 1 && (
-                <div className="absolute inset-x-0 top-0 z-20 h-1 overflow-hidden bg-primary/15">
+                <div className="absolute inset-x-0 top-0 z-20 h-1 bg-white/25">
                   <motion.div
                     key={slideIndex}
-                    className="h-full w-full origin-left bg-gradient-to-r from-primary/40 via-primary-light/90 to-teal-200/80"
+                    className="h-full w-full origin-left bg-gradient-to-r from-slate-400/70 via-white to-slate-300/80"
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
-                    transition={{ duration: SLIDE_AUTOPLAY_MS / 1000, ease: [0.45, 0.05, 0.55, 0.95] }}
+                    transition={{ duration: SLIDE_AUTOPLAY_MS / 1000, ease: "linear" }}
                   />
                 </div>
               )}

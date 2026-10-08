@@ -63,8 +63,15 @@ export function PromoTicker() {
     { icon: Truck, text: "All-over shipping across Canada" },
   ];
 
+  const reduced = usePrefersReducedMotion();
+
   return (
-    <div className="overflow-hidden border-b border-primary-dark/20 bg-gradient-to-r from-primary-dark via-primary to-primary-dark text-white">
+    <motion.div
+      initial={reduced ? false : { opacity: 0, y: -6 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      className="overflow-hidden border-b border-primary-dark/20 bg-gradient-to-r from-primary-dark via-primary to-primary-dark text-white"
+    >
       <div className="marquee-track flex w-max gap-10 py-2.5 text-xs font-semibold tracking-wide">
         {[...items, ...items, ...items].map((item, i) => {
           const Icon = item.icon;
@@ -76,6 +83,6 @@ export function PromoTicker() {
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 }

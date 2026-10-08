@@ -3,15 +3,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { whyChooseUs } from "@/data/solutions";
-import { vitalImages } from "@/data/images";
+import { getWhyChooseUsPhotoClassName, whyChooseUsImages } from "@/data/images";
 import Container from "@/components/ui/Container";
-
-const accentImages = [
-  vitalImages.sections.solutions.rentals,
-  vitalImages.hero.experts,
-  vitalImages.categories["mobility-scooters"],
-  vitalImages.hero.store,
-];
 
 export default function WhyChooseUs() {
   return (
@@ -36,15 +29,14 @@ export default function WhyChooseUs() {
               transition={{ delay: i * 0.1, duration: 0.5 }}
               className="group flex gap-4 overflow-hidden rounded-2xl border border-border/80 bg-white p-4 shadow-sm transition-all hover:shadow-md sm:gap-5 sm:p-5"
             >
-              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl sm:h-28 sm:w-28">
+              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-slate-50 sm:h-28 sm:w-28">
                 <Image
-                  src={accentImages[i]}
+                  src={whyChooseUsImages[i] ?? whyChooseUsImages[0]}
                   alt=""
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  className={`${getWhyChooseUsPhotoClassName()} transition-transform duration-500 group-hover:scale-[1.03]`}
                   sizes="112px"
                 />
-                <div className="absolute inset-0 bg-primary/20 mix-blend-multiply" />
               </div>
               <div className="min-w-0 flex-1">
                 <span className="font-display text-3xl font-extrabold text-primary/20 sm:text-4xl">{item.num}</span>

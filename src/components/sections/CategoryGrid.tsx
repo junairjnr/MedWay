@@ -7,6 +7,7 @@ import { ArrowUpRight } from "lucide-react";
 import { categories } from "@/data/categories";
 import { getPhotoCoverClassName } from "@/data/images";
 import Section, { SectionHeader } from "@/components/ui/Section";
+import MotionInView from "@/components/animations/MotionInView";
 
 export default function CategoryGrid() {
   const featured = categories.slice(0, 2);
@@ -36,7 +37,7 @@ export default function CategoryGrid() {
         ))}
       </div>
 
-      <div className="mt-8 text-center sm:mt-10">
+      <MotionInView className="mt-8 text-center sm:mt-10">
         <Link
           href="/products"
           className="inline-flex min-h-12 items-center gap-2 rounded-full border-2 border-primary/20 bg-white px-8 text-sm font-bold text-primary shadow-sm transition-all hover:border-primary hover:bg-primary hover:text-white hover:shadow-md"
@@ -44,7 +45,7 @@ export default function CategoryGrid() {
           View All Products
           <ArrowUpRight className="h-4 w-4" />
         </Link>
-      </div>
+      </MotionInView>
     </Section>
   );
 }

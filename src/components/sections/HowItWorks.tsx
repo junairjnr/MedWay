@@ -53,7 +53,8 @@ export default function HowItWorks() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-30px" }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
-              className="group overflow-hidden rounded-2xl border border-border/80 bg-background shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
+              whileHover={{ y: -4, transition: { duration: 0.25 } }}
+              className="group overflow-hidden rounded-2xl border border-border/80 bg-background shadow-sm transition-shadow hover:shadow-lg"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image

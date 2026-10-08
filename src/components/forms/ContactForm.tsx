@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
 import { getEmailJsErrorMessage, isEmailJsConfigured, sendEmailJs } from "@/lib/emailjs";
 
 interface ContactFormProps {
@@ -10,6 +11,7 @@ interface ContactFormProps {
 }
 
 export default function ContactForm({ productName, showUpdates = false }: ContactFormProps) {
+  const reduced = usePrefersReducedMotion();
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -84,17 +86,30 @@ export default function ContactForm({ productName, showUpdates = false }: Contac
 
   const inputClass = "w-full px-4 py-3 border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all";
 
-  if (status === "success") {
-    return (
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="py-12 text-center">
-        <h3 className="font-display text-2xl font-bold mb-3">Thank you.</h3>
-        <p className="text-muted">{message}</p>
-      </motion.div>
-    );
-  }
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <AnimatePresence mode="wait" initial={false}>
+      {status === "success" ? (
+        <motion.div
+          key="contact-success"
+          initial={reduced ? false : { opacity: 0, y: 20, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={reduced ? undefined : { opacity: 0, y: -12 }}
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          className="py-12 text-center"
+        >
+          <h3 className="font-display text-2xl font-bold mb-3">Thank you.</h3>
+          <p className="text-muted">{message}</p>
+        </motion.div>
+      ) : (
+        <motion.form
+          key="contact-form"
+          onSubmit={handleSubmit}
+          initial={reduced ? false : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={reduced ? undefined : { opacity: 0, y: -10 }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          className="space-y-5"
+        >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-semibold uppercase tracking-wider mb-2">First Name *</label>
@@ -146,7 +161,21 @@ export default function ContactForm({ productName, showUpdates = false }: Contac
       >
         {status === "loading" ? "Sending..." : productName ? "Send Enquiry" : "Send Message"}
       </motion.button>
-      {status === "error" && <p className="text-sm text-red-600">{message}</p>}
-    </form>
+      <AnimatePresence mode="wait" initial={false}>
+        {status === "error" && message ? (
+          <motion.p
+            key="contact-error"
+            initial={reduced ? false : { opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduced ? undefined : { opacity: 0, y: -4 }}
+            className="text-sm text-red-600"
+          >
+            {message}
+          </motion.p>
+        ) : null}
+      </AnimatePresence>
+        </motion.form>
+      )}
+    </AnimatePresence>
   );
 }

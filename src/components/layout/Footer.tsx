@@ -1,7 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
 import Container from "@/components/ui/Container";
+import MotionInView, { MotionStagger, MotionStaggerItem } from "@/components/animations/MotionInView";
+import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
 import NewsletterForm from "@/components/forms/NewsletterForm";
 import Button from "@/components/ui/Button";
 import { categories } from "@/data/categories";
@@ -9,29 +14,31 @@ import { siteLogo, siteLogoWidth, siteLogoHeight } from "@/data/images";
 import { siteContact, mailtoHref, whatsAppHref } from "@/data/site-contact";
 
 export default function Footer() {
+  const reduced = usePrefersReducedMotion();
+
   return (
     <footer className="relative bg-navy text-slate-400">
       {/* CTA band */}
       <div className="border-b border-white/10 bg-gradient-to-r from-primary-dark via-primary to-primary-dark">
         <Container variant="chrome" className="flex flex-col items-center justify-between gap-5 py-8 sm:flex-row sm:py-10">
-          <div className="text-center sm:text-left">
+          <MotionInView direction="left" className="text-center sm:text-left w-full sm:w-auto">
             <h2 className="font-display text-xl font-extrabold text-white sm:text-2xl">Need help choosing equipment?</h2>
             <p className="mt-1 text-sm text-white/75">Talk to our mobility experts — we&apos;re here to help.</p>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
+          </MotionInView>
+          <MotionInView direction="right" delay={0.08} className="flex flex-col gap-3 sm:flex-row w-full sm:w-auto justify-center sm:justify-end">
             <Button href={whatsAppHref()} variant="white" size="md" showArrow={false} className="rounded-full">
               <Phone className="mr-2 h-4 w-4" /> {siteContact.phone}
             </Button>
             <Button href="/contact" variant="outline" size="md" showArrow={false} className="rounded-full border-white/30 text-white hover:bg-white/10">
               Contact Us
             </Button>
-          </div>
+          </MotionInView>
         </Container>
       </div>
 
       <Container variant="chrome" className="py-12 sm:py-16 lg:py-20">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
-          <div className="lg:col-span-4">
+        <MotionStagger className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+          <MotionStaggerItem className="lg:col-span-4">
             <div className="mb-5">
               <Image
                 src={siteLogo}
@@ -59,9 +66,9 @@ export default function Footer() {
                 Toronto, ON — Canada-wide shipping
               </p>
             </div>
-          </div>
+          </MotionStaggerItem>
 
-          <div className="lg:col-span-2">
+          <MotionStaggerItem className="lg:col-span-2">
             <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-white">Explore</h3>
             <ul className="space-y-2.5 text-sm">
               <li><Link href="/products" className="hover:text-primary-light transition-colors">All Products</Link></li>
@@ -71,9 +78,9 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </MotionStaggerItem>
 
-          <div className="lg:col-span-2">
+          <MotionStaggerItem className="lg:col-span-2">
             <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-white">Company</h3>
             <ul className="space-y-2.5 text-sm">
               <li><Link href="/about" className="hover:text-primary-light transition-colors">About Us</Link></li>
@@ -84,19 +91,25 @@ export default function Footer() {
               {/* <li><Link href="/resources" className="hover:text-primary-light transition-colors">Resources</Link></li> */}
               <li><Link href="/contact" className="hover:text-primary-light transition-colors">Contact</Link></li>
             </ul>
-          </div>
+          </MotionStaggerItem>
 
-          <div className="lg:col-span-4">
+          <MotionStaggerItem className="lg:col-span-4">
             <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-white">Stay Connected</h3>
             <p className="mb-4 text-sm leading-relaxed">Mobility advice, product updates &amp; exclusive offers.</p>
             <NewsletterForm variant="footer" />
-          </div>
-        </div>
+          </MotionStaggerItem>
+        </MotionStagger>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-slate-700 pt-8 text-xs sm:flex-row">
+        <motion.div
+          initial={reduced ? false : { opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-slate-700 pt-8 text-xs sm:flex-row"
+        >
           <p>&copy; {new Date().getFullYear()} Med Way. All Rights Reserved.</p>
           <p className="text-primary-light/80">Outstanding Customer Service · Integrity Pricing</p>
-        </div>
+        </motion.div>
       </Container>
     </footer>
   );

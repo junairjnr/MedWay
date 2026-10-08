@@ -1,4 +1,4 @@
-import { vitalImages } from "./images";
+import { trustedSectionImage, vitalImages } from "./images";
 
 export const siteContent = {
   promo: [
@@ -68,7 +68,7 @@ export const siteContent = {
   },
   trust: {
     headline: "Trusted by Hospitals, Clinics and Home Care Patients Alike!",
-    image: vitalImages.sections.trust,
+    image: trustedSectionImage,
     paragraphs: [
       "At Med Way, we pride ourselves on being the go-to source for top-quality medical equipment in Toronto, the GTA, and across Canada.",
       "Our extensive selection includes everything from mobility aids and home hospital beds to bathroom safety products.",
@@ -98,7 +98,7 @@ export const siteContent = {
     ],
     mission: {
       headline: "Reliable Products, Professional Service, and Customer Care",
-      image: vitalImages.sections.trust,
+      image: trustedSectionImage,
       paragraphs: [
         "At Medway, we understand that medical equipment is often needed during important and sometimes difficult times. That's why we focus on reliable products, timely delivery, professional service, and customer care.",
       ],

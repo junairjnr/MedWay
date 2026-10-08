@@ -2,7 +2,10 @@
 
 import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import { Search, SlidersHorizontal, X } from "lucide-react";
+import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
+import { MotionPresenceSwap } from "@/components/animations/MotionInView";
 import ProductCard from "@/components/products/ProductCard";
 import { products, Product, getProductDisplayName } from "@/data/products";
 import { categories, getCategoryBySlug } from "@/data/categories";
@@ -68,6 +71,7 @@ export default function ProductListing({
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<SortOption>("default");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const reduced = usePrefersReducedMotion();
 
   const categoryData = initialCategory ? getCategoryBySlug(initialCategory) : null;
   const bannerImage = categoryData ? categoryData.image : getCategoryImage("mobility-scooters");
@@ -235,41 +239,55 @@ export default function ProductListing({
               )}
             </div>
 
-            {filtered.length === 0 ? (
-              <div className="surface-card py-16 text-center">
-                <p className="text-muted mb-4">No products match your filters.</p>
-                <button
-                  type="button"
-                  onClick={() => { clearFilters(); setSidebarOpen(false); }}
-                  className="text-sm font-semibold text-primary mb-3"
-                >
-                  Reset all filters
-                </button>
-              </div>
-            ) : (
-              <MotionStagger
-                key={`${selectedCategory}-${search.trim()}-${sort}`}
-                className="product-grid"
-              >
-                {filtered.map((p) => (
-                  <MotionStaggerItem key={p.slug}>
-                    <ProductCard product={p} compact />
-                  </MotionStaggerItem>
-                ))}
-              </MotionStagger>
-            )}
+            <MotionPresenceSwap presenceKey={`${selectedCategory}-${search.trim()}-${sort}-${filtered.length}`}>
+              {filtered.length === 0 ? (
+                <div className="surface-card py-16 text-center">
+                  <p className="text-muted mb-4">No products match your filters.</p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      clearFilters();
+                      setSidebarOpen(false);
+                    }}
+                    className="text-sm font-semibold text-primary mb-3"
+                  >
+                    Reset all filters
+                  </button>
+                </div>
+              ) : (
+                <MotionStagger className="product-grid">
+                  {filtered.map((p) => (
+                    <MotionStaggerItem key={p.slug}>
+                      <ProductCard product={p} compact />
+                    </MotionStaggerItem>
+                  ))}
+                </MotionStagger>
+              )}
+            </MotionPresenceSwap>
           </div>
         </div>
       </Container>
 
-      {sidebarOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          <button
-            className="absolute inset-0 bg-navy/50 backdrop-blur-sm"
-            onClick={() => setSidebarOpen(false)}
-            aria-label="Close filters"
-          />
-          <div className="absolute inset-y-0 right-0 w-full max-w-sm bg-white shadow-2xl flex flex-col rounded-l-2xl overflow-hidden">
+      <AnimatePresence>
+        {sidebarOpen ? (
+          <div key="product-filter-drawer" className="fixed inset-0 z-50 lg:hidden">
+            <motion.button
+              type="button"
+              initial={reduced ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={reduced ? undefined : { opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="absolute inset-0 bg-navy/50 backdrop-blur-sm"
+              onClick={() => setSidebarOpen(false)}
+              aria-label="Close filters"
+            />
+            <motion.div
+              initial={reduced ? false : { x: "100%" }}
+              animate={{ x: 0 }}
+              exit={reduced ? undefined : { x: "100%" }}
+              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-y-0 right-0 w-full max-w-sm bg-white shadow-2xl flex flex-col rounded-l-2xl overflow-hidden"
+            >
             <div className="flex items-center justify-between px-5 py-4 border-b border-border bg-background">
               <h2 className="font-display font-bold text-lg">Filters</h2>
               <button onClick={() => setSidebarOpen(false)} className="touch-target rounded-lg hover:bg-white" aria-label="Close">
@@ -301,9 +319,10 @@ export default function ProductListing({
                 Show {filtered.length} Products
               </button>
             </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 }

@@ -1,6 +1,12 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
+
+const MotionLink = motion.create(Link);
 
 type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "white";
 type ButtonSize = "sm" | "md" | "lg";
@@ -49,6 +55,7 @@ export default function Button({
   fullWidth = false,
   showArrow = true,
 }: ButtonProps) {
+  const reduced = usePrefersReducedMotion();
   const base = [
     "inline-flex items-center justify-center font-semibold tracking-wide",
     "rounded-md transition-all duration-200 ease-out",
@@ -67,19 +74,33 @@ export default function Button({
     <ArrowRight className="w-4 h-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
   );
 
+  const motionProps = reduced
+    ? {}
+    : {
+        whileHover: { scale: 1.02, y: -1 },
+        whileTap: { scale: 0.98 },
+        transition: { type: "spring" as const, stiffness: 420, damping: 24 },
+      };
+
   if (href) {
     return (
-      <Link href={href} onClick={onClick} className={`group ${base}`}>
+      <MotionLink href={href} onClick={onClick} className={`group ${base}`} {...motionProps}>
         {children}
         {arrow}
-      </Link>
+      </MotionLink>
     );
   }
 
   return (
-    <button type={type} onClick={onClick} disabled={disabled} className={`group ${base}`}>
+    <motion.button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={`group ${base}`}
+      {...motionProps}
+    >
       {children}
       {arrow}
-    </button>
+    </motion.button>
   );
 }

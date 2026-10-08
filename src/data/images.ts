@@ -36,6 +36,20 @@ export const serviceCustomerSupportImage = "/assets/customer_support.png";
 /** Header Rentals, Sales & Service — Sales (client asset) */
 export const salesAreaImage = "/assets/sales_area.png";
 
+/** Why Choose Us — Quality Equipment (client asset) */
+export const qualityEquipmentImage = "/assets/quality_equipment.png";
+
+/** Why Choose Us — Built on Trust, Not Hype (client assets) */
+export const whyChooseUsImages = [
+  serviceConsultingImage,
+  qualityEquipmentImage,
+  serviceCustomerSupportImage,
+  serviceDeliveryImage,
+] as const;
+
+/** Trust section — “Trusted by Hospitals…” (client asset) */
+export const trustedSectionImage = "/assets/trusted.png";
+
 /** Verified Unsplash photo IDs (HTTP 200 tested) */
 const STOCK = {
   scooterHero: "photo-1773239627185-dca814dd0546",
@@ -124,14 +138,14 @@ export const vitalImages = {
     "invacare-patient-lift": [patientLiftImage],
   } as Record<string, string[]>,
   gallery: [
-    { src: U(STOCK.scooterHero, 1200), alt: "Mobility scooter outdoors", span: "large" as const },
-    { src: U(STOCK.wheelchairCare, 1200), alt: "Wheelchair care outdoors", span: "tall" as const },
-    { src: U(STOCK.scooterBuilding, 1200), alt: "Electric mobility scooter", span: "normal" as const },
-    { src: hospitalBedImage, alt: "Hospital bed", span: "normal" as const },
     { src: liftChairImage, alt: "Comfort lift recliner", span: "wide" as const },
-    { src: U(STOCK.wheelchairPath, 1200), alt: "Rollator walker support", span: "normal" as const },
-    { src: U(STOCK.medicalOffice, 1200), alt: "Medical supply showroom", span: "normal" as const },
     { src: U(STOCK.wheelchairPark, 1200), alt: "Wheelchair independence", span: "normal" as const },
+    { src: U(STOCK.scooterHero, 1200), alt: "Mobility scooter outdoors", span: "large" as const },
+    { src: hospitalBedImage, alt: "Hospital bed", span: "normal" as const },
+    { src: U(STOCK.wheelchairCare, 1200), alt: "Wheelchair care outdoors", span: "tall" as const },
+    { src: U(STOCK.wheelchairPath, 1200), alt: "Rollator walker support", span: "normal" as const },
+    { src: U(STOCK.scooterBuilding, 1200), alt: "Electric mobility scooter", span: "normal" as const },
+    // { src: U(STOCK.medicalOffice, 1200), alt: "Medical supply showroom", span: "normal" as const },
   ],
   sections: {
     salesArea: salesAreaImage,
@@ -231,6 +245,16 @@ export function getLiftChairPhotoClassName(extra = ""): string {
 /** Wide sales / browse banner — fit full artwork in short cards */
 export function getSalesAreaPhotoClassName(extra = ""): string {
   return `object-contain object-top bg-white px-1 py-1.5 sm:px-1.5 sm:py-2 ${extra}`.trim();
+}
+
+/** Why Choose Us card thumbs — show full client PNGs without crop */
+export function getWhyChooseUsPhotoClassName(extra = ""): string {
+  return `object-contain object-center bg-slate-50 p-0.5 sm:p-1 ${extra}`.trim();
+}
+
+/** Homepage trust block — full trusted.png artwork */
+export function getTrustedSectionPhotoClassName(extra = ""): string {
+  return `object-contain object-center bg-slate-50 p-2 sm:p-3 lg:p-4 ${extra}`.trim();
 }
 
 export function getPhotoCoverClassName(src: string, extra = ""): string {

@@ -10,7 +10,7 @@ export default function FeaturedProducts() {
   const featured = products.filter((p) => p.inStock).slice(0, 6);
 
   return (
-    <section className="relative overflow-hidden bg-navy py-8 sm:py-10 lg:py-11">
+    <section className="relative overflow-hidden bg-navy py-6 sm:py-8 lg:py-9">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_0%_100%,rgba(15,118,110,0.15),transparent_55%)]" aria-hidden />
       <Container className="relative">
         <MotionInView className="mb-5 flex flex-col items-start justify-between gap-3 sm:mb-6 sm:flex-row sm:items-end sm:gap-4">
@@ -30,10 +30,10 @@ export default function FeaturedProducts() {
           </Button>
         </MotionInView>
 
-        <MotionStagger className="product-grid-featured">
+        <MotionStagger className="product-grid-popular-row w-full">
           {featured.map((p) => (
             <MotionStaggerItem key={p.slug}>
-              <ProductCard product={p} compact featured />
+              <ProductCard product={p} compact featured strip />
             </MotionStaggerItem>
           ))}
         </MotionStagger>

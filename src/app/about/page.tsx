@@ -3,6 +3,7 @@ import PageHero from "@/components/ui/PageHero";
 import Container from "@/components/ui/Container";
 import { vitalImages } from "@/data/images";
 import { siteContent } from "@/data/site-content";
+import { getTrustedSectionPhotoClassName } from "@/data/images";
 
 export const metadata = {
   title: "About Us | Medway",
@@ -35,7 +36,7 @@ export default function AboutPage() {
               src={about.mission.image}
               alt={about.mission.headline}
               fill
-              className="object-cover"
+              className={getTrustedSectionPhotoClassName()}
               sizes="(max-width: 768px) 100vw, 400px"
             />
           </div>
