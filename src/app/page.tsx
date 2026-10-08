@@ -34,7 +34,7 @@ export default function HomePage() {
       <TestimonialsSection />
       {/* <BrandsSection /> */}
       {/* <ResourcesSection /> */}
-      <BottomCTA />
+      {/* <BottomCTA /> */}
       <ContactCTA />
     </>
   );

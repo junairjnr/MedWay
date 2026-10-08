@@ -11,12 +11,12 @@ export const servicesNavLinks = [
     href: "/products",
     label: "Sales",
     description: "Mobility & home care equipment — shipped across Canada.",
-    image: vitalImages.hero.store,
+    image: vitalImages.sections.salesArea,
   },
   {
     href: "/service",
     label: "Service",
     description: "Delivery, setup, repairs & expert support when you need it.",
-    image: vitalImages.sections.howItWorks.support,
+    image: vitalImages.sections.service,
   },
 ] as const;

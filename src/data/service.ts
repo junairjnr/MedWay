@@ -6,7 +6,7 @@ export const servicePage = {
     description:
       "From delivery and setup to repairs and ongoing support — Med Way helps you get the most from your medical equipment across Canada.",
     eyebrow: "Service",
-    image: vitalImages.sections.howItWorks.support,
+    image: vitalImages.sections.service,
   },
   intro:
     "Our service team supports every stage of your equipment journey. Whether you are renting, purchasing, or already using mobility and home care products, we provide dependable help backed by experienced specialists.",
@@ -17,7 +17,7 @@ export const servicePage = {
       description: "Professional delivery with setup where you need it.",
       detail:
         "We deliver medical equipment across Canada and provide white-glove setup in Toronto and the GTA. Our team ensures your equipment is placed, assembled, and ready to use safely at home.",
-      image: vitalImages.sections.howItWorks.deliver,
+      image: vitalImages.sections.serviceDelivery,
       highlights: ["Canada-wide shipping", "White-glove Toronto & GTA setup", "Safe home installation"],
     },
     {
@@ -26,7 +26,7 @@ export const servicePage = {
       description: "Keep your equipment working safely and reliably.",
       detail:
         "From routine maintenance to repair support, our technicians help extend the life of your mobility scooters, hospital beds, lift chairs, and other home medical equipment.",
-      image: vitalImages.hero.experts,
+      image: vitalImages.sections.serviceRepairing,
       highlights: ["Routine maintenance", "Repair coordination", "Safety-first approach"],
     },
     {
@@ -35,7 +35,7 @@ export const servicePage = {
       description: "Guidance to help you choose the right solution.",
       detail:
         "Not sure what you need? Our mobility specialists listen to your situation and recommend practical equipment options for rental or sales — with clear, honest guidance.",
-      image: vitalImages.sections.howItWorks.consult,
+      image: vitalImages.sections.serviceConsulting,
       highlights: ["Personalized recommendations", "Rental & sales guidance", "Friendly expert support"],
     },
     {
@@ -44,7 +44,7 @@ export const servicePage = {
       description: "Real people ready to help after your purchase or rental.",
       detail:
         "Questions about usage, accessories, or follow-up care? Our team is here with responsive support by phone, email, WhatsApp, and in-store assistance when you need it.",
-      image: vitalImages.sections.trust,
+      image: vitalImages.sections.serviceCustomerSupport,
       highlights: ["Phone, email & WhatsApp support", "Usage & care guidance", "Dedicated customer care"],
     },
   ],

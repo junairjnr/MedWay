@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, MapPin } from "lucide-react";
-import { getPhotoCoverClassName, vitalImages } from "@/data/images";
+import { getPhotoCoverClassName, isLiftChairAsset, vitalImages } from "@/data/images";
 import Container from "@/components/ui/Container";
 
 /** Bento spans — simplified on mobile to avoid layout breaks */
@@ -43,18 +43,22 @@ export default function ShowroomGallery() {
         <div className="grid grid-cols-2 gap-2 sm:gap-2.5 md:grid-cols-4 md:gap-3">
           {vitalImages.gallery.map((item, i) => (
             <motion.div
-              key={item.src}
+              key={`${item.alt}-${i}`}
               initial={{ opacity: 0, scale: 0.98 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ delay: i * 0.05, duration: 0.45 }}
-              className={`group relative overflow-hidden rounded-xl sm:rounded-2xl ${spanClass[item.span]}`}
+              className={`group relative overflow-hidden rounded-xl sm:rounded-2xl ${spanClass[item.span]} ${
+                isLiftChairAsset(item.src) ? "min-h-[180px] sm:min-h-[220px] md:min-h-[260px]" : ""
+              }`}
             >
               <Image
                 src={item.src}
                 alt={item.alt}
                 fill
-                className={`${getPhotoCoverClassName(item.src)} transition-transform duration-700 group-hover:scale-105`}
+                className={`${getPhotoCoverClassName(item.src)} ${
+                  isLiftChairAsset(item.src) ? "transition-transform duration-700 group-hover:scale-[1.03]" : "transition-transform duration-700 group-hover:scale-105"
+                }`}
                 sizes="(max-width: 768px) 50vw, 25vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/15 to-transparent" />

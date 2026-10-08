@@ -35,6 +35,7 @@ export default function RentalsPromoModal() {
   const [slideIndex, setSlideIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const showTimerRef = useRef<number | null>(null);
+  const dismissedUntilReloadRef = useRef(false);
   const touchStartX = useRef(0);
   const reduced = usePrefersReducedMotion();
   const slides = rentalsPromoSlides;
@@ -50,6 +51,7 @@ export default function RentalsPromoModal() {
   const scheduleShow = useCallback(() => {
     clearShowTimer();
     if (pathname === "/rentals") return;
+    if (dismissedUntilReloadRef.current) return;
 
     showTimerRef.current = window.setTimeout(() => {
       setOpen(true);
@@ -102,8 +104,9 @@ export default function RentalsPromoModal() {
   }, [open, reduced, nextSlide, slides.length]);
 
   function dismiss() {
+    dismissedUntilReloadRef.current = true;
     setOpen(false);
-    scheduleShow();
+    clearShowTimer();
   }
 
   function handleTouchStart(e: React.TouchEvent) {
@@ -152,7 +155,7 @@ export default function RentalsPromoModal() {
               onClick={(e) => e.stopPropagation()}
             >
               {!reduced && (
-                <div aria-hidden className="rentals-promo-shine absolute inset-0 z-[25] rounded-2xl" />
+                <div aria-hidden className="rentals-promo-seashore absolute inset-0 z-[25] rounded-2xl" />
               )}
 
             <div
@@ -161,13 +164,13 @@ export default function RentalsPromoModal() {
               onTouchEnd={handleTouchEnd}
             >
               {!reduced && slides.length > 1 && (
-                <div className="absolute inset-x-0 top-0 z-20 h-1 bg-white/25">
+                <div className="absolute inset-x-0 top-0 z-20 h-1 overflow-hidden bg-primary/15">
                   <motion.div
                     key={slideIndex}
-                    className="h-full w-full origin-left bg-gradient-to-r from-primary-light via-white to-primary-light"
+                    className="h-full w-full origin-left bg-gradient-to-r from-primary/40 via-primary-light/90 to-teal-200/80"
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
-                    transition={{ duration: SLIDE_AUTOPLAY_MS / 1000, ease: "linear" }}
+                    transition={{ duration: SLIDE_AUTOPLAY_MS / 1000, ease: [0.45, 0.05, 0.55, 0.95] }}
                   />
                 </div>
               )}

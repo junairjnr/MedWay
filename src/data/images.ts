@@ -5,6 +5,9 @@ export const siteLogo = "/assets/logo.png";
 export const siteLogoWidth = 1979;
 export const siteLogoHeight = 570;
 
+/** Browser tab favicon (client asset) */
+export const siteFavicon = "/assets/fav.jpg";
+
 /** Client-provided photography — Daily Living / Rehab (Super Pole) */
 export const rehabDailyImage = "/assets/rehab-image.jpg";
 export const rehabDailyImageSecond = "/assets/rehab-image-2.webp";
@@ -17,11 +20,21 @@ export const hospitalBedImage = "/assets/hospital%20bed%201.PNG";
 export const hospitalBedImageSecond = "/assets/hospital%20bed%202.PNG";
 export const liftChairImage = "/assets/lift%20chair.jpeg";
 
-/** Hero banner side panel video (client asset) */
-export const heroBannerVideo = "/assets/hero_video.mp4";
+/** Hero banner video (client asset) */
+export const heroBannerVideo = "/assets/hero%20video_new.mp4";
 
 /** Home intro / Our Story section video (client asset) */
-export const introStoryVideo = "/assets/our_story.mp4";
+export const introStoryVideo = "/assets/our_story_new.mp4";
+
+/** Service page & nav (client asset) */
+export const serviceImage = "/assets/service_image.jpeg";
+export const serviceConsultingImage = "/assets/Specialist_consulting_customer.png";
+export const serviceRepairingImage = "/assets/Technician_repairing_mobility.png";
+export const serviceDeliveryImage = "/assets/delivery.png";
+export const serviceCustomerSupportImage = "/assets/customer_support.png";
+
+/** Header Rentals, Sales & Service — Sales (client asset) */
+export const salesAreaImage = "/assets/sales_area.png";
 
 /** Verified Unsplash photo IDs (HTTP 200 tested) */
 const STOCK = {
@@ -121,6 +134,12 @@ export const vitalImages = {
     { src: U(STOCK.wheelchairPark, 1200), alt: "Wheelchair independence", span: "normal" as const },
   ],
   sections: {
+    salesArea: salesAreaImage,
+    service: serviceImage,
+    serviceConsulting: serviceConsultingImage,
+    serviceRepairing: serviceRepairingImage,
+    serviceDelivery: serviceDeliveryImage,
+    serviceCustomerSupport: serviceCustomerSupportImage,
     trust: U(STOCK.wheelchairCare, 1400),
     emotional: U(STOCK.seniorCare, 1400),
     about: U(STOCK.clinic, 1400),
@@ -138,10 +157,10 @@ export const vitalImages = {
     },
     contact: U(STOCK.pharmacy, 1400),
     howItWorks: {
-      browse: U(STOCK.scooterBuilding, 900),
-      consult: U(STOCK.doctor, 900),
-      deliver: U(STOCK.pharmacy, 900),
-      support: U(STOCK.medicalTeam, 900),
+      browse: salesAreaImage,
+      consult: serviceConsultingImage,
+      deliver: serviceDeliveryImage,
+      support: serviceCustomerSupportImage,
     },
   },
   brands: {
@@ -187,13 +206,43 @@ export function isHospitalBedAsset(src: string): boolean {
   return lower.includes("hospital%20bed") || lower.includes("hospital bed");
 }
 
+export function isLiftChairAsset(src: string): boolean {
+  if (src === liftChairImage) return true;
+  const lower = src.toLowerCase();
+  return lower.includes("lift%20chair") || lower.includes("lift chair");
+}
+
+export function isSalesAreaAsset(src: string): boolean {
+  if (src === salesAreaImage) return true;
+  const lower = src.toLowerCase();
+  return lower.includes("sales_area");
+}
+
 /** Full-bleed cover tuned for wide hospital bed product photos */
 export function getHospitalBedPhotoClassName(extra = ""): string {
   return `object-cover object-[50%_78%] sm:object-[50%_82%] ${extra}`.trim();
 }
 
+/** Portrait product shot on white — show full chair without tight crop */
+export function getLiftChairPhotoClassName(extra = ""): string {
+  return `object-contain object-center bg-white p-2 sm:p-3 ${extra}`.trim();
+}
+
+/** Wide sales / browse banner — fit full artwork in short cards */
+export function getSalesAreaPhotoClassName(extra = ""): string {
+  return `object-contain object-top bg-white px-1 py-1.5 sm:px-1.5 sm:py-2 ${extra}`.trim();
+}
+
 export function getPhotoCoverClassName(src: string, extra = ""): string {
   if (isHospitalBedAsset(src)) return getHospitalBedPhotoClassName(extra);
+  if (isLiftChairAsset(src)) return getLiftChairPhotoClassName(extra);
+  if (isSalesAreaAsset(src)) return getSalesAreaPhotoClassName(extra);
+  return `object-cover object-center ${extra}`.trim();
+}
+
+/** How It Works step thumbnails */
+export function getHowItWorksStepPhotoClassName(src: string, extra = ""): string {
+  if (isSalesAreaAsset(src)) return getSalesAreaPhotoClassName(extra);
   return `object-cover object-center ${extra}`.trim();
 }
 

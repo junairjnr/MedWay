@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Search, MessageCircle, Truck, HeartHandshake } from "lucide-react";
-import { vitalImages } from "@/data/images";
+import { getHowItWorksStepPhotoClassName, vitalImages } from "@/data/images";
 import Section, { SectionHeader } from "@/components/ui/Section";
 
 const steps = [
@@ -60,7 +60,7 @@ export default function HowItWorks() {
                   src={step.image}
                   alt={step.title}
                   fill
-                  className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  className={`${getHowItWorksStepPhotoClassName(step.image, "transition-transform duration-500 group-hover:scale-[1.03]")}`}
                   sizes="(max-width: 640px) 100vw, 25vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
