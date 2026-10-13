@@ -63,7 +63,7 @@ export default function Footer() {
               </a>
               <p className="flex items-start gap-2.5">
                 <MapPin className="mt-0.5 h-4 w-4 text-primary-light shrink-0" />
-                Toronto, ON — Canada-wide shipping
+                {siteContact.address} — Canada-wide shipping
               </p>
             </div>
           </MotionStaggerItem>

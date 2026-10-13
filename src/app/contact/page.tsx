@@ -30,7 +30,7 @@ type ContactCard = {
 const contactItems: ContactCard[] = [
   { label: "Email", value: siteContact.email, href: mailtoHref(), icon: Mail },
   { label: "Phone & WhatsApp", value: siteContact.phone, icon: Phone, variant: "phone-whatsapp" },
-  { label: "Location", value: "123 Healthcare Blvd, Toronto, ON", icon: MapPin },
+  { label: "Location", value: siteContact.address, icon: MapPin },
   { label: "Hours", value: "Mon–Fri 9am–6pm · Sat 10am–4pm", icon: Clock },
 ];
 

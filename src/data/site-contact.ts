@@ -4,6 +4,8 @@ export const siteContact = {
   phoneWhatsApp: "14168304995",
   email: "medwaymobilty@outlook.com",
   emailClass: "text-xs sm:text-sm break-all lowercase",
+  /** Physical location — Contact page, footer, etc. */
+  address: "31 Lake Louise dr Brampton",
 } as const;
 
 export const whatsAppDefaultMessage =
