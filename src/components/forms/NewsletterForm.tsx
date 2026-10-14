@@ -3,7 +3,12 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
-import { getEmailJsErrorMessage, isEmailJsConfigured, sendEmailJs } from "@/lib/emailjs";
+import {
+  buildNewsletterEmailJsParams,
+  getEmailJsErrorMessage,
+  isEmailJsConfigured,
+  sendEmailJs,
+} from "@/lib/emailjs";
 
 interface NewsletterFormProps {
   variant?: "inline" | "footer" | "hero" | "section";
@@ -21,28 +26,21 @@ export default function NewsletterForm({ variant = "inline" }: NewsletterFormPro
 
     if (!isEmailJsConfigured("newsletter")) {
       setStatus("error");
-      setMessage("Newsletter signup is not configured yet. Please try again later.");
+      setMessage("Email service is not configured yet. Please call or WhatsApp us directly.");
       return;
     }
 
     try {
-      await sendEmailJs("newsletter", {
-        from_name: "Newsletter Subscriber",
-        from_email: email,
-        reply_to: email,
-        subject: "Newsletter Subscription",
-        category: "Newsletter",
-        product_name: "Newsletter",
-        message: `New newsletter subscription request: ${email}`,
-        updates: "Yes",
-      });
+      await sendEmailJs("newsletter", buildNewsletterEmailJsParams(email));
 
       setStatus("success");
-      setMessage("Thank you for subscribing!");
+      setMessage("Thank you for subscribing! We've received your request.");
       setEmail("");
     } catch (error) {
       setStatus("error");
-      setMessage(getEmailJsErrorMessage(error));
+      setMessage(
+        `${getEmailJsErrorMessage(error)} Please try again or contact us by phone or WhatsApp.`
+      );
     }
   }
 
@@ -84,7 +82,15 @@ export default function NewsletterForm({ variant = "inline" }: NewsletterFormPro
             animate={{ opacity: 1, y: 0, height: "auto" }}
             exit={reduced ? undefined : { opacity: 0, y: -6, height: 0 }}
             transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-            className={`mt-2 overflow-hidden text-sm ${status === "success" ? "text-green-400" : "text-red-400"}`}
+            className={`mt-2 overflow-hidden text-sm ${
+              status === "success"
+                ? isFooter || isHero
+                  ? "text-green-400"
+                  : "text-green-600"
+                : isFooter || isHero
+                  ? "text-red-400"
+                  : "text-red-600"
+            }`}
           >
             {message}
           </motion.p>

@@ -43,6 +43,42 @@ function getEmailJsErrorMessage(error: unknown): string {
   return "Failed to send email.";
 }
 
+function enrichEmailJsParams(templateParams: Record<string, string>): Record<string, string> {
+  const fromName = templateParams.from_name ?? templateParams.name ?? "";
+  const fromEmail = templateParams.from_email ?? templateParams.email ?? "";
+  const subject = templateParams.subject ?? templateParams.title ?? "";
+  const message = templateParams.message ?? templateParams.content ?? "";
+
+  return {
+    to_email: siteContact.email,
+    ...templateParams,
+    name: fromName,
+    user_name: fromName,
+    from_name: fromName,
+    email: fromEmail,
+    user_email: fromEmail,
+    from_email: fromEmail,
+    title: subject,
+    subject,
+    content: message,
+    message,
+  };
+}
+
+/** Newsletter signup — same EmailJS flow and template fallback as contact. */
+export function buildNewsletterEmailJsParams(subscriberEmail: string): Record<string, string> {
+  return {
+    from_name: "Newsletter Subscriber",
+    from_email: subscriberEmail,
+    reply_to: subscriberEmail,
+    subject: "Newsletter Subscription",
+    category: "Newsletter",
+    product_name: "Newsletter",
+    message: `New newsletter subscription: ${subscriberEmail}`,
+    updates: "Yes",
+  };
+}
+
 export async function sendEmailJs(
   template: EmailJsTemplate,
   templateParams: Record<string, string>
@@ -58,10 +94,7 @@ export async function sendEmailJs(
   await emailjs.send(
     serviceId,
     templateId,
-    {
-      to_email: siteContact.email,
-      ...templateParams,
-    },
+    enrichEmailJsParams(templateParams),
     { publicKey }
   );
 }
