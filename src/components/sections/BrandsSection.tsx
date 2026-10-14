@@ -26,7 +26,7 @@ function BrandRow({ items, reverse = false }: { items: { name: string; logo: str
 
 export default function BrandsSection() {
   const brandEntries = brands
-    .filter((b) => b !== "Med Way" && b !== "Breg" && b !== "Enovis" && b !== "Wellell")
+    .filter((b) => b !== "Medway" && b !== "Breg" && b !== "Enovis" && b !== "Wellell")
     .map((name) => ({
       name,
       logo: vitalImages.brands[name as keyof typeof vitalImages.brands] || null,

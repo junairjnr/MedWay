@@ -12,7 +12,7 @@ export default function WhyChooseUs() {
       <Container>
         <div className="mb-10 text-center sm:mb-12">
           <p className="section-accent mx-auto justify-center text-xs font-bold uppercase tracking-[0.18em] text-primary mb-3">
-            Why Med Way
+            Why Medway
           </p>
           <h2 className="font-display text-2xl font-extrabold tracking-tight sm:text-3xl lg:text-4xl">
             Built on Trust, Not Hype

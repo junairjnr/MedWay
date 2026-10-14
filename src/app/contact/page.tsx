@@ -6,8 +6,8 @@ import ContactForm from "@/components/forms/ContactForm";
 import { siteContact, mailtoHref, whatsAppHref } from "@/data/site-contact";
 
 export const metadata = {
-  title: "Contact | Med Way",
-  description: "Contact Med Way for medical equipment enquiries, rentals, and support.",
+  title: "Contact | Medway",
+  description: "Contact Medway for medical equipment enquiries, rentals, and support.",
 };
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -99,7 +99,7 @@ export default function ContactPage() {
         description="Our mobility specialists are ready to help you find the right equipment."
         eyebrow="Contact"
         image={vitalImages.sections.contact}
-        imageAlt="Med Way showroom"
+        imageAlt="Medway showroom"
       />
       <Container className="page-content">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10">

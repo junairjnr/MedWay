@@ -5,7 +5,7 @@ export const solutions = [
     slug: "rentals",
     title: "Rental / Temporary Needs",
     description: "Flexible equipment solutions where applicable.",
-    detail: "Med Way is Toronto's go-to spot for Home Health Care Product Rentals and Mobility Equipment spanning the whole GTA. We quickly deliver, unbox and set-up rentals with professional expeditious service.",
+    detail: "Medway is Toronto's go-to spot for Home Health Care Product Rentals and Mobility Equipment spanning the whole GTA. We quickly deliver, unbox and set-up rentals with professional expeditious service.",
     image: vitalImages.sections.solutions.rentals,
   },
   {

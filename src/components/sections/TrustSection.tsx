@@ -46,7 +46,7 @@ export default function TrustSection() {
             transition={{ duration: 0.6 }}
             className="order-1 lg:order-2"
           >
-            <p className="section-accent text-xs font-bold uppercase tracking-[0.18em] text-primary mb-4">Why Med Way</p>
+            <p className="section-accent text-xs font-bold uppercase tracking-[0.18em] text-primary mb-4">Why Medway</p>
             <h2 className="font-display text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl lg:text-4xl">
               {trust.headline}
             </h2>

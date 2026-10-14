@@ -42,7 +42,7 @@ export default function Footer() {
             <div className="mb-5">
               <Image
                 src={siteLogo}
-                alt="Med Way"
+                alt="Medway"
                 width={siteLogoWidth}
                 height={siteLogoHeight}
                 quality={100}
@@ -107,7 +107,7 @@ export default function Footer() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-slate-700 pt-8 text-xs sm:flex-row"
         >
-          <p>&copy; {new Date().getFullYear()} Med Way. All Rights Reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Medway. All Rights Reserved.</p>
           <p className="text-primary-light/80">Outstanding Customer Service · Integrity Pricing</p>
         </motion.div>
       </Container>

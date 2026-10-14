@@ -18,6 +18,6 @@ export const brands = [
   "Robooter / Ally",
   "Rotec",
   "Sunrise Medical",
-  "Med Way",
+  "Medway",
   "Wellell",
 ];

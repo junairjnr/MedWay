@@ -33,7 +33,7 @@ export const resources = [
     description: "Simple ways to improve comfort and accessibility.",
     image: vitalImages.sections.resources.home,
     content: [
-      "At Med Way, we pride ourselves on being the go-to source for top-quality medical equipment in Toronto, the GTA, and across Canada. Our extensive selection includes everything from mobility aids and home hospital beds to bathroom safety products.",
+      "At Medway, we pride ourselves on being the go-to source for top-quality medical equipment in Toronto, the GTA, and across Canada. Our extensive selection includes everything from mobility aids and home hospital beds to bathroom safety products.",
       "Creating a safe home environment starts with the right equipment. Hospital beds like the Elite and Symphony models provide comfort and positioning for long-term care. Bathroom safety products including grab bars, shower chairs, and transfer benches reduce fall risk.",
       "Whether you're a medical professional assisting patients in a healthcare setting or an individual seeking essential medical supplies for yourself or a loved one, we've got you covered.",
     ],
@@ -45,7 +45,7 @@ export const resources = [
     description: "A practical guide to choosing the right solution.",
     image: vitalImages.sections.resources.guide,
     content: [
-      "For the last 16 years, the team at Med Way has taken pride in being Canada's #1 Medical Equipment Supplier and independent source for Home Health Care Products.",
+      "For the last 16 years, the team at Medway has taken pride in being Canada's #1 Medical Equipment Supplier and independent source for Home Health Care Products.",
       "Mobility equipment spans a wide range — from rollators and walkers for mild support, to scooters and power wheelchairs for independent travel, to hospital beds and patient lifts for home care environments.",
       "Our dedicated mobility experts are passionate about helping patients, their families and caregivers to find comfort and independence with their medical equipment supplies. Contact us for personalized guidance.",
     ],

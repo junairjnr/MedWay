@@ -363,7 +363,7 @@ export const products: Product[] = [
   {
     slug: "home-rehab-daily-living",
     name: "Super Pole Sales and Installation",
-    brand: "Med Way",
+    brand: "Medway",
     sku: "MED-REHAB-001",
     category: "daily-living",
     inStock: true,
@@ -372,7 +372,7 @@ export const products: Product[] = [
     shortDescription:
       "Super Pole Sales and Installation — professional setup for safe standing support at home.",
     description:
-      "Floor-to-ceiling super poles help with transfers and standing support in bedrooms, bathrooms, and living areas. Med Way supplies quality poles and provides installation guidance and service in Toronto, the GTA, and across Canada.",
+      "Floor-to-ceiling super poles help with transfers and standing support in bedrooms, bathrooms, and living areas. Medway supplies quality poles and provides installation guidance and service in Toronto, the GTA, and across Canada.",
     whoItsFor:
       "Seniors, recovery patients, and caregivers who want secure grab-and-stand support without major bathroom renovations.",
     benefits: [

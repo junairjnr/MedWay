@@ -111,7 +111,7 @@ export default function Header() {
           <Link href="/" className="relative z-10 flex w-auto shrink-0 items-center self-center leading-none group py-1 lg:py-0">
             <Image
               src={siteLogo}
-              alt="Med Way"
+              alt="Medway"
               width={siteLogoWidth}
               height={siteLogoHeight}
               quality={100}

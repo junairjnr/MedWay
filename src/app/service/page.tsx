@@ -4,7 +4,7 @@ import ServicePageSections from "@/components/service/ServicePageSections";
 import { servicePage } from "@/data/service";
 
 export const metadata = {
-  title: "Service | Med Way",
+  title: "Service | Medway",
   description: "Medical equipment service — delivery, setup, repairs, maintenance, and expert support across Canada.",
 };
 

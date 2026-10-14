@@ -42,7 +42,7 @@ export default function HeroCarousel() {
           loop
           playsInline
           preload="auto"
-          aria-label="Med Way medical equipment and mobility solutions"
+          aria-label="Medway medical equipment and mobility solutions"
           />
         </motion.div>
       </AnimatePresence>

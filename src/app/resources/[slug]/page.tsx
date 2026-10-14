@@ -11,8 +11,8 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/resources/[slug]">) {
   const { slug } = await params;
   const r = getResourceBySlug(slug);
-  if (!r) return { title: "Not Found | Med Way" };
-  return { title: `${r.title} | Med Way`, description: r.description };
+  if (!r) return { title: "Not Found | Medway" };
+  return { title: `${r.title} | Medway`, description: r.description };
 }
 
 export default async function ResourcePage({ params }: PageProps<"/resources/[slug]">) {

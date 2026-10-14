@@ -4,7 +4,7 @@ export const servicePage = {
   hero: {
     title: "Sales, Service & Support",
     description:
-      "From delivery and setup to repairs and ongoing support — Med Way helps you get the most from your medical equipment across Canada.",
+      "From delivery and setup to repairs and ongoing support — Medway helps you get the most from your medical equipment across Canada.",
     eyebrow: "Service",
     image: vitalImages.sections.service,
   },

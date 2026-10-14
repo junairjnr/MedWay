@@ -5,7 +5,7 @@ import { vitalImages } from "@/data/images";
 import { solutions } from "@/data/solutions";
 
 export const metadata = {
-  title: "Solutions | Med Way",
+  title: "Solutions | Medway",
   description: "Complete mobility solutions — personal mobility, home care, professional care, and rentals.",
 };
 

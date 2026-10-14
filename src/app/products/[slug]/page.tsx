@@ -9,9 +9,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/products/[slug]">) {
   const { slug } = await params;
   const product = getProductBySlug(slug);
-  if (!product) return { title: "Product Not Found | Med Way" };
+  if (!product) return { title: "Product Not Found | Medway" };
   return {
-    title: `${getProductDisplayName(product)} | Med Way`,
+    title: `${getProductDisplayName(product)} | Medway`,
     description: product.shortDescription,
   };
 }

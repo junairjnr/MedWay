@@ -9,8 +9,8 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/categories/[slug]">) {
   const { slug } = await params;
   const cat = getCategoryBySlug(slug);
-  if (!cat) return { title: "Category Not Found | Med Way" };
-  return { title: `${cat.name} | Med Way`, description: cat.description };
+  if (!cat) return { title: "Category Not Found | Medway" };
+  return { title: `${cat.name} | Medway`, description: cat.description };
 }
 
 export default async function CategoryPage({ params }: PageProps<"/categories/[slug]">) {

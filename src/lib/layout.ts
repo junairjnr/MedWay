@@ -1,4 +1,4 @@
-/** Shared horizontal layout gutters (aligned with store.skynetqatar.com). */
+/** Shared horizontal layout gutters. */
 export const layoutMaxWidthClass = "max-w-[var(--layout-max-width)]";
 
 export const layoutGutterClass = "px-[var(--layout-gutter)]";

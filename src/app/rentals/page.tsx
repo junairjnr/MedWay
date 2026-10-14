@@ -6,7 +6,7 @@ import { rentalsPage } from "@/data/rentals";
 import { getPhotoCoverClassName } from "@/data/images";
 
 export const metadata = {
-  title: "Rentals | Med Way",
+  title: "Rentals | Medway",
   description: "Medical equipment and mobility rentals for home care — hospital beds, scooters, wheelchairs, and more.",
 };
 

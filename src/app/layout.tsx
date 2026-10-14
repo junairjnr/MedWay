@@ -20,11 +20,11 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Med Way | Home Medical Equipment Supplies & Rentals in Toronto, Canada",
+  title: "Medway | Home Medical Equipment Supplies & Rentals in Toronto, Canada",
   description:
     "Canada's Leading Medical Equipment Supplier & Rental Company. Outstanding Customer Service. Integrity Pricing.",
   openGraph: {
-    title: "Med Way | Medical Equipment & Mobility",
+    title: "Medway | Medical Equipment & Mobility",
     description: "Canada's trusted home health care and mobility experts.",
     type: "website",
   },

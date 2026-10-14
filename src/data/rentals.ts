@@ -9,7 +9,7 @@ export const rentalsPage = {
     image: hospitalBedImage,
   },
   intro:
-    "Med Way offers reliable medical equipment rentals when you need quality solutions without a long-term purchase. Our team delivers, sets up, and supports your rental so you can focus on comfort and recovery at home.",
+    "Medway offers reliable medical equipment rentals when you need quality solutions without a long-term purchase. Our team delivers, sets up, and supports your rental so you can focus on comfort and recovery at home.",
   sections: [
     {
       slug: "hospital-beds",

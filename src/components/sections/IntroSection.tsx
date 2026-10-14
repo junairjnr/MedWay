@@ -95,7 +95,7 @@ export default function IntroSection() {
             {/* <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-black/5">
               <Image
                 src={intro.image}
-                alt="Med Way home health care stores Canada"
+                alt="Medway home health care stores Canada"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -113,7 +113,7 @@ export default function IntroSection() {
                   loop
                   playsInline
                   preload="auto"
-                  aria-label="Med Way home health care stores Canada"
+                  aria-label="Medway home health care stores Canada"
                   initial={reduced ? false : { opacity: 0, scale: 1.02 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={reduced ? undefined : { opacity: 0 }}
