@@ -5,10 +5,9 @@ import { vitalImages } from "@/data/images";
 import ContactForm from "@/components/forms/ContactForm";
 import { siteContact, mailtoHref, whatsAppHref } from "@/data/site-contact";
 
-export const metadata = {
-  title: "Contact | Medway",
-  description: "Contact Medway for medical equipment enquiries, rentals, and support.",
-};
+import { staticPages } from "@/lib/seo";
+
+export const metadata = staticPages.contact;
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (

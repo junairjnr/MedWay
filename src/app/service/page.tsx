@@ -3,10 +3,9 @@ import Container from "@/components/ui/Container";
 import ServicePageSections from "@/components/service/ServicePageSections";
 import { servicePage } from "@/data/service";
 
-export const metadata = {
-  title: "Service | Medway",
-  description: "Medical equipment service — delivery, setup, repairs, maintenance, and expert support across Canada.",
-};
+import { staticPages } from "@/lib/seo";
+
+export const metadata = staticPages.service;
 
 export default function ServicePage() {
   const { hero, intro, sections } = servicePage;

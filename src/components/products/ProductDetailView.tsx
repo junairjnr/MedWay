@@ -14,12 +14,15 @@ import Container from "@/components/ui/Container";
 import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
 import { getCategoryBySlug } from "@/data/categories";
 import { getPhotoCoverClassName } from "@/data/images";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import type { BreadcrumbItem } from "@/lib/seo";
 
 interface ProductDetailViewProps {
   product: Product;
+  breadcrumbs?: BreadcrumbItem[];
 }
 
-export default function ProductDetailView({ product }: ProductDetailViewProps) {
+export default function ProductDetailView({ product, breadcrumbs }: ProductDetailViewProps) {
   const [activeImage, setActiveImage] = useState(0);
   const [showEnquiry, setShowEnquiry] = useState(false);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -60,9 +63,13 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
   return (
     <div className="pt-14 lg:pt-[5.5rem] pb-[calc(4.5rem+env(safe-area-inset-bottom))] lg:pb-12">
       <Container className="py-4 sm:py-6">
-        <Link href="/products" className="inline-flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors min-h-11">
-          <ArrowLeft className="w-4 h-4" /> Back to Products
-        </Link>
+        {breadcrumbs && breadcrumbs.length > 0 ? (
+          <Breadcrumbs items={breadcrumbs} />
+        ) : (
+          <Link href="/products" className="inline-flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors min-h-11">
+            <ArrowLeft className="w-4 h-4" /> Back to Products
+          </Link>
+        )}
       </Container>
 
       <Container className="pb-8 sm:pb-12 lg:pb-16">
@@ -119,7 +126,16 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
             style={detailsMaxHeight ? { maxHeight: detailsMaxHeight } : undefined}
             className="product-detail-content-scroll w-full min-w-0 lg:w-1/2 lg:min-h-0 lg:overflow-y-auto lg:overscroll-contain lg:pr-1"
           >
-            <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">{category?.name || product.category}</p>
+            {category ? (
+              <Link
+                href={`/categories/${category.slug}`}
+                className="text-xs font-semibold uppercase tracking-widest text-primary mb-2 inline-block hover:underline"
+              >
+                {category.name}
+              </Link>
+            ) : (
+              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">{product.category}</p>
+            )}
             <h1 className="font-display font-extrabold text-3xl md:text-4xl tracking-tight mb-4">{displayName}</h1>
             <p className="text-sm text-muted mb-6">SKU: {product.sku}</p>
 

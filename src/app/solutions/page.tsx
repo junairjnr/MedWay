@@ -4,10 +4,9 @@ import Container from "@/components/ui/Container";
 import { vitalImages } from "@/data/images";
 import { solutions } from "@/data/solutions";
 
-export const metadata = {
-  title: "Solutions | Medway",
-  description: "Complete mobility solutions — personal mobility, home care, professional care, and rentals.",
-};
+import { staticPages } from "@/lib/seo";
+
+export const metadata = staticPages.solutions;
 
 export default function SolutionsPage() {
   return (

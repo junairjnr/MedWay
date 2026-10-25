@@ -12,12 +12,15 @@ import TrustSection from "@/components/sections/TrustSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 // import BrandsSection from "@/components/sections/BrandsSection";
 // import ResourcesSection from "@/components/sections/ResourcesSection";
-import BottomCTA from "@/components/sections/BottomCTA";
 import ContactCTA from "@/components/sections/ContactCTA";
+import { staticPages } from "@/lib/seo";
+
+export const metadata = staticPages.home;
 
 export default function HomePage() {
   return (
     <>
+      <h1 className="sr-only">Medical Equipment Rentals &amp; Mobility Products in Toronto</h1>
       <div className="pt-14 lg:pt-[5.5rem]">
         <PromoTicker />
         <HeroCarousel />

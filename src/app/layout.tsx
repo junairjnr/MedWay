@@ -6,6 +6,8 @@ import Footer from "@/components/layout/Footer";
 import MobileEnquireBar from "@/components/layout/MobileEnquireBar";
 import MainShell from "@/components/layout/MainShell";
 import RentalsPromoModal from "@/components/promo/RentalsPromoModal";
+import JsonLd from "@/components/seo/JsonLd";
+import { organizationJsonLd, rootMetadata, webSiteJsonLd } from "@/lib/seo";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -19,21 +21,13 @@ const manrope = Manrope({
   weight: ["600", "700", "800"],
 });
 
-export const metadata: Metadata = {
-  title: "Medway | Home Medical Equipment Supplies & Rentals in Toronto, Canada",
-  description:
-    "Canada's Leading Medical Equipment Supplier & Rental Company. Outstanding Customer Service. Integrity Pricing.",
-  openGraph: {
-    title: "Medway | Medical Equipment & Mobility",
-    description: "Canada's trusted home health care and mobility experts.",
-    type: "website",
-  },
-};
+export const metadata: Metadata = rootMetadata();
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${manrope.variable} h-full overflow-x-hidden`}>
+    <html lang="en-CA" className={`${inter.variable} ${manrope.variable} h-full overflow-x-hidden`}>
       <body className="min-h-full flex flex-col antialiased overflow-x-hidden">
+        <JsonLd data={[organizationJsonLd(), webSiteJsonLd()]} />
         <Header />
         <MainShell>{children}</MainShell>
         <Footer />

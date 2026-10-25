@@ -5,11 +5,9 @@ import { vitalImages } from "@/data/images";
 import { siteContent } from "@/data/site-content";
 import { getTrustedSectionPhotoClassName } from "@/data/images";
 
-export const metadata = {
-  title: "About Us | Medway",
-  description:
-    "Medway is a trusted mobility and home medical equipment company dedicated to comfort, safety, mobility, and independence at home.",
-};
+import { staticPages } from "@/lib/seo";
+
+export const metadata = staticPages.about;
 
 export default function AboutPage() {
   const { about } = siteContent;

@@ -12,6 +12,8 @@ import { categories, getCategoryBySlug } from "@/data/categories";
 import { getCategoryImage, getPhotoCoverClassName } from "@/data/images";
 import Container from "@/components/ui/Container";
 import { MotionStagger, MotionStaggerItem } from "@/components/animations/MotionInView";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import type { BreadcrumbItem } from "@/lib/seo";
 
 type SortOption = "default" | "name-az" | "name-za";
 
@@ -60,12 +62,14 @@ interface ProductListingProps {
   initialCategory?: string;
   title?: string;
   description?: string;
+  breadcrumbs?: BreadcrumbItem[];
 }
 
 export default function ProductListing({
   initialCategory,
   title = "All Products",
   description = "Find the right mobility solution for your everyday journey.",
+  breadcrumbs,
 }: ProductListingProps) {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory || "");
   const [search, setSearch] = useState("");
@@ -136,8 +140,11 @@ export default function ProductListing({
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/70 to-navy/40" />
-        <Container className="relative z-10 h-full flex items-end">
+        <Container className="relative z-10 h-full flex flex-col justify-end">
           <div className="pb-6 sm:pb-8 lg:pb-10 w-full">
+            {breadcrumbs && breadcrumbs.length > 0 && (
+              <Breadcrumbs items={breadcrumbs} className="mb-3 text-white/70 [&_a]:text-white/80 [&_a:hover]:text-white [&_span]:text-white" />
+            )}
             <p className="section-accent text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-primary-light mb-2">
               Catalogue
             </p>

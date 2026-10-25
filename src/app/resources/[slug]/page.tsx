@@ -1,18 +1,21 @@
-import Link from "next/link";
 import Image from "next/image";
 import { resources, getResourceBySlug } from "@/data/resources";
 import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import JsonLd from "@/components/seo/JsonLd";
+import { breadcrumbListJsonLd, resourcePageMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
 
 export function generateStaticParams() {
   return resources.map((r) => ({ slug: r.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/resources/[slug]">) {
+export async function generateMetadata({ params }: PageProps<"/resources/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const r = getResourceBySlug(slug);
-  if (!r) return { title: "Not Found | Medway" };
-  return { title: `${r.title} | Medway`, description: r.description };
+  if (!r) return { title: "Not Found" };
+  return resourcePageMetadata(r);
 }
 
 export default async function ResourcePage({ params }: PageProps<"/resources/[slug]">) {
@@ -20,10 +23,17 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const r = getResourceBySlug(slug);
   if (!r) notFound();
 
+  const breadcrumbs = [
+    { name: "Home", href: "/" },
+    { name: "Resources", href: "/resources" },
+    { name: r.title },
+  ];
+
   return (
     <article className="pt-24 pb-16">
+      <JsonLd data={breadcrumbListJsonLd(breadcrumbs)} />
       <Container className="max-w-3xl">
-        <Link href="/resources" className="text-sm text-muted hover:text-primary mb-8 inline-block">← Back to Resources</Link>
+        <Breadcrumbs items={breadcrumbs} className="mb-6" />
         <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">{r.category}</p>
         <h1 className="font-display font-extrabold text-3xl md:text-5xl tracking-tight mb-8">{r.title}</h1>
         <div className="relative aspect-[16/9] overflow-hidden mb-12">

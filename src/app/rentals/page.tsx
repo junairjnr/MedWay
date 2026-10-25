@@ -5,10 +5,9 @@ import Button from "@/components/ui/Button";
 import { rentalsPage } from "@/data/rentals";
 import { getPhotoCoverClassName } from "@/data/images";
 
-export const metadata = {
-  title: "Rentals | Medway",
-  description: "Medical equipment and mobility rentals for home care — hospital beds, scooters, wheelchairs, and more.",
-};
+import { staticPages } from "@/lib/seo";
+
+export const metadata = staticPages.rentals;
 
 export default function RentalsPage() {
   const { hero, intro, sections } = rentalsPage;

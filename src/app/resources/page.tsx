@@ -6,10 +6,9 @@ import Container from "@/components/ui/Container";
 import { resources } from "@/data/resources";
 import { vitalImages } from "@/data/images";
 
-export const metadata = {
-  title: "Resources | Medway",
-  description: "Mobility guides, buying guides, and educational articles.",
-};
+import { staticPages } from "@/lib/seo";
+
+export const metadata = staticPages.resources;
 
 export default function ResourcesPage() {
   return (
