@@ -22,6 +22,8 @@ export const siteSeo = {
     "Medway provides medical equipment rentals, mobility products, home healthcare equipment and medical supplies in Toronto, the GTA and across Canada.",
   locale: "en_CA",
   ogImagePath: "/opengraph-image",
+  /** Google Search Console HTML tag (public in page source). */
+  googleSiteVerification: "aLG0JBKJKXP0r2MVGMP-xQaXgu_rCN7OrlrFi2L9xME",
 } as const;
 
 export function absoluteUrl(path: string): string {
@@ -213,7 +215,8 @@ export function productJsonLd(product: Product) {
 }
 
 export function rootMetadata(): Metadata {
-  const googleVerification = process.env.GOOGLE_SITE_VERIFICATION?.trim();
+  const googleVerification =
+    process.env.GOOGLE_SITE_VERIFICATION?.trim() || siteSeo.googleSiteVerification;
 
   return {
     metadataBase: new URL(getSiteUrl()),
