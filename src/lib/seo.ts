@@ -19,11 +19,27 @@ export const siteSeo = {
   defaultTitle: "Medway | Medical Equipment Rentals & Mobility Products in Toronto",
   titleTemplate: "%s | Medway",
   defaultDescription:
-    "Medway provides medical equipment rentals, mobility products, home healthcare equipment and medical supplies in Toronto, the GTA and across Canada.",
+    "Medway offers hospital bed and medical bed rentals, sales, installation and service; mobility scooter rentals, sales, battery change and repair; wheelchair rentals, sales and service — Toronto, GTA and Canada.",
   locale: "en_CA",
   ogImagePath: "/opengraph-image",
   /** Google Search Console HTML tag (public in page source). */
   googleSiteVerification: "aLG0JBKJKXP0r2MVGMP-xQaXgu_rCN7OrlrFi2L9xME",
+  /** Core offerings — used in metadata keywords and structured data (not visible on-page). */
+  serviceKeywords: [
+    "hospital bed rentals",
+    "medical bed rentals",
+    "hospital bed sales",
+    "hospital bed service",
+    "hospital bed moving",
+    "hospital bed installation",
+    "mobility scooter rentals",
+    "mobility scooter services",
+    "mobility scooter battery change",
+    "mobility scooter sales",
+    "wheelchair sales",
+    "wheelchair rentals",
+    "wheelchair services",
+  ],
 } as const;
 
 export function absoluteUrl(path: string): string {
@@ -46,6 +62,7 @@ type PageMetadataInput = {
   /** Override OG/Twitter image URL (absolute or site-relative) */
   image?: string;
   noIndex?: boolean;
+  keywords?: string[];
 };
 
 /** Build page-level metadata with canonical, Open Graph, and Twitter cards. */
@@ -55,6 +72,7 @@ export function createPageMetadata({
   path,
   image,
   noIndex = false,
+  keywords,
 }: PageMetadataInput): Metadata {
   const url = absoluteUrl(path);
   const ogImage = image ? absoluteImageUrl(image) : absoluteUrl(siteSeo.ogImagePath);
@@ -62,6 +80,7 @@ export function createPageMetadata({
   return {
     title,
     description,
+    ...(keywords?.length ? { keywords } : {}),
     alternates: {
       canonical: url,
     },
@@ -91,31 +110,67 @@ export function createPageMetadata({
 }
 
 const categoryTitleBySlug: Record<string, string> = {
-  "mobility-scooters": "Mobility Scooters in Toronto",
-  wheelchairs: "Wheelchairs in Toronto",
+  "mobility-scooters": "Mobility Scooter Rentals, Sales & Service in Toronto",
+  wheelchairs: "Wheelchair Rentals, Sales & Service in Toronto",
   "walkers-rollators": "Rollators & Walkers in Toronto",
   "power-wheelchairs": "Power Wheelchairs in Toronto",
   "transport-chairs": "Transport Chairs in Toronto",
-  "hospital-beds": "Hospital Bed Rentals in Toronto",
+  "hospital-beds": "Hospital Bed & Medical Bed Rentals, Sales & Service",
   "lift-chairs": "Medical Lift Chairs in Toronto",
   "bathroom-safety": "Bathroom Safety Equipment in Toronto",
   "daily-living": "Daily Living & Rehab Products in Toronto",
   "patient-care": "Medical Mattresses & Patient Care in Toronto",
 };
 
+const categorySeoBySlug: Record<
+  string,
+  { description: string; keywords: string[] }
+> = {
+  "hospital-beds": {
+    description:
+      "Hospital bed rentals and medical bed rentals, hospital bed sales, installation, moving and in-home service in Toronto and the GTA. Medway delivers, sets up and supports home hospital beds across Canada.",
+    keywords: [
+      "hospital bed rentals",
+      "medical bed rentals",
+      "hospital bed sales",
+      "hospital bed service",
+      "hospital bed moving",
+      "hospital bed installation",
+    ],
+  },
+  "mobility-scooters": {
+    description:
+      "Mobility scooter rentals and sales plus scooter service, repair and battery change in Toronto and the GTA. Medway helps you stay mobile with expert support and Canada-wide shipping on purchases.",
+    keywords: [
+      "mobility scooter rentals",
+      "mobility scooter services",
+      "mobility scooter battery change",
+      "mobility scooter sales",
+    ],
+  },
+  wheelchairs: {
+    description:
+      "Wheelchair sales and rentals with wheelchair service, fitting guidance and home setup in Toronto and the GTA. Manual, transport and power mobility options from Medway across Canada.",
+    keywords: ["wheelchair sales", "wheelchair rentals", "wheelchair services"],
+  },
+};
+
 export function categoryPageMetadata(category: Category): Metadata {
+  const custom = categorySeoBySlug[category.slug];
   const title =
     categoryTitleBySlug[category.slug] ?? `${category.name} in Toronto`;
   const description =
-    category.description.length > 120
+    custom?.description ??
+    (category.description.length > 120
       ? `${category.description} Available from Medway in Toronto, the GTA and across Canada.`
-      : `Shop ${category.name.toLowerCase()} from Medway — ${category.description} Serving Toronto, the GTA and Canada.`;
+      : `Shop ${category.name.toLowerCase()} from Medway — ${category.description} Serving Toronto, the GTA and Canada.`);
 
   return createPageMetadata({
     title,
     description,
     path: `/categories/${category.slug}`,
     image: category.image,
+    keywords: custom?.keywords,
   });
 }
 
@@ -149,6 +204,52 @@ export function breadcrumbListJsonLd(items: BreadcrumbItem[]) {
   };
 }
 
+type MedwayServiceOffer = {
+  name: string;
+  path: string;
+};
+
+/** Indexable service lines for OfferCatalog / page-level Service schema. */
+export const medwayServiceOffers: MedwayServiceOffer[] = [
+  { name: "Hospital bed rentals", path: "/rentals" },
+  { name: "Medical bed rentals", path: "/rentals" },
+  { name: "Hospital bed sales", path: "/categories/hospital-beds" },
+  { name: "Hospital bed service", path: "/service" },
+  { name: "Hospital bed moving", path: "/service" },
+  { name: "Hospital bed installation", path: "/service" },
+  { name: "Mobility scooter rentals", path: "/rentals" },
+  { name: "Mobility scooter services", path: "/service" },
+  { name: "Mobility scooter battery change", path: "/service" },
+  { name: "Mobility scooter sales", path: "/categories/mobility-scooters" },
+  { name: "Wheelchair sales", path: "/categories/wheelchairs" },
+  { name: "Wheelchair rentals", path: "/rentals" },
+  { name: "Wheelchair services", path: "/service" },
+];
+
+function serviceOffersJsonLd(offers: MedwayServiceOffer[]) {
+  return offers.map((offer, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "Service",
+      name: offer.name,
+      provider: { "@type": "MedicalBusiness", name: siteSeo.name, url: getSiteUrl() },
+      areaServed: "Toronto and Greater Toronto Area, Canada",
+      url: absoluteUrl(offer.path),
+    },
+  }));
+}
+
+export function offerCatalogJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    name: "Medway medical equipment rentals, sales and service",
+    url: getSiteUrl(),
+    itemListElement: serviceOffersJsonLd(medwayServiceOffers),
+  };
+}
+
 export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
@@ -171,6 +272,11 @@ export function organizationJsonLd() {
       { "@type": "AdministrativeArea", name: "Greater Toronto Area" },
       { "@type": "Country", name: "Canada" },
     ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Rentals, sales and service",
+      itemListElement: serviceOffersJsonLd(medwayServiceOffers),
+    },
   };
 }
 
@@ -225,6 +331,7 @@ export function rootMetadata(): Metadata {
       template: siteSeo.titleTemplate,
     },
     description: siteSeo.defaultDescription,
+    keywords: [...siteSeo.serviceKeywords],
     applicationName: siteSeo.name,
     authors: [{ name: siteSeo.name, url: getSiteUrl() }],
     creator: siteSeo.name,
@@ -271,8 +378,9 @@ export const staticPages = {
     ...createPageMetadata({
       title: "Medical Equipment Rentals & Mobility Products in Toronto",
       description:
-        "Medical equipment rentals, mobility scooters, wheelchairs, hospital beds, lift chairs and home healthcare products serving Toronto, the GTA and Canada.",
+        "Hospital bed rentals, mobility scooter rentals, wheelchair rentals, sales and service in Toronto and the GTA. Medway also provides hospital bed installation, scooter battery change and equipment moving across Canada.",
       path: "/",
+      keywords: [...siteSeo.serviceKeywords],
     }),
     title: {
       absolute: "Medical Equipment Rentals & Mobility Products in Toronto | Medway",
@@ -281,20 +389,40 @@ export const staticPages = {
   products: createPageMetadata({
     title: "Mobility & Home Medical Equipment Products",
     description:
-      "Explore mobility scooters, wheelchairs, hospital beds, lift chairs, bathroom safety and home care products from Medway in Toronto and across Canada.",
+      "Shop hospital beds, mobility scooters and wheelchairs for sale in Toronto — plus lift chairs, bathroom safety and home care products with Canada-wide shipping from Medway.",
     path: "/products",
+    keywords: [
+      "hospital bed sales",
+      "mobility scooter sales",
+      "wheelchair sales",
+      "medical equipment Toronto",
+    ],
   }),
   rentals: createPageMetadata({
-    title: "Medical Equipment Rentals in Toronto",
+    title: "Hospital Bed, Mobility Scooter & Wheelchair Rentals",
     description:
-      "Explore medical equipment rental options from Medway, including mobility equipment, hospital beds, wheelchairs and home healthcare solutions in Toronto and the GTA.",
+      "Hospital bed rentals and medical bed rentals, mobility scooter rentals and wheelchair rentals in Toronto and the GTA. Flexible terms with delivery and setup from Medway.",
     path: "/rentals",
+    keywords: [
+      "hospital bed rentals",
+      "medical bed rentals",
+      "mobility scooter rentals",
+      "wheelchair rentals",
+    ],
   }),
   service: createPageMetadata({
-    title: "Medical Equipment Service & Support",
+    title: "Hospital Bed Installation, Scooter & Wheelchair Service",
     description:
-      "Delivery, setup, repairs and maintenance for mobility and home medical equipment — expert support from Medway across Toronto, the GTA and Canada.",
+      "Hospital bed installation, moving and service; mobility scooter repair and battery change; wheelchair service and setup — expert support from Medway in Toronto, the GTA and Canada.",
     path: "/service",
+    keywords: [
+      "hospital bed service",
+      "hospital bed moving",
+      "hospital bed installation",
+      "mobility scooter services",
+      "mobility scooter battery change",
+      "wheelchair services",
+    ],
   }),
   solutions: createPageMetadata({
     title: "Mobility & Home Care Solutions",
@@ -334,4 +462,42 @@ export function resourcePageMetadata(resource: {
     path: `/resources/${resource.slug}`,
     image: resource.image,
   });
+}
+
+export function rentalsPageJsonLd() {
+  const rentalOffers = medwayServiceOffers.filter((o) => /rentals/i.test(o.name));
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Medical equipment rentals",
+    url: absoluteUrl("/rentals"),
+    description:
+      "Hospital bed rentals and medical bed rentals, mobility scooter rentals and wheelchair rentals in Toronto and the GTA from Medway.",
+    isPartOf: { "@type": "WebSite", name: siteSeo.name, url: getSiteUrl() },
+    about: {
+      "@type": "OfferCatalog",
+      name: "Medway equipment rentals",
+      itemListElement: serviceOffersJsonLd(rentalOffers),
+    },
+  };
+}
+
+export function servicePageJsonLd() {
+  const serviceOffers = medwayServiceOffers.filter((o) =>
+    /service|installation|moving|battery change/i.test(o.name)
+  );
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Medical equipment service and support",
+    url: absoluteUrl("/service"),
+    description:
+      "Hospital bed installation, moving and service; mobility scooter repair and battery change; wheelchair service from Medway.",
+    isPartOf: { "@type": "WebSite", name: siteSeo.name, url: getSiteUrl() },
+    about: {
+      "@type": "OfferCatalog",
+      name: "Medway equipment service",
+      itemListElement: serviceOffersJsonLd(serviceOffers),
+    },
+  };
 }

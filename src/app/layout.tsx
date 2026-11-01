@@ -7,7 +7,7 @@ import MobileEnquireBar from "@/components/layout/MobileEnquireBar";
 import MainShell from "@/components/layout/MainShell";
 import RentalsPromoModal from "@/components/promo/RentalsPromoModal";
 import JsonLd from "@/components/seo/JsonLd";
-import { organizationJsonLd, rootMetadata, webSiteJsonLd } from "@/lib/seo";
+import { offerCatalogJsonLd, organizationJsonLd, rootMetadata, webSiteJsonLd } from "@/lib/seo";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -27,7 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en-CA" className={`${inter.variable} ${manrope.variable} h-full overflow-x-hidden`}>
       <body className="min-h-full flex flex-col antialiased overflow-x-hidden">
-        <JsonLd data={[organizationJsonLd(), webSiteJsonLd()]} />
+        <JsonLd data={[organizationJsonLd(), webSiteJsonLd(), offerCatalogJsonLd()]} />
         <Header />
         <MainShell>{children}</MainShell>
         <Footer />

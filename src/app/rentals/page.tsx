@@ -5,7 +5,8 @@ import Button from "@/components/ui/Button";
 import { rentalsPage } from "@/data/rentals";
 import { getPhotoCoverClassName } from "@/data/images";
 
-import { staticPages } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
+import { rentalsPageJsonLd, staticPages } from "@/lib/seo";
 
 export const metadata = staticPages.rentals;
 
@@ -13,6 +14,8 @@ export default function RentalsPage() {
   const { hero, intro, sections } = rentalsPage;
 
   return (
+    <>
+      <JsonLd data={rentalsPageJsonLd()} />
     <div className="pt-14 lg:pt-[5.5rem] bg-background">
       <PageHero
         title={hero.title}
@@ -72,5 +75,6 @@ export default function RentalsPage() {
         </div>
       </Container>
     </div>
+    </>
   );
 }

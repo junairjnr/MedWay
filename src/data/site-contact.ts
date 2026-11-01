@@ -5,7 +5,7 @@ export const siteContact = {
   email: "medwaymobility@outlook.com",
   emailClass: "text-xs sm:text-sm break-all lowercase",
   /** Physical location — Contact page, footer, etc. */
-  address: "31 Lake Louise dr Brampton",
+  address: "Toronto, Mississauga, 31 Lake Louise Dr, Brampton",
 } as const;
 
 export const whatsAppDefaultMessage =
