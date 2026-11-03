@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import MobileEnquireBar from "@/components/layout/MobileEnquireBar";
 import MainShell from "@/components/layout/MainShell";
 import RentalsPromoModal from "@/components/promo/RentalsPromoModal";
+import GoogleTagManager from "@/components/analytics/GoogleTagManager";
 import JsonLd from "@/components/seo/JsonLd";
 import { offerCatalogJsonLd, organizationJsonLd, rootMetadata, webSiteJsonLd } from "@/lib/seo";
 
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en-CA" className={`${inter.variable} ${manrope.variable} h-full overflow-x-hidden`}>
       <body className="min-h-full flex flex-col antialiased overflow-x-hidden">
+        <GoogleTagManager />
         <JsonLd data={[organizationJsonLd(), webSiteJsonLd(), offerCatalogJsonLd()]} />
         <Header />
         <MainShell>{children}</MainShell>
