@@ -20,7 +20,9 @@ export const metadata = staticPages.home;
 export default function HomePage() {
   return (
     <>
-      <h1 className="sr-only">Medical Equipment Rentals &amp; Mobility Products in Toronto</h1>
+      <h1 className="sr-only">
+        Hospital Bed Rental &amp; Mobility Equipment Rentals in Brampton, Mississauga &amp; Toronto
+      </h1>
       <div className="pt-14 lg:pt-[5.5rem]">
         <PromoTicker />
         <HeroCarousel />

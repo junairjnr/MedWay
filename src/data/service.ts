@@ -2,7 +2,7 @@ import { vitalImages } from "./images";
 
 export const servicePage = {
   hero: {
-    title: "Sales, Service & Support",
+    title: "Medical Equipment Sales, Services & Support",
     description:
       "From delivery and setup to repairs and ongoing support — Medway helps you get the most from your medical equipment across Canada.",
     eyebrow: "Service",
