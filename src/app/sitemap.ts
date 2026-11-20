@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { categories } from "@/data/categories";
 import { products } from "@/data/products";
+import { rentalItems } from "@/data/rentals";
 import { resources } from "@/data/resources";
 import { absoluteUrl, getSiteUrl } from "@/lib/seo";
 
@@ -38,6 +39,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const rentalRoutes: MetadataRoute.Sitemap = rentalItems.map((rental) => ({
+    url: absoluteUrl(`/rentals/${rental.slug}`),
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 0.75,
+  }));
+
   const resourceRoutes: MetadataRoute.Sitemap = resources.map((resource) => ({
     url: absoluteUrl(`/resources/${resource.slug}`),
     lastModified: now,
@@ -45,5 +53,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...categoryRoutes, ...productRoutes, ...resourceRoutes];
+  return [
+    ...staticRoutes,
+    ...categoryRoutes,
+    ...productRoutes,
+    ...rentalRoutes,
+    ...resourceRoutes,
+  ];
 }

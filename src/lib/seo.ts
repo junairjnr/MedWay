@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import type { Product } from "@/data/products";
 import type { Category } from "@/data/categories";
+import type { RentalItem } from "@/data/rentals";
+import type { RentalSeoPage } from "@/data/rental-seo-content";
+import { getRentalSeoPage } from "@/data/rental-seo-content";
 import { getProductDisplayName } from "@/data/products";
 import { siteContact } from "@/data/site-contact";
 import { siteLogo } from "@/data/images";
@@ -215,19 +218,21 @@ type MedwayServiceOffer = {
 
 /** Indexable service lines for OfferCatalog / page-level Service schema. */
 export const medwayServiceOffers: MedwayServiceOffer[] = [
-  { name: "Hospital bed rentals", path: "/rentals" },
-  { name: "Medical bed rentals", path: "/rentals" },
+  { name: "Hospital bed rentals", path: "/rentals/hospital-bed-rental" },
+  { name: "Medical bed rentals", path: "/rentals/hospital-bed-rental" },
   { name: "Hospital bed sales", path: "/categories/hospital-beds" },
   { name: "Hospital bed service", path: "/service" },
   { name: "Hospital bed moving", path: "/service" },
   { name: "Hospital bed installation", path: "/service" },
-  { name: "Mobility scooter rentals", path: "/rentals" },
+  { name: "Mobility scooter rentals", path: "/rentals/mobility-scooter-rental" },
   { name: "Mobility scooter services", path: "/service" },
   { name: "Mobility scooter battery change", path: "/service" },
   { name: "Mobility scooter sales", path: "/categories/mobility-scooters" },
   { name: "Wheelchair sales", path: "/categories/wheelchairs" },
-  { name: "Wheelchair rentals", path: "/rentals" },
+  { name: "Wheelchair rentals", path: "/rentals/wheelchair-rental" },
   { name: "Wheelchair services", path: "/service" },
+  { name: "Patient lift rentals", path: "/rentals/patient-lift-rental" },
+  { name: "Hoyer lift rental", path: "/rentals/patient-lift-rental" },
 ];
 
 function serviceOffersJsonLd(offers: MedwayServiceOffer[]) {
@@ -466,6 +471,74 @@ export function resourcePageMetadata(resource: {
     path: `/resources/${resource.slug}`,
     image: resource.image,
   });
+}
+
+export function rentalPageMetadata(rental: RentalItem): Metadata {
+  const seo = getRentalSeoPage(rental.slug);
+  if (seo) {
+    return createPageMetadata({
+      title: seo.titleTag,
+      description: seo.metaDescription,
+      path: `/rentals/${seo.slug}`,
+      image: seo.image,
+      keywords: seo.keywords,
+      absoluteTitle: true,
+    });
+  }
+
+  return createPageMetadata({
+    title: rental.title,
+    description: rental.detail || rental.description,
+    path: `/rentals/${rental.slug}`,
+    image: rental.image,
+  });
+}
+
+export function rentalFaqJsonLd(seo: RentalSeoPage) {
+  if (seo.faqs.length === 0) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: seo.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
+export function rentalDetailJsonLd(rental: RentalItem) {
+  const seo = getRentalSeoPage(rental.slug);
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: seo?.h1 ?? rental.title,
+    description: seo?.metaDescription ?? rental.detail ?? rental.description,
+    url: absoluteUrl(`/rentals/${rental.slug}`),
+    image: absoluteImageUrl(seo?.image ?? rental.image),
+    provider: {
+      "@type": "MedicalBusiness",
+      name: siteSeo.name,
+      url: getSiteUrl(),
+      telephone: siteContact.phoneTel,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "31 Lake Louise Dr",
+        addressLocality: "Brampton",
+        addressRegion: "ON",
+        postalCode: "L6X 4Y6",
+        addressCountry: "CA",
+      },
+    },
+    areaServed: [
+      { "@type": "City", name: "Brampton" },
+      { "@type": "City", name: "Mississauga" },
+      { "@type": "City", name: "Toronto" },
+    ],
+  };
 }
 
 export function rentalsPageJsonLd() {

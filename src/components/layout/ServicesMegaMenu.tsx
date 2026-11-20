@@ -31,8 +31,9 @@ export function ServicesMegaMenuDesktop({ onNavigate, onMouseEnter, onMouseLeave
           <Image src={featured.image} alt="" fill className="object-cover opacity-55" sizes="384px" />
           <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/75 to-navy/30" />
           <div className="relative z-10 flex h-full flex-col justify-end p-4">
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary-light">Rentals, Sales & Service</p>
-            <p className="mt-1 font-display text-sm font-bold text-white">Rent, buy, or get expert support</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary-light">Rentals & Service</p>
+            {/* Sales area hidden — was: Rentals, Sales & Service / Rent, buy, or get expert support */}
+            <p className="mt-1 font-display text-sm font-bold text-white">Rent or get expert support</p>
           </div>
         </div>
 
@@ -94,9 +95,10 @@ export function ServicesMegaMenuMobile({ onNavigate }: ServicesMegaMenuProps) {
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/90 to-navy/70" />
         <div className="relative z-10">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-primary-light">Rentals, Sales & Service</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-primary-light">Rentals & Service</p>
+          {/* Sales area hidden — was: Rentals, Sales & Service / Rent, buy, or get expert support */}
           <p className="mt-1 max-w-[16rem] font-display text-sm font-bold leading-snug text-white sm:text-base">
-            Rent, buy, or get expert support
+            Rent or get expert support
           </p>
           <Button href="/rentals" size="sm" variant="white" showArrow={false} className="mt-3" onClick={onNavigate}>
             View Rentals

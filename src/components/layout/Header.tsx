@@ -31,7 +31,8 @@ export default function Header() {
 
   const solidNav = !isHome || scrolled;
   const isProductsActive = pathname.startsWith("/products") || pathname.startsWith("/categories");
-  const isServicesActive = pathname === "/rentals" || pathname === "/service";
+  const isServicesActive =
+    pathname === "/rentals" || pathname.startsWith("/rentals/") || pathname === "/service";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -122,7 +123,7 @@ export default function Header() {
           </Link>
 
           <nav className="relative z-20 hidden lg:flex flex-1 items-center justify-center gap-0.5 self-center min-w-0">
-            {/* Rentals, Sales & Service */}
+            {/* Rentals & Service — Sales area hidden */}
             <div className="relative">
               <button
                 type="button"
@@ -137,7 +138,7 @@ export default function Header() {
                     : navText
                 }`}
               >
-                Rentals, Sales & Service
+                Rentals & Service
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`}
                 />

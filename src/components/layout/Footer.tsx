@@ -86,7 +86,9 @@ export default function Footer() {
               <li><Link href="/about" className="hover:text-primary-light transition-colors">About Us</Link></li>
               <li><Link href="/solutions" className="hover:text-primary-light transition-colors">Solutions</Link></li>
               <li><Link href="/rentals" className="hover:text-primary-light transition-colors">Rentals</Link></li>
+              {/* Sales area — hidden (keep for restore)
               <li><Link href="/products" className="hover:text-primary-light transition-colors">Sales</Link></li>
+              */}
               <li><Link href="/service" className="hover:text-primary-light transition-colors">Service</Link></li>
               {/* <li><Link href="/resources" className="hover:text-primary-light transition-colors">Resources</Link></li> */}
               <li><Link href="/contact" className="hover:text-primary-light transition-colors">Contact</Link></li>
