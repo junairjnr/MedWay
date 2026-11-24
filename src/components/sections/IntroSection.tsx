@@ -9,7 +9,8 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 
 const highlights = [
-  "GTA rentals & Canada-wide sales",
+  // Sales catalogue — hidden (keep for restore)
+  // "GTA rentals & Canada-wide sales",
   "Wide range of mobility & home care solutions",
   "Expert staff & integrity pricing",
 ];
@@ -67,9 +68,11 @@ export default function IntroSection() {
               <Button href="/rentals" size="lg" className="rounded-full">
                 Explore Rentals
               </Button>
+              {/* Sales catalogue — hidden (keep for restore)
               <Button href="/products" size="lg" variant="outline" className="rounded-full">
                 Shop Products
               </Button>
+              */}
               <Button
                 href="/about"
                 variant="outline"

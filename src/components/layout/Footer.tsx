@@ -9,7 +9,8 @@ import MotionInView, { MotionStagger, MotionStaggerItem } from "@/components/ani
 import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
 import NewsletterForm from "@/components/forms/NewsletterForm";
 import Button from "@/components/ui/Button";
-import { categories } from "@/data/categories";
+// Sales catalogue — hidden (keep for restore)
+// import { categories } from "@/data/categories";
 import { siteLogo, siteLogoWidth, siteLogoHeight } from "@/data/images";
 import { siteContact, mailtoHref, whatsAppHref } from "@/data/site-contact";
 
@@ -68,6 +69,7 @@ export default function Footer() {
             </div>
           </MotionStaggerItem>
 
+          {/* Sales catalogue — hidden (keep for restore): All Products + category listing
           <MotionStaggerItem className="lg:col-span-2">
             <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-white">Explore</h3>
             <ul className="space-y-2.5 text-sm">
@@ -79,6 +81,7 @@ export default function Footer() {
               ))}
             </ul>
           </MotionStaggerItem>
+          */}
 
           <MotionStaggerItem className="lg:col-span-2">
             <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-white">Company</h3>

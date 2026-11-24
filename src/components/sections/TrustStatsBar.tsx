@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Truck, Headphones, ShieldCheck, ShoppingBag, Wrench, RefreshCw } from "lucide-react";
+import { Truck, Headphones, ShieldCheck, Wrench, RefreshCw } from "lucide-react";
 import Container from "@/components/ui/Container";
 import { usePrefersReducedMotion } from "@/components/animations/usePrefersReducedMotion";
 
@@ -58,7 +58,8 @@ export default function TrustStatsBar() {
 export function PromoTicker() {
   const items = [
     { icon: RefreshCw, text: "Rental — flexible home health care equipment" },
-    { icon: ShoppingBag, text: "Sales — mobility & home care equipment" },
+    // Sales catalogue — hidden (keep for restore)
+    // { icon: ShoppingBag, text: "Sales — mobility & home care equipment" },
     { icon: Wrench, text: "Service — expert setup, repairs & support" },
     { icon: Truck, text: "All-over shipping across Canada" },
   ];

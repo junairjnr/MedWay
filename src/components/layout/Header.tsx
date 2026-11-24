@@ -8,13 +8,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
-import { ProductsMegaMenuDesktop, ProductsMegaMenuMobile } from "@/components/layout/ProductsMegaMenu";
+// Sales catalogue — hidden (keep for restore)
+// import { ProductsMegaMenuDesktop, ProductsMegaMenuMobile } from "@/components/layout/ProductsMegaMenu";
 import { ServicesMegaMenuDesktop, ServicesMegaMenuMobile } from "@/components/layout/ServicesMegaMenu";
 import { siteLogo, siteLogoWidth, siteLogoHeight } from "@/data/images";
 import { layoutGutterClass } from "@/lib/layout";
 
 const navLinks = [
-  { href: "/products", label: "Products" },
+  // Sales catalogue — hidden (keep for restore)
+  // { href: "/products", label: "Products" },
   { href: "/solutions", label: "Solutions" },
   { href: "/about", label: "About" },
   // { href: "/resources", label: "Resources" },
@@ -25,12 +27,20 @@ export default function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [categoriesOpen, setCategoriesOpen] = useState(false);
+  // Sales catalogue — hidden (keep for restore)
+  // const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [navPathname, setNavPathname] = useState(pathname);
+  if (pathname !== navPathname) {
+    setNavPathname(pathname);
+    setMobileOpen(false);
+    // setCategoriesOpen(false);
+    setServicesOpen(false);
+  }
 
   const solidNav = !isHome || scrolled;
-  const isProductsActive = pathname.startsWith("/products") || pathname.startsWith("/categories");
+  // const isProductsActive = pathname.startsWith("/products") || pathname.startsWith("/categories");
   const isServicesActive =
     pathname === "/rentals" || pathname.startsWith("/rentals/") || pathname === "/service";
 
@@ -40,12 +50,6 @@ export default function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    setMobileOpen(false);
-    setCategoriesOpen(false);
-    setServicesOpen(false);
-  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -60,26 +64,27 @@ export default function Header() {
   const menuIcon = solidNav ? "text-foreground" : "text-white max-lg:text-foreground";
 
   const closeMenus = () => {
-    setCategoriesOpen(false);
+    // setCategoriesOpen(false);
     setServicesOpen(false);
     setMobileOpen(false);
   };
 
-  const categoriesCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Sales catalogue — hidden (keep for restore)
+  // const categoriesCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const servicesCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const openCategoriesMenu = useCallback(() => {
-    if (categoriesCloseTimer.current) {
-      clearTimeout(categoriesCloseTimer.current);
-      categoriesCloseTimer.current = null;
-    }
-    setCategoriesOpen(true);
-  }, []);
+  // const openCategoriesMenu = useCallback(() => {
+  //   if (categoriesCloseTimer.current) {
+  //     clearTimeout(categoriesCloseTimer.current);
+  //     categoriesCloseTimer.current = null;
+  //   }
+  //   setCategoriesOpen(true);
+  // }, []);
 
-  const scheduleCloseCategoriesMenu = useCallback(() => {
-    if (categoriesCloseTimer.current) clearTimeout(categoriesCloseTimer.current);
-    categoriesCloseTimer.current = setTimeout(() => setCategoriesOpen(false), 150);
-  }, []);
+  // const scheduleCloseCategoriesMenu = useCallback(() => {
+  //   if (categoriesCloseTimer.current) clearTimeout(categoriesCloseTimer.current);
+  //   categoriesCloseTimer.current = setTimeout(() => setCategoriesOpen(false), 150);
+  // }, []);
 
   const openServicesMenu = useCallback(() => {
     if (servicesCloseTimer.current) {
@@ -96,7 +101,7 @@ export default function Header() {
 
   useEffect(() => {
     return () => {
-      if (categoriesCloseTimer.current) clearTimeout(categoriesCloseTimer.current);
+      // if (categoriesCloseTimer.current) clearTimeout(categoriesCloseTimer.current);
       if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current);
     };
   }, []);
@@ -155,7 +160,7 @@ export default function Header() {
               </AnimatePresence>
             </div>
 
-            {/* Products mega menu */}
+            {/* Sales catalogue — hidden (keep for restore): Products nav link + mega menu
             <div className="relative">
               <button
                 type="button"
@@ -186,8 +191,9 @@ export default function Header() {
                 )}
               </AnimatePresence>
             </div>
+            */}
 
-            {navLinks.slice(1).map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -241,12 +247,14 @@ export default function Header() {
 
                 <hr className="border-border" aria-hidden />
 
+                {/* Sales catalogue — hidden (keep for restore): Products nav + show all products
                 <ProductsMegaMenuMobile onNavigate={closeMenus} />
 
                 <hr className="border-border" aria-hidden />
+                */}
 
                 <div className="space-y-1">
-                  {navLinks.slice(1).map((link) => (
+                  {navLinks.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}

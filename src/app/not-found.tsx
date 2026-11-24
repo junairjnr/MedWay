@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import { createPageMetadata } from "@/lib/seo";
@@ -17,7 +16,7 @@ export default function NotFound() {
         <p className="text-xs font-bold uppercase tracking-widest text-primary mb-3">404</p>
         <h1 className="font-display font-extrabold text-3xl sm:text-4xl tracking-tight mb-4">Page not found</h1>
         <p className="text-muted mb-8">
-          This page may have moved or no longer exists. Browse products, rentals, or contact our team for help.
+          This page may have moved or no longer exists. Browse rentals, or contact our team for help.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Button href="/" size="lg" className="rounded-full">
@@ -27,11 +26,13 @@ export default function NotFound() {
             Contact Us
           </Button>
         </div>
+        {/* Sales catalogue — hidden (keep for restore)
         <p className="mt-8 text-sm text-muted">
           <Link href="/products" className="text-primary hover:underline">
             View all products
           </Link>
         </p>
+        */}
       </Container>
     </div>
   );

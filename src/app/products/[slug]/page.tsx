@@ -1,5 +1,6 @@
 import { products, getProductBySlug, getProductDisplayName } from "@/data/products";
-import ProductDetailView from "@/components/products/ProductDetailView";
+// Sales catalogue — hidden (keep for restore)
+// import ProductDetailView from "@/components/products/ProductDetailView";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/seo/JsonLd";
 import {
@@ -45,7 +46,9 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
   return (
     <>
       <JsonLd data={[productJsonLd(product), breadcrumbListJsonLd(breadcrumbs)]} />
+      {/* Sales catalogue — hidden (keep for restore): view product section
       <ProductDetailView product={product} breadcrumbs={breadcrumbs} />
+      */}
     </>
   );
 }

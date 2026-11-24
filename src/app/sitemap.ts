@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
-import { categories } from "@/data/categories";
-import { products } from "@/data/products";
+// Sales catalogue — hidden (keep for restore)
+// import { categories } from "@/data/categories";
+// import { products } from "@/data/products";
 import { rentalItems } from "@/data/rentals";
 import { resources } from "@/data/resources";
 import { absoluteUrl, getSiteUrl } from "@/lib/seo";
@@ -11,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes: MetadataRoute.Sitemap = [
     "",
-    "/products",
+    // "/products",
     "/rentals",
     "/service",
     "/solutions",
@@ -25,19 +26,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "" ? 1 : 0.8,
   }));
 
-  const categoryRoutes: MetadataRoute.Sitemap = categories.map((cat) => ({
-    url: absoluteUrl(`/categories/${cat.slug}`),
-    lastModified: now,
-    changeFrequency: "weekly",
-    priority: 0.75,
-  }));
+  // Sales catalogue — hidden (keep for restore)
+  const categoryRoutes: MetadataRoute.Sitemap = [];
+  // const categoryRoutes: MetadataRoute.Sitemap = categories.map((cat) => ({
+  //   url: absoluteUrl(`/categories/${cat.slug}`),
+  //   lastModified: now,
+  //   changeFrequency: "weekly",
+  //   priority: 0.75,
+  // }));
 
-  const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
-    url: absoluteUrl(`/products/${product.slug}`),
-    lastModified: now,
-    changeFrequency: "weekly",
-    priority: 0.7,
-  }));
+  const productRoutes: MetadataRoute.Sitemap = [];
+  // const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
+  //   url: absoluteUrl(`/products/${product.slug}`),
+  //   lastModified: now,
+  //   changeFrequency: "weekly",
+  //   priority: 0.7,
+  // }));
 
   const rentalRoutes: MetadataRoute.Sitemap = rentalItems.map((rental) => ({
     url: absoluteUrl(`/rentals/${rental.slug}`),

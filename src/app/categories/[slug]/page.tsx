@@ -1,5 +1,6 @@
 import { categories, getCategoryBySlug } from "@/data/categories";
-import ProductListing from "@/components/products/ProductListing";
+// Sales catalogue — hidden (keep for restore)
+// import ProductListing from "@/components/products/ProductListing";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/seo/JsonLd";
 import { breadcrumbListJsonLd, categoryPageMetadata } from "@/lib/seo";
@@ -30,12 +31,14 @@ export default async function CategoryPage({ params }: PageProps<"/categories/[s
   return (
     <>
       <JsonLd data={breadcrumbListJsonLd(breadcrumbs)} />
+      {/* Sales catalogue — hidden (keep for restore): product listing
       <ProductListing
         initialCategory={cat.slug}
         title={cat.name}
         description={cat.description}
         breadcrumbs={breadcrumbs}
       />
+      */}
     </>
   );
 }
