@@ -22,15 +22,6 @@ export const rentalItems: RentalItem[] = [
     highlights: ["Delivery & setup available", "From $140/month", "Brampton & GTA service"],
   },
   {
-    slug: "mobility-scooter-rental",
-    title: "Mobility Scooter Rental",
-    description: "Travel and full-size scooters by the day, week or month in Brampton.",
-    detail:
-      "Scooter rentals with delivery, setup and pickup across Brampton and Mississauga.",
-    image: vitalImages.categories["mobility-scooters"],
-    highlights: ["From $75/day", "Travel & standard options", "Flexible rental periods"],
-  },
-  {
     slug: "patient-lift-rental",
     title: "Patient Lift Rental",
     description: "Battery-powered Hoyer patient lifts with sling sizing and training in Brampton.",
@@ -47,6 +38,15 @@ export const rentalItems: RentalItem[] = [
       "Rent manual wheelchairs, transport chairs, and related mobility aids for home use, appointments, and recovery in Brampton and the GTA.",
     image: vitalImages.categories.wheelchairs,
     highlights: ["Manual & transport options", "Fast availability", "Ideal for temporary needs"],
+  },
+  {
+    slug: "mobility-scooter-rental",
+    title: "Mobility Scooter Rental",
+    description: "Travel and full-size scooters by the day, week or month in Brampton.",
+    detail:
+      "Scooter rentals with delivery, setup and pickup across Brampton and Mississauga.",
+    image: vitalImages.categories["mobility-scooters"],
+    highlights: ["From $75/day", "Travel & standard options", "Flexible rental periods"],
   },
 ];
 

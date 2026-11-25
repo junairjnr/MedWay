@@ -1,13 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { rentalItems, rentalsPage, type RentalItem } from "@/data/rentals";
+import { rentalItems, type RentalItem } from "@/data/rentals";
 import { getPhotoCoverClassName } from "@/data/images";
 
 type HeadingLevel = "h2" | "h3";
 
 export function splitFeaturedRentals(items: RentalItem[] = rentalItems) {
-  const featured = items.find((item) => item.image !== rentalsPage.hero.image) ?? items[0];
+  const featured = items.find((item) => item.slug === "hospital-bed-rental") ?? items[0];
   const rest = featured ? items.filter((item) => item.slug !== featured.slug) : [];
   return { featured, rest };
 }
